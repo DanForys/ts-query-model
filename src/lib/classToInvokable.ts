@@ -1,4 +1,4 @@
-type Callable<A extends abstract new () => unknown> = A extends new (
+type Callable<A extends abstract new () => any> = A extends new (
   ...args: infer Args
 ) => infer Instance
   ? A & ((...args: Args) => Instance)
@@ -12,10 +12,10 @@ type Callable<A extends abstract new () => unknown> = A extends new (
  * @returns Wrapped class instance.
  * @private
  */
-export function classToInvokable<
-  Class extends new (...args: unknown[]) => unknown
->(constructor: Class): Callable<Class> {
-  return new Proxy<Callable<Class>>(constructor as Callable<Class>, {
+export function classToInvokable<Class extends new (...args: any[]) => any>(
+  constructor: Class
+): Callable<Class> {
+  return new Proxy<Callable<Class>>(constructor as any, {
     apply(_target, _thisArg, args: ConstructorParameters<Class>) {
       return new constructor(...args);
     },

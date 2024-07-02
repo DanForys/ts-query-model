@@ -1,22 +1,20 @@
-import { GenericConnection } from "@/generic/generic-connection";
+import { GenericConnection } from "../generic/generic-connection";
 
 import mysql, { Connection, RowDataPacket } from "mysql2/promise";
 
 export class MySQLConnection extends GenericConnection {
-  connectionUri: string;
+  options: mysql.ConnectionOptions;
   connection: mysql.Connection | null = null;
 
-  constructor({ uri }: { uri: string }) {
+  constructor(options: mysql.ConnectionOptions) {
     super();
-    this.connectionUri = uri;
+    this.options = options;
   }
 
   async getConnection() {
     if (this.connection) return this.connection;
 
-    this.connection = await mysql.createConnection({
-      uri: this.connectionUri,
-    });
+    this.connection = await mysql.createConnection(this.options);
 
     // FIXME
     // this.connection.on("end", () => {

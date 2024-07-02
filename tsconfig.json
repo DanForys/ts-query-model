@@ -1,5 +1,5 @@
 {
-  "extends": "@tsconfig/node18/tsconfig.json",
+  "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
     "noUnusedLocals": true,
     "removeComments": true,
@@ -8,14 +8,12 @@
     "typeRoots": [
       "./src/typescript"
     ],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "lib": ["ES2020", "DOM"]
   },
   "include": [
     "src/**/*.ts"
   ],
   "exclude": [
-    "node_modules/**/*",
+    "node_modules/**/*"
   ]
 }

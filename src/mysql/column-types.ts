@@ -1,8 +1,10 @@
-import { classToInvokable } from "@/lib/classToInvokable";
+import { classToInvokable } from "../lib/classToInvokable";
 
 export abstract class MySQLColumn {
   primary = false;
   autoIncrement = false;
+
+  constructor() {}
 
   get(value: unknown) {
     return value;
@@ -47,28 +49,28 @@ class DATE extends MySQLColumn {
   }
 }
 
-class JSONSTRING<T> extends MySQLColumn {
-  get(value: string) {
+const JSONSTRING = <T extends object>() => ({
+  get: (value: string) => {
     return JSON.parse(value) as T;
-  }
-  set(value: T) {
+  },
+  set: (value: T) => {
     return JSON.stringify(value);
-  }
-}
+  },
+});
 
-class ENUM<T> extends MySQLColumn {
-  get(value: T) {
+const ENUM = <T extends string[]>() => ({
+  get: function (value: string): T[number] {
     return value;
-  }
-  set(value: T) {
+  },
+  set: function (value: T[number]) {
     return value;
-  }
-}
+  },
+});
 
 export default {
   STRING: classToInvokable(STRING),
   BOOL: classToInvokable(BOOL),
   DATE: classToInvokable(DATE),
-  JSONSTRING: classToInvokable(JSONSTRING),
-  ENUM: classToInvokable(ENUM),
+  JSONSTRING: JSONSTRING,
+  ENUM: ENUM,
 };
