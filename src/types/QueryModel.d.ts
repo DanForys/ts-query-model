@@ -1,11 +1,19 @@
 import { GenericConnection } from "@/generic/generic-connection";
-import { MySQLColumn } from "@/mysql/column-types";
 
 export type GenericQueryFn = (...args: any[]) => any;
 
+export type BuiltColumn = {
+  get: (value: unknown) => unknown;
+  set: (value: unknown) => unknown;
+};
+
+export type ModelColumnsDefinition =
+  | Record<string, BuiltColumn>
+  | Record<string, never>;
+
 export interface QueryOptions {
   name?: string;
-  columns: Record<string, MySQLColumn>;
+  columns: ModelColumnsDefinition;
   query: GenericQueryFn;
   connection: GenericConnection;
 }

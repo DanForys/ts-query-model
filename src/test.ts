@@ -1,5 +1,6 @@
 import { Database } from "./lib/database";
 import columnTypes from "./mysql/column-types";
+// import { QueryOptions } from "./types/QueryModel";
 import { MySQLConnection } from "./mysql";
 
 type ModelRow<T extends (...args: any[]) => Promise<any>> = Awaited<
@@ -13,18 +14,28 @@ const db = new Database(
   })
 );
 
+class UserModel extends db.buildModel({
+  departure_date: columnTypes.STRING(),
+  origin: columnTypes.STRING(),
+  destination: columnTypes.STRING(),
+}) {
+  // departure_date = "";
+  // origin = "";
+  // destination = "";
+}
+// const UserModel = db.buildModel({
+//   departure_date: columnTypes.STRING(),
+//   origin: columnTypes.STRING(),
+//   destination: columnTypes.STRING(),
+// })
+
 const userModel = {
-  getUser: db.getMany({
-    columns: {
-      departure_date: columnTypes.STRING(),
-      origin: columnTypes.STRING(),
-      destination: columnTypes.STRING(),
-      // things: columnTypes.ENUM<["one", "two"]>(),
-      // blob: columnTypes.JSONSTRING<{ hello: boolean }>(),
-    },
+  getUser: db.getOne({
+    name: "getUser",
+    model: UserModel,
     query: (origin: string, destination: string) => ({
       sql: `
-        SELECT departure_date, origin, destination, total_availability FROM train_demand
+        SELECT departure_date, origin, destination FROM train_demand
         WHERE origin = ?
         AND destination = ?
       `,
@@ -46,3 +57,16 @@ const run = async () => {
 };
 
 run().then(() => console.log("FIN"));
+
+const user = new UserModel();
+
+user.departure_date;
+user.data?.departure_date;
+
+console.log(typeof user, user instanceof UserModel);
+console.log({ ...user });
+console.log(user.getColumns());
+
+const yy = (thing: UserModel) => {
+  console.log(thing);
+};

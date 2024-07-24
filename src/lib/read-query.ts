@@ -1,10 +1,11 @@
-import {
-  GenericConnectionInstance,
-  GenericQueryFn,
-  QueryOptions,
-} from "../types/QueryModel";
+import { GenericConnectionInstance, GenericQueryFn } from "../types/QueryModel";
 
+import { AbstractModel } from "./abstract-model";
 import { Query } from "./query";
+
+// type ModelInstance<Model extends AbstractModel> = InstanceType<Model>;
+
+// type Columns<M extends Model> = ReturnType<ModelInstance<M>["getColumns"]>;
 
 /**
  * QueryBuilder Class
@@ -14,31 +15,34 @@ import { Query } from "./query";
  * @param <H> - Headers
  */
 export class ReadQuery<
-  Columns extends QueryOptions["columns"],
+  Model extends typeof AbstractModel,
   Query extends GenericQueryFn
-> extends Query<Columns, Query> {
+> extends Query<Model, Query> {
   constructor({
     name,
-    columns,
+    model,
     query,
     connection,
   }: {
     name?: string;
-    columns: Columns;
+    model: Model;
     query: Query;
     connection: GenericConnectionInstance;
   }) {
-    super({ name, columns, query, connection });
+    super({ name, model, query, connection });
   }
 
-  validateFields<K extends keyof Columns>(resultRow: Record<K, unknown>) {
+  validateFields<K extends keyof InstanceType<Model>["columns"]>(
+    modelInstance: InstanceType<Model>,
+    resultRow: Record<K, unknown>
+  ) {
     const resultKeys = Object.keys(resultRow);
 
     const missingColumnDefinitions = resultKeys.filter(
-      (key) => !(key in this.columns)
+      (key) => !(key in modelInstance.columns)
     );
 
-    const missingRowColumns = Object.keys(this.columns).filter(
+    const missingRowColumns = Object.keys(modelInstance.columns).filter(
       (key) => !(key in resultRow)
     );
 
@@ -59,30 +63,33 @@ export class ReadQuery<
     }
   }
 
-  resultToObject<K extends keyof Columns>(resultRow: Record<K, unknown>) {
-    const mapped = Object.fromEntries(
-      Object.entries(resultRow).map(([key, value]) => [
-        key,
-        this.columns[key].get(value),
-      ])
-    );
+  resultToModel<K extends keyof InstanceType<Model>["columns"]>(
+    resultRow: Record<K, unknown>
+  ): InstanceType<Model> {
+    const model = new this.model();
 
-    return mapped as {
-      [Property in keyof Columns]: ReturnType<Columns[Property]["get"]>;
-    };
+    for (const key in resultRow) {
+      if (model.data && key in model.data) {
+        model.data[key] = model.columns[key].get(resultRow[key]);
+      }
+    }
+
+    return model;
   }
 
-  getOne = async (...args: Parameters<Query>) => {
+  getOne = async (
+    ...args: Parameters<Query>
+  ): Promise<InstanceType<Model> | null> => {
     const query = this.query(...args);
 
     try {
       const result = await this.connection.getOne<
-        Record<keyof Columns, unknown>
+        Record<keyof InstanceType<Model>["columns"], unknown>
       >(query);
 
       if (!result) return null;
-      this.validateFields(result);
-      return this.resultToObject(result);
+      // this.validateFields(result);
+      return this.resultToModel(result);
     } catch (e) {
       throw this.getQueryError(e, query);
     }
@@ -100,7 +107,7 @@ export class ReadQuery<
         this.validateFields(result[0]);
       }
 
-      return result.map((item: any) => this.resultToObject(item)) as {
+      return result.map((item: any) => this.resultToModel(item)) as {
         [Property in keyof Columns]: ReturnType<Columns[Property]["get"]>;
       }[];
     } catch (e) {
