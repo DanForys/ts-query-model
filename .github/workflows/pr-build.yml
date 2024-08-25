@@ -35,7 +35,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: query-test
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
         volumes:
-          - /integration-test/fixtures/mysql:/docker-entrypoint-initdb.d
+          - $GITHUB_WORKSPACE/integration-test/fixtures/mysql:/docker-entrypoint-initdb.d
     steps:
       - name: Checkout
         uses: actions/checkout@v4
