@@ -5,15 +5,13 @@
     "removeComments": false,
     "declaration": true,
     "outDir": "dist",
-    "typeRoots": [
-      "./src/types"
-    ],
     "lib": ["ES2020", "DOM"]
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "src/**/*.test.ts",
   ],
   "exclude": [
-    "node_modules/**/*"
+    "node_modules/**/*",
   ]
 }

@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
+    "@types/jest": "^29.5.12",
     "@types/node": "^20.14.9",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
     "eslint": "^8.29.0",
@@ -27,9 +28,10 @@
     "eslint-plugin-jest": "^27.2.3",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-simple-import-sort": "^8.0.0",
-    "jest": "^29.0.3",
+    "jest": "^29.7.0",
     "prettier": "^2.3.2",
-    "typescript": "^5.5.3"
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.5.4"
   },
   "peerDependencies": {
     "mysql2": "^2.1.0"
