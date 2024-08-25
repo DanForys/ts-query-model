@@ -13,7 +13,8 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "eslint ./src"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
@@ -31,5 +32,10 @@
   },
   "peerDependencies": {
     "mysql2": "^2.1.0"
+  },
+  "peerDependenciesMeta": {
+    "mysql2": {
+      "optional": true
+    }
   }
 }

@@ -8,37 +8,31 @@ import mysql, {
 
 export class MySQLConnection extends GenericConnection {
   options: mysql.ConnectionOptions;
-  connection: mysql.Connection | null = null;
+  pool: mysql.Pool | null = null;
 
   constructor(options: mysql.ConnectionOptions) {
     super();
     this.options = options;
   }
 
-  async getConnection() {
-    if (this.connection) return this.connection;
+  getConnection() {
+    if (this.pool) return this.pool;
 
-    this.connection = await mysql.createConnection(this.options);
-
-    // FIXME
-    // this.connection.on("end", () => {
-    //   this.connection = null;
-    // });
-
-    return this.connection;
+    this.pool = mysql.createPool(this.options);
+    return this.pool;
   }
 
   async getMany<T>(...query: Parameters<Connection["query"]>): Promise<T[]> {
-    const connection = await this.getConnection();
-    const result = await connection.query<T[] & RowDataPacket[]>(...query);
+    const connection = this.getConnection();
+    const result = await connection.execute<T[] & RowDataPacket[]>(...query);
     return result[0];
   }
 
   async getOne<T>(
     ...query: Parameters<Connection["query"]>
   ): Promise<T | null> {
-    const connection = await this.getConnection();
-    const result = await connection.query<T[] & RowDataPacket[]>(...query);
+    const connection = this.getConnection();
+    const result = await connection.execute<T[] & RowDataPacket[]>(...query);
 
     return result[0][0] ?? null;
   }
@@ -46,8 +40,8 @@ export class MySQLConnection extends GenericConnection {
   async write(
     ...query: Parameters<Connection["query"]>
   ): Promise<ResultSetHeader> {
-    const connection = await this.getConnection();
-    const result = await connection.query<ResultSetHeader>(...query);
+    const connection = this.getConnection();
+    const result = await connection.execute<ResultSetHeader>(...query);
 
     return result[0];
   }

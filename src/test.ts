@@ -1,3 +1,4 @@
+import { MySQLConnection } from "./databases/mysql";
 import { enumColumn } from "./lib/columns/column-types/enum-column";
 import { jsonColumn } from "./lib/columns/column-types/json-like-column";
 import {
@@ -6,7 +7,6 @@ import {
 } from "./lib/columns/column-types/string-like-column";
 import { Database } from "./lib/database";
 import { ExtractRowType } from "./types/query-model";
-import { MySQLConnection } from "./mysql";
 
 const db = new Database(
   new MySQLConnection({
