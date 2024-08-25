@@ -47,6 +47,10 @@ export class Database<Connection extends GenericConnection> {
     this.connection = connection;
   }
 
+  disconnect() {
+    this.connection.disconnect();
+  }
+
   getOne<Query extends GenericQueryFn, Columns extends QueryColumns>({
     name,
     columns,

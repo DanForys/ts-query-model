@@ -8,6 +8,7 @@ import {
   nullableJsonColumn,
 } from "./column-types/json-like-column";
 import {
+  autoIncrementNumberColumn,
   nullableNumberColumn,
   numberColumn,
 } from "./column-types/number-like-column";
@@ -17,6 +18,7 @@ import {
 } from "./column-types/string-like-column";
 
 export {
+  autoIncrementNumberColumn,
   booleanColumn,
   enumColumn,
   jsonColumn,

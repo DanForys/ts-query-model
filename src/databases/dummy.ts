@@ -9,6 +9,10 @@ export class DummySQLConnection extends GenericConnection {
     return {};
   }
 
+  async disconnect() {
+    // no-op
+  }
+
   async getMany<T>(): Promise<T[]> {
     return [];
   }

@@ -1,0 +1,17 @@
+{
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "compilerOptions": {
+    "noUnusedLocals": true,
+    "removeComments": false,
+    "declaration": true,
+    "outDir": "dist",
+    "lib": ["ES2020", "DOM"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.test.ts",
+  ],
+  "exclude": [
+    "node_modules/**/*",
+  ]
+}

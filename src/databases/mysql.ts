@@ -22,6 +22,10 @@ export class MySQLConnection extends GenericConnection {
     return this.pool;
   }
 
+  disconnect() {
+    this.getConnection().end();
+  }
+
   async getMany<T>(...query: Parameters<Connection["query"]>): Promise<T[]> {
     const connection = this.getConnection();
     const result = await connection.execute<T[] & RowDataPacket[]>(...query);

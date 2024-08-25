@@ -1,0 +1,43 @@
+{
+  "name": "ts-query-model-integration-tests",
+  "description": "Integration tests for ts-query-model",
+  "license": "MIT",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint ./src",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.9",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jest": "^27.2.3",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "jest": "^29.7.0",
+    "prettier": "^2.3.2",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "mysql2": "^2.1.0"
+  },
+  "peerDependencies": {
+    "ts-query-model": "^0.0.1"
+  },
+  "peerDependenciesMeta": {
+    "ts-query-model": {
+      "optional": true
+    }
+  }
+}
