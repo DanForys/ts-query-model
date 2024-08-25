@@ -1,8 +1,5 @@
-import {
-  GenericConnectionInstance,
-  GenericQueryFn,
-  QueryOptions,
-} from "../types/QueryModel";
+import { GenericConnection } from "../generic/generic-connection";
+import { GenericQueryFn, QueryColumns } from "../types/query-model";
 
 import { Query } from "./query";
 
@@ -14,9 +11,10 @@ import { Query } from "./query";
  * @param <H> - Headers
  */
 export class ReadQuery<
-  Columns extends QueryOptions["columns"],
-  Query extends GenericQueryFn
-> extends Query<Columns, Query> {
+  Columns extends QueryColumns,
+  Query extends GenericQueryFn,
+  Connection extends GenericConnection
+> extends Query<Columns, Query, Connection> {
   constructor({
     name,
     columns,
@@ -26,7 +24,7 @@ export class ReadQuery<
     name?: string;
     columns: Columns;
     query: Query;
-    connection: GenericConnectionInstance;
+    connection: Connection;
   }) {
     super({ name, columns, query, connection });
   }
@@ -63,12 +61,12 @@ export class ReadQuery<
     const mapped = Object.fromEntries(
       Object.entries(resultRow).map(([key, value]) => [
         key,
-        this.columns[key].get(value),
+        this.columns[key].fromSQL(value),
       ])
     );
 
     return mapped as {
-      [Property in keyof Columns]: ReturnType<Columns[Property]["get"]>;
+      [Property in keyof Columns]: ReturnType<Columns[Property]["fromSQL"]>;
     };
   }
 
@@ -100,12 +98,49 @@ export class ReadQuery<
         this.validateFields(result[0]);
       }
 
-      return result.map((item: any) => this.resultToObject(item)) as {
-        [Property in keyof Columns]: ReturnType<Columns[Property]["get"]>;
-      }[];
+      return result.map((item: any) => this.resultToObject(item));
     } catch (e) {
       throw this.getQueryError(e, query);
     }
+  };
+
+  getColumn = (columnName: keyof Columns) => {
+    return async (...args: Parameters<Query>) => {
+      const query = this.query(...args);
+
+      try {
+        const result = await this.connection.getMany<
+          Record<keyof Columns, unknown>
+        >(query);
+
+        if (result.length > 0) {
+          this.validateFields(result[0]);
+        }
+
+        return result.map((item: any) => this.resultToObject(item)[columnName]);
+      } catch (e) {
+        throw this.getQueryError(e, query);
+      }
+    };
+  };
+
+  getValue = (columnName: keyof Columns) => {
+    return async (...args: Parameters<Query>) => {
+      const query = this.query(...args);
+
+      try {
+        const result = await this.connection.getOne<
+          Record<keyof Columns, unknown>
+        >(query);
+
+        if (!result) return null;
+        this.validateFields(result);
+
+        return this.resultToObject(result)[columnName];
+      } catch (e) {
+        throw this.getQueryError(e, query);
+      }
+    };
   };
 
   // async update(row: {

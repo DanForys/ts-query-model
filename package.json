@@ -12,9 +12,6 @@
     "node": ">=18.0.0"
   },
   "main": "dist/index.js",
-  "moduleRoots": [
-    "src/react"
-  ],
   "scripts": {
     "build": "tsc"
   },
@@ -34,10 +31,5 @@
   },
   "peerDependencies": {
     "mysql2": "^2.1.0"
-  },
-  "nodemonConfig": {
-    "ignore": [
-      "public/*"
-    ]
   }
 }

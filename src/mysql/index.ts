@@ -1,6 +1,10 @@
 import { GenericConnection } from "../generic/generic-connection";
 
-import mysql, { Connection, RowDataPacket } from "mysql2/promise";
+import mysql, {
+  Connection,
+  ResultSetHeader,
+  RowDataPacket,
+} from "mysql2/promise";
 
 export class MySQLConnection extends GenericConnection {
   options: mysql.ConnectionOptions;
@@ -37,5 +41,14 @@ export class MySQLConnection extends GenericConnection {
     const result = await connection.query<T[] & RowDataPacket[]>(...query);
 
     return result[0][0] ?? null;
+  }
+
+  async write(
+    ...query: Parameters<Connection["query"]>
+  ): Promise<ResultSetHeader> {
+    const connection = await this.getConnection();
+    const result = await connection.query<ResultSetHeader>(...query);
+
+    return result[0];
   }
 }

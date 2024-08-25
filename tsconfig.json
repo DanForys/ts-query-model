@@ -2,11 +2,11 @@
   "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
     "noUnusedLocals": true,
-    "removeComments": true,
+    "removeComments": false,
     "declaration": true,
     "outDir": "dist",
     "typeRoots": [
-      "./src/typescript"
+      "./src/types"
     ],
     "lib": ["ES2020", "DOM"]
   },

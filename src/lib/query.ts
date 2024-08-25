@@ -1,9 +1,5 @@
 import { GenericConnection } from "../generic/generic-connection";
-import {
-  GenericConnectionInstance,
-  GenericQueryFn,
-  QueryOptions,
-} from "../types/QueryModel";
+import { GenericQueryFn, QueryOptions } from "../types/query-model";
 
 /**
  * QueryBuilder Class
@@ -14,12 +10,13 @@ import {
  */
 export class Query<
   Columns extends QueryOptions["columns"],
-  Query extends GenericQueryFn
+  Query extends GenericQueryFn,
+  Connection extends GenericConnection
 > {
   readonly name: string;
   readonly columns: Columns;
   readonly query: Query;
-  readonly connection: GenericConnectionInstance;
+  readonly connection: Connection;
 
   /**
    * Constructor for QueryBuilder, contains the following keys:
@@ -34,7 +31,7 @@ export class Query<
     name?: string;
     columns: Columns;
     query: Query;
-    connection: GenericConnection;
+    connection: Connection;
   }) {
     this.name = name ?? "anonymous";
     this.columns = columns;
