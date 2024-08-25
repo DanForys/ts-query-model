@@ -1,4 +1,4 @@
-import { MySQLConnection } from "./databases/mysql";
+import { DummySQLConnection } from "./databases/dummy";
 import { enumColumn } from "./lib/columns/column-types/enum-column";
 import { jsonColumn } from "./lib/columns/column-types/json-like-column";
 import {
@@ -8,12 +8,7 @@ import {
 import { Database } from "./lib/database";
 import { ExtractRowType } from "./types/query-model";
 
-const db = new Database(
-  new MySQLConnection({
-    uri: "mysql://packages_demand:packages_demand@localhost:3306",
-    database: "packages_demand",
-  })
-);
+const db = new Database(new DummySQLConnection());
 
 const userModel = {
   getUser: db.getMany({
@@ -71,7 +66,7 @@ const log = (row: UserModelRow) => {
 const run = async () => {
   const t = await userModel.getUser("8814001", "8775100");
   console.log(t);
-  log(t);
+  log(t[0]);
   if (t) {
     // const yy = t.things;
     // const pp = t.departure_date;
@@ -79,13 +74,13 @@ const run = async () => {
     // const ll = t.blob.hello;
   }
 
-  const r = await userModel.createUser({
-    departure_date: "hello",
-    destination: "cheese",
-    origin: "foo",
-    blob: { hello: true },
-    things: "two",
-  });
+  // const r = await userModel.createUser({
+  //   departure_date: "hello",
+  //   destination: "cheese",
+  //   origin: "foo",
+  //   blob: { hello: true },
+  //   things: "two",
+  // });
 };
 
 run().then(() => console.log("FIN"));
