@@ -96,6 +96,7 @@ Create a query function to write to the database, returning a result set header.
 | `jsonStringColumn<JsonShape>`     | `JsonShape extends object`               | `TEXT` &#124; `VARCHAR` etc               |
 | `jsonStringColumnNull<JsonShape>` | `JsonShape extends object` &#124; `null` | `TEXT` &#124; `VARCHAR` etc &#124; `null` |
 | `numberColumn`                    | `number`                                 | `INT`, `MEDIUMINT` etc                    |
+| `numberColumnAutoIncrement`       | `number` &#124; `null`                   | `INT`, `MEDIUMINT` etc                    |
 | `numberColumnNull`                | `number` &#124; `null`                   | `INT`, `MEDIUMINT` etc &#124; `null`      |
 | `stringColumn`                    | `string`                                 | `TEXT` &#124; `VARCHAR` etc               |
 | `stringColumnNull`                | `string` &#124; `null`                   | `TEXT` &#124; `VARCHAR` etc &#124; `null` |
