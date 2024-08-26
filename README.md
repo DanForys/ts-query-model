@@ -58,3 +58,44 @@ const result = await getUsers({ limit: 10 });
 //      typed according to        correctly typed
 //      your columns
 ```
+
+## Database methods
+
+### `getOne({ name?, columns, query })`
+
+Create a query function to run `query` and return a single row of columns.
+
+### `getMany({ name?, columns, query })`
+
+Create a query function to run `query` and return multiple rows of columns.
+
+### `getColumn({ name?, columnName, columns, query })`
+
+Create a query function to run `query` and return an array of results
+only from column `columnName`.
+
+### `getValue({ name?, columnName, columns, query })`
+
+Create a query function to run `query` and return a single value
+only from column `columnName`.
+
+### `write({ name?, query })`
+
+Create a query function to write to the database, returning a result set header.
+
+## Column types
+
+| Column function                   | TypeScript type                          | Database type                             |
+| --------------------------------- | ---------------------------------------- | ----------------------------------------- |
+| `booleanIntColumn`                | `boolean`                                | `0` &#124; `1`                            |
+| `booleanIntColumnNull`            | `boolean` &#124; `null`                  | `0` &#124; `1` &#124; `null`              |
+| `dateColumn`                      | `Date`                                   | `DateTime`                                |
+| `dateColumnNull`                  | `Date` &#124; `null`                     | `DateTime` &#124; `null`                  |
+| `enumColumn<EnumShape>`           | `EnumShape extends string`               | `ENUM`                                    |
+| `enumColumnNull<EnumShape>`       | `EnumShape extends string` #124; `null`  | `ENUM` &#124; `null`                      |
+| `jsonStringColumn<JsonShape>`     | `JsonShape extends object`               | `TEXT` &#124; `VARCHAR` etc               |
+| `jsonStringColumnNull<JsonShape>` | `JsonShape extends object` &#124; `null` | `TEXT` &#124; `VARCHAR` etc &#124; `null` |
+| `numberColumn`                    | `number`                                 | `INT`, `MEDIUMINT` etc                    |
+| `numberColumnNull`                | `number` &#124; `null`                   | `INT`, `MEDIUMINT` etc &#124; `null`      |
+| `stringColumn`                    | `string`                                 | `TEXT` &#124; `VARCHAR` etc               |
+| `stringColumnNull`                | `string` &#124; `null`                   | `TEXT` &#124; `VARCHAR` etc &#124; `null` |
