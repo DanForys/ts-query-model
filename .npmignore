@@ -3,3 +3,4 @@ dist/**/*.test.d.test
 integration-test
 src
 .github
+docs
