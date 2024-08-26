@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.1](https://github.com/DanForys/ts-query-model/compare/v0.3.0...v0.3.1) (2024-08-26)
+
+
+### Bug Fixes
+
+* docs deploy ([#9](https://github.com/DanForys/ts-query-model/issues/9)) ([bad9131](https://github.com/DanForys/ts-query-model/commit/bad913135e5b6a49c4a3898b8f2617f0aae5c15a))
+* remove docs from package ([adb8569](https://github.com/DanForys/ts-query-model/commit/adb85693c006d67313a50143343440ea26167a31))
+* update package homepage ([35cfbaa](https://github.com/DanForys/ts-query-model/commit/35cfbaaee4682a7cb2f327d86377eb38ae01ce73))
+
 ## [0.3.0](https://github.com/DanForys/ts-query-model/compare/v0.2.0...v0.3.0) (2024-08-26)
 
 
