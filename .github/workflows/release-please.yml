@@ -37,23 +37,3 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.release_created }}
-      - name: Build and publish docs
-        run: |
-          cd docs
-          npm install
-          npm install ts-query-model@latest
-          npm run docs:build
-        if: ${{ steps.release.outputs.release_created }}
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-        if: ${{ steps.release.outputs.release_created }}
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: "./docs/dist"
-        if: ${{ steps.release.outputs.release_created }}
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-        if: ${{ steps.release.outputs.release_created }}
