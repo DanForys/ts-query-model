@@ -26,9 +26,19 @@ export default defineConfig({
           { text: 'Configuration', link: '/configuration' },
           { text: 'Querying', link: '/querying' }
         ]
+      },
+      {
+        text: 'Defining columns',
+        items: [
+          { text: 'Columns concepts', link: '/' },
+          { text: 'Column types', collapsed: true, items: [
+            { text: 'booleanIntColumn', link: '/columns/booleanIntColumn' },
+            { text: 'dateColumn', link: '/columns/dateColumn' },
+            { text: 'enumColumn', link: '/columns/enumColumn' },
+          ]}
+        ]
       }
     ],
-
     socialLinks: [
       { icon: 'github', link: 'https://github.com/DanForys/ts-query-model' }
     ]
