@@ -51,6 +51,12 @@ export class Database<Connection extends GenericConnection> {
     this.connection.disconnect();
   }
 
+  /**
+   * Create a query for a single row:
+   * @param name - Query name for logging
+   * @param columns - Column definition
+   * @param query - function returning the query to be run
+   */
   getOne<Query extends GenericQueryFn, Columns extends QueryColumns>({
     name,
     columns,

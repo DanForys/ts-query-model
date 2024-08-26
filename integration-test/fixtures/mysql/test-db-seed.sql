@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 8.2.0)
 # Database: query-test
-# Generation Time: 2024-08-25 20:17:05 +0000
+# Generation Time: 2024-08-26 09:24:22 +0000
 # ************************************************************
 
 
@@ -38,7 +38,9 @@ LOCK TABLES `test` WRITE;
 
 INSERT INTO `test` (`id`, `name`, `booleanLike`, `number`)
 VALUES
-	(1,'Mr Flibble',1,12345);
+	(1,'Mr Flibble',1,12345),
+	(2,'Lister',0,6789),
+	(3,'Kryten',1,101112);
 
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -5,25 +5,26 @@ interface EnumColumn<EnumShape extends string> extends ColumnDefinition {
   fromSQL: (valueFromSQL: EnumShape) => EnumShape;
 }
 
-interface NullableEnumColumn<EnumShape extends string>
-  extends ColumnDefinition {
+interface EnumColumnNull<EnumShape extends string> extends ColumnDefinition {
   toSQL: (valueFromJS: EnumShape | null | undefined) => EnumShape | null;
   fromSQL: (valueFromSQL: EnumShape | null) => EnumShape | null;
 }
 
-const enumColumn = <EnumShape extends string>() => {
+const enumColumn = <EnumShape extends string>(): EnumColumn<EnumShape> => {
   return {
     toSQL: (valueFromJS: EnumShape) => valueFromJS,
     fromSQL: (valueFromSQL: EnumShape) => valueFromSQL,
-  } as EnumColumn<EnumShape>;
+  };
 };
 
-const nullableEnumColumn = <EnumShape extends string>() => {
+const enumColumnNull = <
+  EnumShape extends string
+>(): EnumColumnNull<EnumShape> => {
   return {
-    toSQL: (valueFromJS: EnumShape | null) =>
+    toSQL: (valueFromJS: EnumShape | null | undefined) =>
       valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
     fromSQL: (valueFromSQL: EnumShape | null) => valueFromSQL,
-  } as NullableEnumColumn<EnumShape>;
+  };
 };
 
-export { enumColumn, nullableEnumColumn };
+export { enumColumn, enumColumnNull };

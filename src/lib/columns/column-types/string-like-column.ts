@@ -1,21 +1,21 @@
 import { ColumnDefinition } from "../../../types/query-model";
 
-interface StringLikeColumn extends ColumnDefinition {
+interface StringColumn extends ColumnDefinition {
   toSQL: (valueFromJS: string) => string;
   fromSQL: (valueFromSQL: string) => string;
 }
 
-interface NullableStringLikeColumn extends ColumnDefinition {
+interface StringColumnNull extends ColumnDefinition {
   toSQL: (valueFromJS: string | null | undefined) => string | null;
   fromSQL: (valueFromSQL: string | null) => string | null;
 }
 
-const _stringColumn: StringLikeColumn = {
+const _stringColumn: StringColumn = {
   toSQL: (valueFromJS) => valueFromJS.toString(),
   fromSQL: (valueFromSQL) => `${valueFromSQL}`,
 };
 
-const _nullableStringColumn: NullableStringLikeColumn = {
+const _nullableStringColumn: StringColumnNull = {
   toSQL: (valueFromJS) =>
     valueFromJS === null || valueFromJS === undefined
       ? null
@@ -24,6 +24,6 @@ const _nullableStringColumn: NullableStringLikeColumn = {
 };
 
 const stringColumn = () => _stringColumn;
-const nullableStringColumn = () => _nullableStringColumn;
+const stringColumnNull = () => _nullableStringColumn;
 
-export { nullableStringColumn, stringColumn };
+export { stringColumn, stringColumnNull };

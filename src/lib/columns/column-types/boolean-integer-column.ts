@@ -26,7 +26,7 @@ const _nullableBooleanColumn: NullableBooleanLikeColumn = {
     valueFromSQL === null ? null : Boolean(valueFromSQL),
 };
 
-const booleanColumn = () => _booleanColumn;
-const nullableBooleanColumn = () => _nullableBooleanColumn;
+const booleanIntColumn = () => _booleanColumn;
+const booleanIntColumnNull = () => _nullableBooleanColumn;
 
-export { booleanColumn, nullableBooleanColumn };
+export { booleanIntColumn, booleanIntColumnNull };

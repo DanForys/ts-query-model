@@ -1,39 +1,39 @@
 import { ColumnDefinition } from "../../../types/query-model";
 
-interface NumberLikeColumn extends ColumnDefinition {
+interface NumberColumn extends ColumnDefinition {
   toSQL: (valueFromJS: number) => number;
   fromSQL: (valueFromSQL: number) => number;
 }
 
-interface NullableNumberLikeColumn extends ColumnDefinition {
+interface NumberColumnNull extends ColumnDefinition {
   toSQL: (valueFromJS: number | null | undefined) => null | number;
   fromSQL: (valueFromSQL: null) => null | number;
 }
 
-interface AutoIncrementNumberLikeColumn extends ColumnDefinition {
+interface NumberColumnAutoIncrement extends ColumnDefinition {
   toSQL: (valueFromJS: number | null | undefined) => null | number;
   fromSQL: (valueFromSQL: number) => number;
 }
 
-const _numberColumn: NumberLikeColumn = {
+const _numberColumn: NumberColumn = {
   toSQL: (valueFromJS) => valueFromJS,
   fromSQL: (valueFromSQL) => valueFromSQL,
 };
 
-const _nullableNumberColumn: NullableNumberLikeColumn = {
+const _nullableNumberColumn: NumberColumnNull = {
   toSQL: (valueFromJS) =>
     valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
   fromSQL: (valueFromSQL) => valueFromSQL,
 };
 
-const _autoIncrementNumberColumn: AutoIncrementNumberLikeColumn = {
+const _autoIncrementNumberColumn: NumberColumnAutoIncrement = {
   toSQL: (valueFromJS) =>
     valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
   fromSQL: (valueFromSQL) => valueFromSQL,
 };
 
 const numberColumn = () => _numberColumn;
-const nullableNumberColumn = () => _nullableNumberColumn;
-const autoIncrementNumberColumn = () => _autoIncrementNumberColumn;
+const numberColumnNull = () => _nullableNumberColumn;
+const numberColumnAutoIncrement = () => _autoIncrementNumberColumn;
 
-export { autoIncrementNumberColumn, nullableNumberColumn, numberColumn };
+export { numberColumn, numberColumnAutoIncrement, numberColumnNull };

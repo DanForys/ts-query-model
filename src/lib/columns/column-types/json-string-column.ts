@@ -1,32 +1,36 @@
 import { ColumnDefinition } from "../../../types/query-model";
 
-interface JsonColumn<JSONShape extends object> extends ColumnDefinition {
+interface JsonStringColumn<JSONShape extends object> extends ColumnDefinition {
   toSQL: (valueFromJS: JSONShape) => string;
   fromSQL: (valueFromSQL: string) => JSONShape;
 }
 
-interface NullablejsonColumn<JSONShape extends object>
+interface JsonStringColumnNull<JSONShape extends object>
   extends ColumnDefinition {
   toSQL: (valueFromJS: JSONShape | null | undefined) => string | null;
   fromSQL: (valueFromSQL: string | null) => JSONShape | null;
 }
 
-const jsonColumn = <JSONShape extends object>() => {
+const jsonStringColumn = <
+  JSONShape extends object
+>(): JsonStringColumn<JSONShape> => {
   return {
     toSQL: (valueFromJS: JSONShape) => JSON.stringify(valueFromJS),
     fromSQL: (valueFromSQL: string) => JSON.parse(valueFromSQL),
-  } as JsonColumn<JSONShape>;
+  };
 };
 
-const nullableJsonColumn = <JSONShape extends object>() => {
+const jsonStringColumnNull = <
+  JSONShape extends object
+>(): JsonStringColumnNull<JSONShape> => {
   return {
-    toSQL: (valueFromJS: JSONShape | null) =>
+    toSQL: (valueFromJS: JSONShape | null | undefined) =>
       valueFromJS === null || valueFromJS === undefined
         ? null
         : JSON.stringify(valueFromJS),
     fromSQL: (valueFromSQL: string | null) =>
       valueFromSQL === null ? null : JSON.parse(valueFromSQL),
-  } as NullablejsonColumn<JSONShape>;
+  };
 };
 
-export { jsonColumn, nullableJsonColumn };
+export { jsonStringColumn, jsonStringColumnNull };
