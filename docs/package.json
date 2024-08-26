@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "@shikijs/twoslash": "^1.14.1",
+    "@shikijs/vitepress-twoslash": "^1.14.1",
+    "mysql2": "^2.3.3",
+    "sql-template-strings": "^2.2.2",
+    "ts-query-model": "^0.2.0",
+    "vitepress": "^1.3.4"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  }
+}
