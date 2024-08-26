@@ -1,14 +1,9 @@
 {
-  "name": "ts-query-model",
-  "description": "Simple TS wrapper for MySQL database queries with some convenience features. Not an ORM.",
-  "keywords": [
-    "typescript",
-    "mysql",
-    "database"
-  ],
+  "name": "ts-query-model-integration-tests",
+  "description": "Integration tests for ts-query-model",
   "license": "MIT",
   "version": "0.0.1",
-  "private": false,
+  "private": true,
   "engines": {
     "node": ">=18.0.0"
   },
@@ -34,11 +29,14 @@
     "ts-jest": "^29.2.5",
     "typescript": "^5.5.4"
   },
-  "peerDependencies": {
+  "dependencies": {
     "mysql2": "^2.1.0"
   },
+  "peerDependencies": {
+    "ts-query-model": "^0.0.1"
+  },
   "peerDependenciesMeta": {
-    "mysql2": {
+    "ts-query-model": {
       "optional": true
     }
   }

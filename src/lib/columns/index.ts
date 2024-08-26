@@ -1,30 +1,35 @@
 import {
-  booleanColumn,
-  nullableBooleanColumn,
-} from "./column-types/boolean-like-column";
-import { enumColumn, nullableEnumColumn } from "./column-types/enum-column";
+  booleanIntColumn,
+  booleanIntColumnNull,
+} from "./column-types/boolean-integer-column";
+import { dateColumn, dateColumnNull } from "./column-types/date-column";
+import { enumColumn, enumColumnNull } from "./column-types/enum-column";
 import {
-  jsonColumn,
-  nullableJsonColumn,
-} from "./column-types/json-like-column";
+  jsonStringColumn,
+  jsonStringColumnNull,
+} from "./column-types/json-string-column";
 import {
-  nullableNumberColumn,
   numberColumn,
+  numberColumnAutoIncrement,
+  numberColumnNull,
 } from "./column-types/number-like-column";
 import {
-  nullableStringColumn,
   stringColumn,
+  stringColumnNull,
 } from "./column-types/string-like-column";
 
 export {
-  booleanColumn,
+  booleanIntColumn,
+  booleanIntColumnNull,
+  dateColumn,
+  dateColumnNull,
   enumColumn,
-  jsonColumn,
-  nullableBooleanColumn,
-  nullableEnumColumn,
-  nullableJsonColumn,
-  nullableNumberColumn,
-  nullableStringColumn,
+  enumColumnNull,
+  jsonStringColumn,
+  jsonStringColumnNull,
   numberColumn,
+  numberColumnAutoIncrement,
+  numberColumnNull,
   stringColumn,
+  stringColumnNull,
 };
