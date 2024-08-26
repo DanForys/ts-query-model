@@ -2,3 +2,4 @@ dist/**/*.test.js
 dist/**/*.test.d.test
 integration-test
 src
+.github
