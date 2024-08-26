@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/DanForys/ts-query-model/compare/v0.2.0...v0.3.0) (2024-08-26)
+
+
+### Features
+
+* add doc website ([#7](https://github.com/DanForys/ts-query-model/issues/7)) ([bcfd953](https://github.com/DanForys/ts-query-model/commit/bcfd953c5907826fb6c9b08d94745221ef01edd6))
+
+
+### Bug Fixes
+
+* doc deployment ([8802a86](https://github.com/DanForys/ts-query-model/commit/8802a86aabf45aa07797a7a7cf380b86a7a6ad9e))
+
 ## [0.2.0](https://github.com/DanForys/ts-query-model/compare/v0.1.2...v0.2.0) (2024-08-26)
 
 
