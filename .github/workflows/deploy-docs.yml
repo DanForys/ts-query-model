@@ -32,8 +32,9 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Build
         run: |
+          npm ci
           cd docs
-          npm install
+          npm ci
           npm install ts-query-model@latest
           npm run docs:build
       - name: Upload artifact
