@@ -17,6 +17,12 @@ Not an ORM. Currently supports usage with the [mysql2 package](https://www.npmjs
 npm install ts-query-model
 ```
 
+The `mysql2` package is required as a peer dependency:
+
+```bash
+npm install mysql2
+```
+
 It is recommended to use in conjunction with
 [sql-template-strings](https://www.npmjs.com/package/sql-template-strings)
 
