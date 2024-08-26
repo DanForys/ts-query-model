@@ -1,7 +1,7 @@
 {
   "name": "ts-query-model",
   "description": "Simple TS wrapper for MySQL database queries with some convenience features. Not an ORM.",
-  "homepage": "https://github.com/DanForys/ts-query-model",
+  "homepage": "https://ts-query-model.forys.uk/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DanForys/ts-query-model.git"
