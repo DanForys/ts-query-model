@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/DanForys/ts-query-model/compare/v0.1.2...v0.2.0) (2024-08-26)
+
+
+### Features
+
+* create README ([#5](https://github.com/DanForys/ts-query-model/issues/5)) ([091ee22](https://github.com/DanForys/ts-query-model/commit/091ee227718a3cb3c4a1b72bf57b8a2563896f71))
+
 ## [0.1.2](https://github.com/DanForys/ts-query-model/compare/v0.1.1...v0.1.2) (2024-08-26)
 
 
