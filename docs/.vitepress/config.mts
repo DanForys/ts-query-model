@@ -42,6 +42,19 @@ export default defineConfig({
         ]
       },
       {
+        text: 'Creating models',
+        items: [
+          { text: 'Model concepts', link: '/models/concepts' },
+          { text: 'Model factory methods', collapsed: true, items: [
+            { text: 'getOne()', link: '/models/getOne' },
+            { text: 'getMany()', link: '/models/getMany' },
+            { text: 'getColumn()', link: '/models/getColumn' },
+            { text: 'getValue()', link: '/models/getValue' },
+            { text: 'write()', link: '/models/write' },
+          ]}
+        ]
+      },
+      {
         items: [
           { text: 'Changelog', link: '/CHANGELOG' },
         ]
