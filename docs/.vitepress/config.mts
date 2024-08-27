@@ -30,13 +30,14 @@ export default defineConfig({
       {
         text: 'Defining columns',
         items: [
-          { text: 'Columns concepts', link: '/' },
+          { text: 'Columns concepts', link: '/columns/concepts' },
           { text: 'Column types', collapsed: true, items: [
             { text: 'booleanIntColumn', link: '/columns/booleanIntColumn' },
             { text: 'dateColumn', link: '/columns/dateColumn' },
             { text: 'enumColumn', link: '/columns/enumColumn' },
             { text: 'jsonStringColumn', link: '/columns/jsonStringColumn' },
             { text: 'numberColumn', link: '/columns/numberColumn' },
+            { text: 'stringColumn', link: '/columns/stringColumn' },
           ]}
         ]
       },
