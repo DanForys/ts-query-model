@@ -37,6 +37,11 @@ export default defineConfig({
             { text: 'enumColumn', link: '/columns/enumColumn' },
           ]}
         ]
+      },
+      {
+        items: [
+          { text: 'Changelog', link: '/CHANGELOG' },
+        ]
       }
     ],
     socialLinks: [

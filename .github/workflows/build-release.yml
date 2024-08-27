@@ -51,6 +51,7 @@ jobs:
           cd docs
           npm ci
           npm install ts-query-model@latest
+          cp ../CHANGELOG.md ./
           npm run docs:build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
