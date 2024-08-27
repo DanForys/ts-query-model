@@ -6,7 +6,12 @@ outline: deep
 
 ## When to use
 
-Transforms a JavaScript `true` or `false` value to an integer `1` or `0` respectively.
+- Your TypeScript code expects a `true` or `false` value
+- The database column encodes this as a `1` or `0` integer value
+
+## How it works
+
+It transforms a JavaScript `true` or `false` value to an integer `1` or `0` respectively.
 Used where the database does not support true Boolean columns e.g. MySQL.
 
 The database column should be of type `TINYINT(1)`
@@ -69,7 +74,12 @@ const getExampleRow = db.getOne({
 });
 // ---cut---
 const result = await getExampleRow({ id: 1 });
-// result = { status: false }
+if (result) {
+  console.log(result.status);
+  //                 ^?
+}
+
+// -> false
 ```
 
 And for row `2`:
@@ -94,5 +104,11 @@ const getExampleRow = db.getOne({
 });
 // ---cut---
 const result = await getExampleRow({ id: 2 });
-// result = { status: true }
+
+if (result) {
+  console.log(result.status);
+  //                 ^?
+}
+
+// -> true
 ```

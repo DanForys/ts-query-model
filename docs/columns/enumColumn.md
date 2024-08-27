@@ -6,7 +6,10 @@ outline: deep
 
 ## When to use
 
-For a column of defined `ENUM` values.
+- Your TypeScript code expects a string from a strictly defined set
+- Your database column is an `ENUM` of defined values
+
+## How it works
 
 This column type is generic and takes a union of string values for the permitted `ENUM` values.
 For example, if a column was defined with the possible enum values `CHEESE`, `WINE` and `JELLY`,
@@ -76,5 +79,10 @@ const getExampleRow = db.getOne({
 });
 // ---cut---
 const result = await getExampleRow({ id: 1 });
-// result = { pet: "CAT" }
+if (result) {
+  console.log(result.pet);
+  //                 ^?
+}
+
+// -> 'CAT'
 ```

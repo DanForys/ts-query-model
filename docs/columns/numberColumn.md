@@ -2,32 +2,32 @@
 outline: deep
 ---
 
-# `dateColumn()`
+# `numberColumn()`
 
 ## When to use
 
-- Your TypeScript code expects a `Date` object
-- The database library returns a `Date` for the column
+- Your TypeScript code expects a `number` value
+- The database column is an integer or decimal value fitting into the range of a JS `number`
 
 ## How it works
 
-Returns a `Date` object if the database library is configured to return
-JavaScript `Date` instancesf or `DATETIME` and `TIMESTAMP` columns.
-
-Do not use this if string values are returned.
+It expects the underlying database driver to return a `number` for the column data.
 
 ## Nullability
 
-If the column allows `null` values, use `dateColumnNull()`.
+If the column allows `null` values, use `numberColumnNull()`.
+
+If the column is an auto-increment primary key, use `numberColumnAutoIncrement()`. This allows
+`null` as an input, but will not be `null` on output.
 
 ## Example
 
-Given the following database table `dateExample`:
+Given the following database table `numberExample`:
 
-| id `INT` | date `DATETIME`     |
-| -------- | ------------------- |
-| 1        | 2024-01-01 00:00:00 |
-| 2        | 2025-01-01 00:00:00 |
+| id `INT` | number `INT` |
+| -------- | ------------ |
+| 1        | 1234         |
+| 2        | 5678         |
 
 And the following model:
 
@@ -45,10 +45,10 @@ const db = new Database(
 const getExampleRow = db.getOne({
   name: "get-one-example-row",
   columns: {
-    date: columns.dateColumn(),
+    number: columns.numberColumn(),
   },
   query: ({ id }: { id: number }) =>
-    SQL`SELECT date FROM dateExample WHERE id = ${id}`,
+    SQL`SELECT number FROM numberExample WHERE id = ${id}`,
 });
 ```
 
@@ -67,17 +67,17 @@ const db = new Database(
 const getExampleRow = db.getOne({
   name: "get-one-example-row",
   columns: {
-    date: columns.dateColumn(),
+    number: columns.numberColumn(),
   },
   query: ({ id }: { id: number }) =>
-    SQL`SELECT status FROM boolIntExample WHERE id = ${id}`,
+    SQL`SELECT number FROM numberExample WHERE id = ${id}`,
 });
 // ---cut---
 const result = await getExampleRow({ id: 1 });
 if (result) {
-  console.log(result.date);
+  console.log(result.number);
   //                 ^?
 }
 
-// -> Date: Mon Jan 01 2024 00:00:00 GMT+0000
+// -> 1234
 ```

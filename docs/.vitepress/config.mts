@@ -35,6 +35,8 @@ export default defineConfig({
             { text: 'booleanIntColumn', link: '/columns/booleanIntColumn' },
             { text: 'dateColumn', link: '/columns/dateColumn' },
             { text: 'enumColumn', link: '/columns/enumColumn' },
+            { text: 'jsonStringColumn', link: '/columns/jsonStringColumn' },
+            { text: 'numberColumn', link: '/columns/numberColumn' },
           ]}
         ]
       },
