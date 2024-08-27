@@ -3,6 +3,11 @@
 A simple TypeScript wrapper for database queries with some convenience features.
 Not an ORM. Currently supports usage with the [mysql2 package](https://www.npmjs.com/package/mysql2).
 
+It aims to provide a middle ground between the complexity of using an ORM
+and having to manually create types for raw SQL queries.
+
+➡️➡️ [Full documentation website](https://ts-query-model.forys.uk/) ⬅️⬅️
+
 ## Features
 
 - ✅ Pure SQL queries. No awkward JS/SQL mapping.
@@ -64,6 +69,8 @@ const result = await getUsers({ limit: 10 });
 //      typed according to        correctly typed
 //      your columns
 ```
+
+See more at the [full documentation website](https://ts-query-model.forys.uk/)
 
 ## Database methods
 

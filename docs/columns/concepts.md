@@ -10,6 +10,9 @@ The available column types can be imported with:
 import { columns } from "ts-query-model";
 ```
 
+See the menu on the left for details on the available
+column types.
+
 The column types perform these functions:
 
 - transforming data from JavaScript types to SQL types

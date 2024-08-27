@@ -5,6 +5,9 @@ outline: deep
 # About
 
 The `ts-query-model` package is a lightweight database query wrapper for MySQL.
+It aims to provide a middle ground between the complexity of using an ORM
+and having to manually create types for raw SQL queries.
+
 Its API is designed for projects where:
 
 - SQL is preferred over using an ORM
