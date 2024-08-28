@@ -19,7 +19,27 @@ describe("ts-query-model SQLite support", () => {
       `,
     });
 
+    const addRow = db.write({
+      name: "addRow",
+      query: (
+        id: number,
+        name: string,
+        booleanLike: number,
+        number: number
+      ) => SQL`
+        INSERT INTO test VALUES (
+         ${id},
+         ${name},
+         ${booleanLike},
+         ${number}
+        )
+      `,
+    });
+
     await createTable();
+    await addRow(1, "Mr Flibble", 1, 12345);
+    await addRow(2, "Lister", 0, 6789);
+    await addRow(3, "Kryten", 1, 101112);
   });
 
   afterAll(() => {
@@ -35,9 +55,7 @@ describe("ts-query-model SQLite support", () => {
         booleanLike: columns.booleanIntColumn(),
         number: columns.numberColumn(),
       },
-      query: () => ({
-        sql: "SELECT * FROM test LIMIT 1",
-      }),
+      query: () => "SELECT * FROM test LIMIT 1",
     });
 
     const result = await getRow();
@@ -53,9 +71,7 @@ describe("ts-query-model SQLite support", () => {
         booleanLike: columns.booleanIntColumn(),
         number: columns.numberColumn(),
       },
-      query: () => ({
-        sql: "SELECT * FROM test",
-      }),
+      query: () => "SELECT * FROM test",
     });
 
     const result = await getRows();
@@ -69,9 +85,7 @@ describe("ts-query-model SQLite support", () => {
       columns: {
         name: columns.stringColumn(),
       },
-      query: () => ({
-        sql: "SELECT name FROM test",
-      }),
+      query: () => "SELECT name FROM test",
     });
 
     const result = await getColumn();
@@ -85,9 +99,7 @@ describe("ts-query-model SQLite support", () => {
       columns: {
         rowCount: columns.numberColumn(),
       },
-      query: () => ({
-        sql: "SELECT COUNT(*) AS rowCount FROM test",
-      }),
+      query: () => "SELECT COUNT(*) AS rowCount FROM test",
     });
 
     const result = await getValue();

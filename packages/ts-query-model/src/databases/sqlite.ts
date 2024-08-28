@@ -1,4 +1,5 @@
 import { GenericConnection } from "../generic/generic-connection";
+import { GenericQuery } from "../types/query-model";
 
 import sqlite3 from "sqlite3";
 
@@ -48,10 +49,10 @@ export class SQLiteConnection extends GenericConnection {
   async getMany<T>(
     ...query: Parameters<sqlite3.Database["all"]>
   ): Promise<T[]> {
-    const connmection = await this.getConnection();
+    const connection = await this.getConnection();
 
     return new Promise((resolve, reject) => {
-      connmection.all(query[0], query[1] ?? [], (error, rows) => {
+      connection.all(query[0], query[1] ?? [], (error, rows) => {
         if (error) return reject(error);
         resolve(rows as T[]);
       });
@@ -59,10 +60,10 @@ export class SQLiteConnection extends GenericConnection {
   }
 
   async getOne<T>(...query: Parameters<sqlite3.Database["get"]>): Promise<T> {
-    const connmection = await this.getConnection();
+    const connection = await this.getConnection();
 
     return new Promise((resolve, reject) => {
-      connmection.get(query[0], query[1] ?? [], (error, row) => {
+      connection.get(query[0], query[1] ?? [], (error, row) => {
         if (error) return reject(error);
         resolve(row as T);
       });
@@ -70,18 +71,34 @@ export class SQLiteConnection extends GenericConnection {
   }
 
   async write(
-    ...query: Parameters<sqlite3.Database["get"]>
+    query: GenericQuery
   ): Promise<{ lastID: number; changes: number }> {
-    const connmection = await this.getConnection();
+    const connection = await this.getConnection();
 
-    return new Promise((resolve, reject) => {
-      connmection.run(query[0], query[1] ?? [], function (error) {
-        if (error) return reject(error);
-        resolve({
-          lastID: this.lastID,
-          changes: this.changes,
+    if (typeof query === "string") {
+      return new Promise((resolve, reject) => {
+        connection.run(query[0], query[1] ?? [], function (error) {
+          if (error) return reject(error);
+          resolve({
+            lastID: this.lastID,
+            changes: this.changes,
+          });
         });
       });
-    });
+    }
+
+    if (query.sql && query.values) {
+      return new Promise((resolve, reject) => {
+        connection.run(query.sql, query.values ?? [], function (error) {
+          if (error) return reject(error);
+          resolve({
+            lastID: this.lastID,
+            changes: this.changes,
+          });
+        });
+      });
+    }
+
+    throw new Error("Invalid query");
   }
 }

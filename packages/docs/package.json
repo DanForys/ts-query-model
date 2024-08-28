@@ -1,11 +1,18 @@
 {
+  "name": "ts-query-model-docs",
+  "description": "Documentation for ts-query-model",
+  "license": "MIT",
+  "version": "0.0.1",
+  "private": true,
   "devDependencies": {
     "@shikijs/twoslash": "^1.14.1",
     "@shikijs/vitepress-twoslash": "^1.14.1",
     "mysql2": "^2.3.3",
     "sql-template-strings": "^2.2.2",
-    "ts-query-model": "^0.2.0",
     "vitepress": "^1.3.4"
+  },
+  "dependencies": {
+    "ts-query-model": "*"
   },
   "scripts": {
     "docs:dev": "vitepress dev",

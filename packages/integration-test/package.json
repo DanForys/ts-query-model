@@ -32,14 +32,7 @@
   "dependencies": {
     "mysql2": "^2.1.0",
     "sql-template-strings": "^2.2.2",
-    "sqlite3": "^5.1.7"
-  },
-  "peerDependencies": {
-    "ts-query-model": "^0.0.1"
-  },
-  "peerDependenciesMeta": {
-    "ts-query-model": {
-      "optional": true
-    }
+    "sqlite3": "^5.1.7",
+    "ts-query-model": "*"
   }
 }

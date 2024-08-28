@@ -1,6 +1,14 @@
 import { GenericConnection } from "../generic/generic-connection";
 
-export type GenericQueryFn = (...args: any[]) => any;
+interface TemplateStringQuery {
+  text: string;
+  sql: string;
+  values?: any[];
+}
+
+export type GenericQuery = TemplateStringQuery | string;
+
+export type GenericQueryFn = (...args: any[]) => GenericQuery;
 
 export type QueryColumns = Record<string, ColumnDefinition>;
 

@@ -11,6 +11,7 @@ describe("The Database class", () => {
         columns: { test: stringColumn() },
         query: (input: string) => ({
           sql: `DUMMY SQL`,
+          text: `DUMMY SQL`,
           values: [input],
         }),
       })

@@ -8,8 +8,8 @@
     "lib": ["ES2020", "DOM"]
   },
   "include": [
-    "packages/ts-query-model/src/**/*.ts",
-    "packages/ts-query-model/src/**/*.test.ts",
+    "src/**/*.ts",
+    "src/**/*.test.ts",
   ],
   "exclude": [
     "node_modules/**/*",
