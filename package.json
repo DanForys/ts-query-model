@@ -7,6 +7,9 @@
   "engines": {
     "node": ">=18.0.0"
   },
+  "scripts": {
+    "postinstall": "cd packages/ts-query-model && npm run build"
+  },
   "workspaces": [
     "packages/integration-test/",
     "packages/docs/",
