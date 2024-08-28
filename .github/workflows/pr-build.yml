@@ -16,9 +16,9 @@ jobs:
       - name: NPM Install
         run: npm ci
       - name: Lint
-        run: npm run lint
+        run: cd packages/ts-query-model && npm run lint
       - name: Run Unit Tests
-        run: npm run test
+        run: cd packages/ts-query-model && npm run test
   integration-test-mysql:
     needs: setup-and-test
     runs-on: ubuntu-latest
@@ -44,16 +44,11 @@ jobs:
           cache: "npm"
       - name: Seed database
         run: |
-          cat integration-test/fixtures/mysql/test-db-seed.sql | mysql -uquery-test -pquery-test -h127.0.0.1 query-test
+          cat packages/integration-test/fixtures/mysql/test-db-seed.sql | mysql -uquery-test -pquery-test -h127.0.0.1 query-test
       - name: Install packages
         run: |
           npm ci
-          npm run build
-          npm link
-          cd integration-test
-          npm ci
-          npm link ts-query-model
       - name: Run integration tests
         run: |
-          cd integration-test
+          cd packages/integration-test
           npm run test
