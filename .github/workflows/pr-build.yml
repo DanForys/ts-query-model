@@ -20,6 +20,7 @@ jobs:
       - name: Run Unit Tests
         run: cd packages/ts-query-model && npm run test
   integration-test-mysql:
+    name: MySQL integration tests
     needs: setup-and-test
     runs-on: ubuntu-latest
     timeout-minutes: 15
