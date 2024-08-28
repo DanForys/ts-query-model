@@ -10,7 +10,7 @@ and having to manually create types for raw SQL queries.
 
 ## Features
 
-- ✅ Pure SQL queries.
+- ✅ Write SQL. No querybuilder API.
 - ✅ Correctly typed query results without separate type declarations.
 - ✅ Lightweight. No dependencies.
 - ✅ No scripted setup process.
