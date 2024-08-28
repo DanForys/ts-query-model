@@ -1,5 +1,9 @@
 import { GenericConnection } from "../generic/generic-connection";
-import { GenericQueryFn, QueryOptions } from "../types/query-model";
+import {
+  GenericQuery,
+  GenericQueryFn,
+  QueryOptions,
+} from "../types/query-model";
 
 /**
  * QueryBuilder Class
@@ -39,7 +43,7 @@ export class Query<
     this.connection = connection;
   }
 
-  getQueryError(e: any, query: string | Record<string, unknown>) {
+  getQueryError(e: any, query: GenericQuery) {
     const stringifiedQuery =
       typeof query === "string" ? query : JSON.stringify(query);
 

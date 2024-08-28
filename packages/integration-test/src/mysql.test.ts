@@ -24,9 +24,7 @@ describe("ts-query-model", () => {
         booleanLike: columns.booleanIntColumn(),
         number: columns.numberColumn(),
       },
-      query: () => ({
-        sql: "SELECT * FROM test LIMIT 1",
-      }),
+      query: () => "SELECT * FROM test LIMIT 1",
     });
 
     const result = await getRow();
@@ -42,9 +40,7 @@ describe("ts-query-model", () => {
         booleanLike: columns.booleanIntColumn(),
         number: columns.numberColumn(),
       },
-      query: () => ({
-        sql: "SELECT * FROM test",
-      }),
+      query: () => "SELECT * FROM test",
     });
 
     const result = await getRows();
@@ -58,9 +54,7 @@ describe("ts-query-model", () => {
       columns: {
         name: columns.stringColumn(),
       },
-      query: () => ({
-        sql: "SELECT name FROM test",
-      }),
+      query: () => "SELECT name FROM test",
     });
 
     const result = await getColumn();
@@ -74,9 +68,7 @@ describe("ts-query-model", () => {
       columns: {
         rowCount: columns.numberColumn(),
       },
-      query: () => ({
-        sql: "SELECT COUNT(*) AS rowCount FROM test",
-      }),
+      query: () => "SELECT COUNT(*) AS rowCount FROM test",
     });
 
     const result = await getValue();

@@ -16,10 +16,11 @@ jobs:
       - name: NPM Install
         run: npm ci
       - name: Lint
-        run: npm run lint
+        run: cd packages/ts-query-model && npm run lint
       - name: Run Unit Tests
-        run: npm run test
+        run: cd packages/ts-query-model && npm run test
   integration-test-mysql:
+    name: MySQL integration tests
     needs: setup-and-test
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -44,16 +45,31 @@ jobs:
           cache: "npm"
       - name: Seed database
         run: |
-          cat integration-test/fixtures/mysql/test-db-seed.sql | mysql -uquery-test -pquery-test -h127.0.0.1 query-test
+          cat packages/integration-test/fixtures/mysql/test-db-seed.sql | mysql -uquery-test -pquery-test -h127.0.0.1 query-test
       - name: Install packages
         run: |
           npm ci
-          npm run build
-          npm link
-          cd integration-test
-          npm ci
-          npm link ts-query-model
       - name: Run integration tests
         run: |
-          cd integration-test
-          npm run test
+          cd packages/integration-test
+          npm run test:mysql
+  integration-test-sqlite:
+    name: SQLite integration tests
+    needs: setup-and-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure NPM cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - name: Install packages
+        run: |
+          npm ci
+      - name: Run integration tests
+        run: |
+          cd packages/integration-test
+          npm run test:sqlite

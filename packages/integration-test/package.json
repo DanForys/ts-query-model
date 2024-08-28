@@ -11,7 +11,8 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint ./src",
-    "test": "jest"
+    "test:mysql": "jest src/mysql.test.ts",
+    "test:sqlite": "jest src/sqlite.test.ts"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
@@ -30,14 +31,9 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "mysql2": "^2.1.0"
-  },
-  "peerDependencies": {
-    "ts-query-model": "^0.0.1"
-  },
-  "peerDependenciesMeta": {
-    "ts-query-model": {
-      "optional": true
-    }
+    "mysql2": "^2.1.0",
+    "sql-template-strings": "^2.2.2",
+    "sqlite3": "^5.1.7",
+    "ts-query-model": "*"
   }
 }

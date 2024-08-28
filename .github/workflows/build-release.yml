@@ -31,9 +31,8 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
       - run: |
           npm ci
-          npm run build
         if: ${{ steps.release.outputs.release_created }}
-      - run: npm publish
+      - run: cd packages/ts-query-model && npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.release_created }}
@@ -48,15 +47,13 @@ jobs:
       - name: Build
         run: |
           npm ci
-          cd docs
-          npm ci
-          npm install ts-query-model@latest
-          cp ../CHANGELOG.md ./
+          cp CHANGELOG.md ./packages/docs/
+          cd packages/docs
           npm run docs:build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./docs/.vitepress/dist"
+          path: ".packages/docs/.vitepress/dist"
   deploy-docs:
     environment:
       name: github-pages

@@ -1,0 +1,57 @@
+{
+  "name": "ts-query-model",
+  "description": "Simple TS wrapper for database queries with some convenience features. Works with MySQL and SQLite.",
+  "homepage": "https://ts-query-model.forys.uk/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanForys/ts-query-model.git"
+  },
+  "keywords": [
+    "typescript",
+    "mysql",
+    "sqlite",
+    "database"
+  ],
+  "license": "MIT",
+  "version": "0.3.1",
+  "private": false,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint ./src",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.9",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jest": "^27.2.3",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "jest": "^29.7.0",
+    "mysql2": "^2.1.0",
+    "prettier": "^2.3.2",
+    "sqlite3": "^5.1.7",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.5.4"
+  },
+  "peerDependencies": {
+    "mysql2": "^2.1.0",
+    "sqlite3": "^5.1.7"
+  },
+  "peerDependenciesMeta": {
+    "mysql2": {
+      "optional": true
+    },
+    "sqlite3": {
+      "optional": true
+    }
+  }
+}
