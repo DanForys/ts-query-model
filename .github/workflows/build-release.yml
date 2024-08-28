@@ -48,7 +48,7 @@ jobs:
       - name: Build
         run: |
           npm ci
-          cp CHANGELOG.md ./packages/docs/
+          cp ./packages/ts-query-model/CHANGELOG.md ./packages/docs/
           cd packages/docs
           npm run docs:build
       - name: Upload artifact
