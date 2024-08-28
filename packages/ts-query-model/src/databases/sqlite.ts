@@ -46,24 +46,40 @@ export class SQLiteConnection extends GenericConnection {
     return connection.close();
   }
 
-  async getMany<T>(
-    ...query: Parameters<sqlite3.Database["all"]>
-  ): Promise<T[]> {
+  async getMany<T>(query: GenericQuery): Promise<T[]> {
     const connection = await this.getConnection();
 
+    if (typeof query === "string") {
+      return new Promise((resolve, reject) => {
+        connection.all(query, (error, rows) => {
+          if (error) return reject(error);
+          resolve(rows as T[]);
+        });
+      });
+    }
+
     return new Promise((resolve, reject) => {
-      connection.all(query[0], query[1] ?? [], (error, rows) => {
+      connection.all(query.sql, query.values ?? [], (error, rows) => {
         if (error) return reject(error);
         resolve(rows as T[]);
       });
     });
   }
 
-  async getOne<T>(...query: Parameters<sqlite3.Database["get"]>): Promise<T> {
+  async getOne<T>(query: GenericQuery): Promise<T> {
     const connection = await this.getConnection();
 
+    if (typeof query === "string") {
+      return new Promise((resolve, reject) => {
+        connection.get(query, (error, row) => {
+          if (error) return reject(error);
+          resolve(row as T);
+        });
+      });
+    }
+
     return new Promise((resolve, reject) => {
-      connection.get(query[0], query[1] ?? [], (error, row) => {
+      connection.get(query.sql, query.values ?? [], (error, row) => {
         if (error) return reject(error);
         resolve(row as T);
       });
@@ -77,7 +93,7 @@ export class SQLiteConnection extends GenericConnection {
 
     if (typeof query === "string") {
       return new Promise((resolve, reject) => {
-        connection.run(query[0], query[1] ?? [], function (error) {
+        connection.run(query, function (error) {
           if (error) return reject(error);
           resolve({
             lastID: this.lastID,
@@ -87,18 +103,14 @@ export class SQLiteConnection extends GenericConnection {
       });
     }
 
-    if (query.sql && query.values) {
-      return new Promise((resolve, reject) => {
-        connection.run(query.sql, query.values ?? [], function (error) {
-          if (error) return reject(error);
-          resolve({
-            lastID: this.lastID,
-            changes: this.changes,
-          });
+    return new Promise((resolve, reject) => {
+      connection.run(query.sql, query.values ?? [], function (error) {
+        if (error) return reject(error);
+        resolve({
+          lastID: this.lastID,
+          changes: this.changes,
         });
       });
-    }
-
-    throw new Error("Invalid query");
+    });
   }
 }

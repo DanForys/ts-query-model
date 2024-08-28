@@ -3,7 +3,7 @@ import { GenericConnection } from "../generic/generic-connection";
 interface TemplateStringQuery {
   text: string;
   sql: string;
-  values?: any[];
+  values?: any | any[] | { [param: string]: any };
 }
 
 export type GenericQuery = TemplateStringQuery | string;

@@ -1,10 +1,10 @@
 import { GenericConnection } from "../generic/generic-connection";
 
 import mysql, {
-  Connection,
   ResultSetHeader,
   RowDataPacket,
 } from "mysql2/promise";
+import { GenericQuery } from "../types/query-model";
 
 export class MySQLConnection extends GenericConnection {
   options: mysql.ConnectionOptions;
@@ -26,27 +26,43 @@ export class MySQLConnection extends GenericConnection {
     this.getConnection().end();
   }
 
-  async getMany<T>(...query: Parameters<Connection["query"]>): Promise<T[]> {
+  async getMany<T>(query: GenericQuery): Promise<T[]> {
     const connection = this.getConnection();
-    const result = await connection.execute<T[] & RowDataPacket[]>(...query);
+
+    if (typeof query === "string") {
+      const result = await connection.execute<T[] & RowDataPacket[]>(query);
+      return result[0];
+    }
+
+    const result = await connection.execute<T[] & RowDataPacket[]>(query);
     return result[0];
   }
 
   async getOne<T>(
-    ...query: Parameters<Connection["query"]>
+    query: GenericQuery
   ): Promise<T | null> {
     const connection = this.getConnection();
-    const result = await connection.execute<T[] & RowDataPacket[]>(...query);
 
+    if (typeof query === 'string') {
+      const result = await connection.execute<T[] & RowDataPacket[]>(query);
+      return result[0][0] ?? null;
+    }
+
+    const result = await connection.execute<T[] & RowDataPacket[]>(query);
     return result[0][0] ?? null;
   }
 
   async write(
-    ...query: Parameters<Connection["query"]>
+    query: GenericQuery
   ): Promise<ResultSetHeader> {
     const connection = this.getConnection();
-    const result = await connection.execute<ResultSetHeader>(...query);
 
+    if (typeof query === "string") {
+      const result = await connection.execute<ResultSetHeader>(query);
+      return result[0];
+    }
+    
+    const result = await connection.execute<ResultSetHeader>(query);
     return result[0];
   }
 }
