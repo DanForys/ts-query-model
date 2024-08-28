@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.3](https://github.com/DanForys/ts-query-model/compare/v0.4.2...v0.4.3) (2024-08-28)
+
+
+### Bug Fixes
+
+* docs ([787d854](https://github.com/DanForys/ts-query-model/commit/787d854af756f354007507ec69f1db949387f18d))
+
 ## [0.4.2](https://github.com/DanForys/ts-query-model/compare/v0.4.1...v0.4.2) (2024-08-28)
 
 
