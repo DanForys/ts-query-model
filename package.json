@@ -11,8 +11,8 @@
     "postinstall": "cd packages/ts-query-model && npm run build"
   },
   "workspaces": [
-    "packages/integration-test/",
-    "packages/docs/",
-    "packages/ts-query-model/"
+    "packages/integration-test",
+    "packages/docs",
+    "packages/ts-query-model"
   ]
 }
