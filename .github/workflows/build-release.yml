@@ -19,7 +19,6 @@ jobs:
         with:
           release-type: node
           token: ${{ secrets.RELEASE_PLEASE_GITHUB_TOKEN }}
-          path: ./packages/ts-query-model
       # The logic below handles the npm publication:
       - uses: actions/checkout@v4
         # these if statements ensure that a publication only occurs when
