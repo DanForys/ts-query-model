@@ -30,7 +30,9 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "mysql2": "^2.1.0"
+    "mysql2": "^2.1.0",
+    "sql-template-strings": "^2.2.2",
+    "sqlite3": "^5.1.7"
   },
   "peerDependencies": {
     "ts-query-model": "^0.0.1"
