@@ -19,7 +19,6 @@ jobs:
         with:
           release-type: node
           token: ${{ secrets.RELEASE_PLEASE_GITHUB_TOKEN }}
-          config-file: release-please-config.json
           path: packages/ts-query-model
       # The logic below handles the npm publication:
       - uses: actions/checkout@v4
