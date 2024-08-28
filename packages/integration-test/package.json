@@ -11,7 +11,8 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint ./src",
-    "test": "jest"
+    "test:mysql": "jest src/mysql.test.ts",
+    "test:sqlite": "jest src/sqlite.test.ts"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
