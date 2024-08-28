@@ -81,25 +81,25 @@ See more at the [full documentation website](https://ts-query-model.forys.uk/)
 
 ## Database methods
 
-### `getOne({ name?, columns, query })`
+### `getOne()`
 
 Create a query function to run `query` and return a single row of columns.
 
-### `getMany({ name?, columns, query })`
+### `getMany()`
 
 Create a query function to run `query` and return multiple rows of columns.
 
-### `getColumn({ name?, columnName, columns, query })`
+### `getColumn()`
 
 Create a query function to run `query` and return an array of results
 only from column `columnName`.
 
-### `getValue({ name?, columnName, columns, query })`
+### `getValue()`
 
 Create a query function to run `query` and return a single value
 only from column `columnName`.
 
-### `write({ name?, query })`
+### `write()`
 
 Create a query function to write to the database, returning a result set header.
 
