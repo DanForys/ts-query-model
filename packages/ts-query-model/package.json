@@ -1,6 +1,6 @@
 {
   "name": "ts-query-model",
-  "description": "Simple TS wrapper for MySQL database queries with some convenience features. Not an ORM.",
+  "description": "Simple TS wrapper for database queries with some convenience features. Works with MySQL and SQLite.",
   "homepage": "https://ts-query-model.forys.uk/",
   "repository": {
     "type": "git",
@@ -9,6 +9,7 @@
   "keywords": [
     "typescript",
     "mysql",
+    "sqlite",
     "database"
   ],
   "license": "MIT",

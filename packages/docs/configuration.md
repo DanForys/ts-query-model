@@ -7,9 +7,9 @@ outline: deep
 To configure a connection to the database, create an instance of the `Database` class.
 You should export and re-use the database instance for each query you create.
 
-For the full list of connection options, see the [node-mysql documentation](https://sidorares.github.io/node-mysql2/docs/examples/connections/create-connection#connectionoptions)
+## MySQL
 
-For example, create a file `database.ts`:
+For the full list of connection options, see the [node-mysql documentation](https://sidorares.github.io/node-mysql2/docs/examples/connections/create-connection#connectionoptions)
 
 ```ts
 import { Database, MySQLConnection } from "ts-query-model";
@@ -24,6 +24,18 @@ const db = new Database(
 
 export { db };
 ```
+
+## SQLite
+
+```ts
+import { Database, SQLiteConnection } from "ts-query-model";
+
+const db = new Database(new SQLiteConnection("database-filename"));
+
+export { db };
+```
+
+## Basic usage
 
 You can then use this `db` instance to create models:
 

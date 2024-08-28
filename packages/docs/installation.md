@@ -13,10 +13,20 @@ npm install ts-query-model
 `ts-query-model` has no direct runtime dependencies. The following packages
 are also recommended to be installed in your application:
 
+`sql-template-strings` to safely format your SQL:
+
 ```sh
-npm install sql-template-strings mysql2
+npm install sql-template-strings
 ```
 
-- [sql-template-strings](https://www.npmjs.com/package/sql-template-strings) allows for writing
-  queries in a template string with correctly escaped placeholder variables
-- [mysql2](https://www.npmjs.com/package/mysql2) is the underlying MySQL library
+`mysql2` if you are working with a MySQL database:
+
+```sh
+npm install mysql2
+```
+
+`sqlite3` if you are working with a SQLite database:
+
+```sh
+npm install sqlite3
+```

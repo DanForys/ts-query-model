@@ -22,10 +22,16 @@ and having to manually create types for raw SQL queries.
 npm install ts-query-model
 ```
 
-The `mysql2` package is required as a peer dependency:
+To use with MySQL, use the `mysql2` package:
 
 ```bash
 npm install mysql2
+```
+
+To use with SQLite, use the `sqlite3` package:
+
+```bash
+npm install sqlite3
 ```
 
 It is recommended to use in conjunction with
@@ -35,13 +41,14 @@ It is recommended to use in conjunction with
 npm install sql-template-strings
 ```
 
-## Quick start
+## Quick start (MySQL)
 
 ```typescript
 import { columns, Database, MySQLConnection } from "ts-query-model";
 import SQL from "sql-template-strings";
 
 // Step 1: define your database connection
+// (You can use new SQLiteConnection() for SQLite)
 const db = new Database(
   new MySQLConnection({
     uri: "mysql://your-database-connection-string",
