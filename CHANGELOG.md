@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.1](https://github.com/DanForys/ts-query-model/compare/v0.4.0...v0.4.1) (2024-08-28)
+
+
+### Bug Fixes
+
+* add release-please-config,json ([c907a59](https://github.com/DanForys/ts-query-model/commit/c907a593118246a443455f1d22ff307f796bac72))
+* package json version ([2aa1fbd](https://github.com/DanForys/ts-query-model/commit/2aa1fbd0f52bced959f391f49351b5aca3a01a3d))
+* release please config ([0c1fa03](https://github.com/DanForys/ts-query-model/commit/0c1fa03a0c4646cda3390dd3d61027ec6357aca2))
+* release-please config ([b27dfdd](https://github.com/DanForys/ts-query-model/commit/b27dfdd3e6a3c36cb39c9a69d8e06ca1b824545c))
+* release-please path ([70f8b93](https://github.com/DanForys/ts-query-model/commit/70f8b9316af3b137899414d2a6dc8f88ba46dfba))
+
 ## [0.4.0](https://github.com/DanForys/ts-query-model/compare/v0.3.1...v0.4.0) (2024-08-28)
 
 
