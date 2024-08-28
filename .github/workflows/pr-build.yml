@@ -52,4 +52,24 @@ jobs:
       - name: Run integration tests
         run: |
           cd packages/integration-test
-          npm run test
+          npm run test:mysql
+  integration-test-sqlite:
+    name: SQLite integration tests
+    needs: setup-and-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure NPM cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - name: Install packages
+        run: |
+          npm ci
+      - name: Run integration tests
+        run: |
+          cd packages/integration-test
+          npm run test:sqlite
