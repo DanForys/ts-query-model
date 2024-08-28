@@ -13,7 +13,7 @@
     "database"
   ],
   "license": "MIT",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "private": false,
   "engines": {
     "node": ">=18.0.0"
