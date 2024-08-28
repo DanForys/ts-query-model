@@ -14,7 +14,7 @@ and having to manually create types for raw SQL queries.
 - ✅ Correctly typed query results without separate type declarations.
 - ✅ Lightweight. No dependencies.
 - ✅ No scripted setup process.
-- ✅ Easily extensible with your own custom column types
+- ✅ Easily extensible with your own custom column types.
 
 ## Installation
 
