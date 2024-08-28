@@ -4,6 +4,6 @@
   "release-type": "node",
   "separate-pull-requests": true,
   "packages": {
-    "./packages/ts-query-model": {}
+    "packages/ts-query-model": {}
   }
 }
