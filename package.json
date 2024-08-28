@@ -2,7 +2,7 @@
   "name": "ts-query-model-workspace",
   "description": ".",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.4.0",
   "private": true,
   "engines": {
     "node": ">=18.0.0"

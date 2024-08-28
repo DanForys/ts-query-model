@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.0](https://github.com/DanForys/ts-query-model/compare/v0.3.1...v0.4.0) (2024-08-28)
+
+
+### Features
+
+* Add SQLite support ([#11](https://github.com/DanForys/ts-query-model/issues/11)) ([8111e72](https://github.com/DanForys/ts-query-model/commit/8111e72f02d10e6b52f8e4ba9ba89c83996bdcb7))
+
+
+### Bug Fixes
+
+* invalid docs path ([10395b1](https://github.com/DanForys/ts-query-model/commit/10395b1805e1ecae5e8530d05cf29b65f48207e6))
+
 ## [0.3.1](https://github.com/DanForys/ts-query-model/compare/v0.3.0...v0.3.1) (2024-08-26)
 
 
