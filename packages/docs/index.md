@@ -26,7 +26,7 @@ features:
   - title: Painless types
     details: Declare columns once. Get types automatically.
   - title: Lightweight
-    details: No direct dependencies
+    details: No dependencies. No setup process.
 ---
 
 ## Quick overview
