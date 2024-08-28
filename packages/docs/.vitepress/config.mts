@@ -14,8 +14,8 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Column setup', link: '/columns/concepts' },
-      { text: 'Model setup', link: '/models/concepts' }
+      { text: 'Defining columns', link: '/columns/concepts' },
+      { text: 'Model API', link: '/models/concepts' }
     ],
 
     sidebar: [
@@ -29,9 +29,9 @@ export default defineConfig({
         ]
       },
       {
-        text: 'Defining columns',
+        text: 'Database columns',
         items: [
-          { text: 'Columns concepts', link: '/columns/concepts' },
+          { text: 'Defining columns', link: '/columns/concepts' },
           { text: 'Column types', collapsed: true, items: [
             { text: 'booleanIntColumn', link: '/columns/booleanIntColumn' },
             { text: 'dateColumn', link: '/columns/dateColumn' },
@@ -45,7 +45,7 @@ export default defineConfig({
       {
         text: 'Creating models',
         items: [
-          { text: 'Model concepts', link: '/models/concepts' },
+          { text: 'Model API', link: '/models/concepts' },
           { text: 'Model factory methods', collapsed: true, items: [
             { text: 'getOne()', link: '/models/getOne' },
             { text: 'getMany()', link: '/models/getMany' },

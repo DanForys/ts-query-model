@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Model concepts
+# Model API
 
 All models are built from `Database` class instance factory methods. To get started,
 get an instance configured for your database:

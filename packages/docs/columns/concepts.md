@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Column concepts
+# Defining columns
 
 The available column types can be imported with:
 
