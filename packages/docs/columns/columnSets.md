@@ -4,7 +4,7 @@ outline: deep
 
 # Column Sets
 
-Column sets are curried collections of columns you can reuse across
+Column sets are collections of columns you can reuse across
 multiple queries.
 
 For convenience you can use the `buildColumnSet()` function to define
@@ -76,11 +76,13 @@ const getColumns = buildColumnSet({
 const myAwesomeModel = {
   getThings: db.getMany({
     name: "get-all-things",
+    // spread your column set here to add these columns to the query
     ...getColumns("id", "email"),
     query: () => SQL`SELECT id, email FROM things`,
   }),
   getOnlyEmails: db.getMany({
     name: "get-only-email",
+    // re-use the column set anywhere with different column names
     ...getColumns("email"),
     query: () => SQL`SELECT id, email FROM things`,
   }),
