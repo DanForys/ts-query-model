@@ -5,7 +5,9 @@ describe("ts-query-model SQLite support", () => {
   let db: Database<SQLiteConnection>;
 
   beforeAll(async () => {
-    db = new Database(new SQLiteConnection(":memory:"));
+    db = new Database(new SQLiteConnection(":memory:"), {
+      loggingEnabled: false,
+    });
 
     const createTable = db.write({
       name: "createTable",

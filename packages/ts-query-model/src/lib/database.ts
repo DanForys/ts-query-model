@@ -40,11 +40,26 @@ interface WriteQueryOptions<Q extends GenericQueryFn> {
   query: Q;
 }
 
+export interface QueryModelDatabaseOptions {
+  loggingEnabled: boolean;
+}
+
+// To be expanded in the future
+export type QueryLogger = typeof console | null;
+
 export class Database<Connection extends GenericConnection> {
   connection: Connection;
+  logger: QueryLogger | null;
+  options: QueryModelDatabaseOptions;
 
-  constructor(connection: Connection) {
+  constructor(connection: Connection, options?: QueryModelDatabaseOptions) {
     this.connection = connection;
+
+    this.options = {
+      loggingEnabled: options?.loggingEnabled ?? true,
+    };
+
+    this.logger = this.options.loggingEnabled ? console : null;
   }
 
   disconnect() {
@@ -66,8 +81,13 @@ export class Database<Connection extends GenericConnection> {
     Query,
     Connection
   >["getOne"] {
-    return new ReadQuery({ connection: this.connection, name, columns, query })
-      .getOne;
+    return new ReadQuery({
+      connection: this.connection,
+      name,
+      columns,
+      query,
+      logger: this.logger,
+    }).getOne;
   }
 
   getMany<Query extends GenericQueryFn, Columns extends QueryColumns>({
@@ -79,8 +99,13 @@ export class Database<Connection extends GenericConnection> {
     Query,
     Connection
   >["getMany"] {
-    return new ReadQuery({ connection: this.connection, name, columns, query })
-      .getMany;
+    return new ReadQuery({
+      connection: this.connection,
+      name,
+      columns,
+      query,
+      logger: this.logger,
+    }).getMany;
   }
 
   /**
@@ -99,6 +124,7 @@ export class Database<Connection extends GenericConnection> {
       name,
       columns,
       query,
+      logger: this.logger,
     }).getColumn(columnName);
   }
 
@@ -118,6 +144,7 @@ export class Database<Connection extends GenericConnection> {
       name,
       columns,
       query,
+      logger: this.logger,
     }).getValue(columnName);
   }
 
@@ -137,6 +164,7 @@ export class Database<Connection extends GenericConnection> {
       name,
       columns: {},
       query,
+      logger: this.logger,
     }).write;
   }
 }

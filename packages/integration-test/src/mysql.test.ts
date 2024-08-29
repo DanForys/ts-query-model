@@ -7,7 +7,8 @@ describe("ts-query-model", () => {
     db = new Database(
       new MySQLConnection({
         uri: "mysql://query-test:query-test@localhost:3306/query-test",
-      })
+      }),
+      { loggingEnabled: false }
     );
   });
 

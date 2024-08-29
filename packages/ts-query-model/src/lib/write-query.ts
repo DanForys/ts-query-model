@@ -1,6 +1,7 @@
 import { GenericConnection } from "../generic/generic-connection";
 import { GenericQueryFn, QueryColumns } from "../types/query-model";
 
+import { QueryLogger } from "./database";
 import { Query } from "./query";
 
 /**
@@ -20,22 +21,26 @@ export class WriteQuery<
     columns,
     query,
     connection,
+    logger,
   }: {
     name?: string;
     columns: Columns;
     query: Query;
     connection: Connection;
+    logger: QueryLogger;
   }) {
-    super({ name, columns, query, connection });
+    super({ name, columns, query, connection, logger });
   }
 
   write = async (
     ...args: Parameters<Query>
   ): Promise<ReturnType<Connection["write"]>> => {
     const query = this.query(...args);
+    const logData = this.startQueryLog();
 
     try {
       const result = await this.connection.write(query);
+      this.endQueryLog(logData, args);
       return result as ReturnType<Connection["write"]>;
     } catch (e) {
       throw this.getQueryError(e, query);

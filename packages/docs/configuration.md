@@ -75,3 +75,16 @@ const myModel = {
   }),
 };
 ```
+
+## Logging
+
+Basic logging is built in using `console.info()`. It is enabled by default.
+To disable logging, set `loggingEnabled: false` in the `Database` constructor options:
+
+```ts
+import { Database, SQLiteConnection } from "ts-query-model";
+
+const db = new Database(new SQLiteConnection("database-filename"), {
+  loggingEnabled: false,
+});
+```
