@@ -11,7 +11,8 @@ describe("ts-query-model PostgreSQL support", () => {
         user: "query-test",
         password: "query-test",
         database: "query-test",
-      })
+      }),
+      { loggingEnabled: false }
     );
 
     const createTable = db.write({

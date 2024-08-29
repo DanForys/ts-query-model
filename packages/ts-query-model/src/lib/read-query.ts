@@ -1,6 +1,7 @@
 import { GenericConnection } from "../generic/generic-connection";
 import { GenericQueryFn, QueryColumns } from "../types/query-model";
 
+import { QueryLogger } from "./database";
 import { Query } from "./query";
 
 /**
@@ -20,13 +21,15 @@ export class ReadQuery<
     columns,
     query,
     connection,
+    logger,
   }: {
     name?: string;
     columns: Columns;
     query: Query;
     connection: Connection;
+    logger: QueryLogger;
   }) {
-    super({ name, columns, query, connection });
+    super({ name, columns, query, connection, logger });
   }
 
   validateFields<K extends keyof Columns>(resultRow: Record<K, unknown>) {
@@ -72,6 +75,7 @@ export class ReadQuery<
 
   getOne = async (...args: Parameters<Query>) => {
     const query = this.query(...args);
+    const logData = this.startQueryLog();
 
     try {
       const result = await this.connection.getOne<
@@ -80,6 +84,8 @@ export class ReadQuery<
 
       if (!result) return null;
       this.validateFields(result);
+      this.endQueryLog(logData, args);
+
       return this.resultToObject(result);
     } catch (e) {
       throw this.getQueryError(e, query);
@@ -88,6 +94,7 @@ export class ReadQuery<
 
   getMany = async (...args: Parameters<Query>) => {
     const query = this.query(...args);
+    const logData = this.startQueryLog();
 
     try {
       const result = await this.connection.getMany<
@@ -98,6 +105,7 @@ export class ReadQuery<
         this.validateFields(result[0]);
       }
 
+      this.endQueryLog(logData, args);
       return result.map((item: any) => this.resultToObject(item));
     } catch (e) {
       throw this.getQueryError(e, query);
@@ -107,6 +115,7 @@ export class ReadQuery<
   getColumn = (columnName: keyof Columns) => {
     return async (...args: Parameters<Query>) => {
       const query = this.query(...args);
+      const logData = this.startQueryLog();
 
       try {
         const result = await this.connection.getMany<
@@ -116,7 +125,7 @@ export class ReadQuery<
         if (result.length > 0) {
           this.validateFields(result[0]);
         }
-
+        this.endQueryLog(logData, args);
         return result.map((item: any) => this.resultToObject(item)[columnName]);
       } catch (e) {
         throw this.getQueryError(e, query);
@@ -127,6 +136,7 @@ export class ReadQuery<
   getValue = (columnName: keyof Columns) => {
     return async (...args: Parameters<Query>) => {
       const query = this.query(...args);
+      const logData = this.startQueryLog();
 
       try {
         const result = await this.connection.getOne<
@@ -135,7 +145,7 @@ export class ReadQuery<
 
         if (!result) return null;
         this.validateFields(result);
-
+        this.endQueryLog(logData, args);
         return this.resultToObject(result)[columnName];
       } catch (e) {
         throw this.getQueryError(e, query);

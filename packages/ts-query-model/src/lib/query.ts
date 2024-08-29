@@ -5,6 +5,8 @@ import {
   QueryOptions,
 } from "../types/query-model";
 
+import { QueryLogger } from "./database";
+
 /**
  * QueryBuilder Class
  * @typeParam T extends QueryModelColumnsDefinition - The column definitions passed to the constructor
@@ -21,6 +23,7 @@ export class Query<
   readonly columns: Columns;
   readonly query: Query;
   readonly connection: Connection;
+  readonly logger: QueryLogger;
 
   /**
    * Constructor for QueryBuilder, contains the following keys:
@@ -31,16 +34,19 @@ export class Query<
     columns,
     query,
     connection,
+    logger,
   }: {
     name?: string;
     columns: Columns;
     query: Query;
     connection: Connection;
+    logger: QueryLogger;
   }) {
     this.name = name ?? "anonymous";
     this.columns = columns;
     this.query = query;
     this.connection = connection;
+    this.logger = logger;
   }
 
   getQueryError(e: any, query: GenericQuery) {
@@ -56,5 +62,21 @@ export class Query<
     }
 
     return e;
+  }
+
+  startQueryLog() {
+    return {
+      startTime: new Date(),
+    };
+  }
+
+  endQueryLog({ startTime }: { startTime: Date }, queryArgs: any[]) {
+    if (!this.logger) return;
+
+    this.logger.info(
+      `Query "${this.name ?? "<Anonymous>"}" [${
+        new Date().getMilliseconds() - startTime.getMilliseconds()
+      }ms] args: ${queryArgs.length > 0 ? JSON.stringify(queryArgs) : "<none>"}`
+    );
   }
 }
