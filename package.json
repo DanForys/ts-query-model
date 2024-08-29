@@ -9,6 +9,7 @@
   },
   "scripts": {
     "postinstall": "cd packages/ts-query-model && npm run build",
+    "build": "npm run build --workspace ts-query-model",
     "docs:dev": "npm run docs:dev --workspace ts-query-model-docs",
     "test:integration": "npm run test:mysql --workspace ts-query-model-integration-tests && npm run test:sqlite --workspace ts-query-model-integration-tests && npm run test:postgres --workspace ts-query-model-integration-tests"
   },
