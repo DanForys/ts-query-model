@@ -1,4 +1,7 @@
-import { GenericConnection } from "../generic/generic-connection";
+import {
+  GenericConnection,
+  QueryResultRow,
+} from "../generic/generic-connection";
 import { GenericQuery } from "../types/query-model";
 
 import sqlite3 from "sqlite3";
@@ -46,7 +49,7 @@ export class SQLiteConnection extends GenericConnection {
     return connection.close();
   }
 
-  async getMany<T>(query: GenericQuery): Promise<T[]> {
+  async getMany<T extends QueryResultRow>(query: GenericQuery): Promise<T[]> {
     const connection = await this.getConnection();
 
     if (typeof query === "string") {
@@ -66,22 +69,24 @@ export class SQLiteConnection extends GenericConnection {
     });
   }
 
-  async getOne<T>(query: GenericQuery): Promise<T> {
+  async getOne<T extends QueryResultRow>(
+    query: GenericQuery
+  ): Promise<T | null> {
     const connection = await this.getConnection();
 
     if (typeof query === "string") {
       return new Promise((resolve, reject) => {
-        connection.get(query, (error, row) => {
+        connection.get(query, (error, row: T) => {
           if (error) return reject(error);
-          resolve(row as T);
+          resolve(row);
         });
       });
     }
 
     return new Promise((resolve, reject) => {
-      connection.get(query.sql, query.values ?? [], (error, row) => {
+      connection.get(query.sql, query.values ?? [], (error, row: T) => {
         if (error) return reject(error);
-        resolve(row as T);
+        resolve(row);
       });
     });
   }
