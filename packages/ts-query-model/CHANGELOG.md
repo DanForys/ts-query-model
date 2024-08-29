@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/DanForys/ts-query-model/compare/v0.5.1...v0.6.0) (2024-08-29)
+
+
+### Features
+
+* basic logging support ([#26](https://github.com/DanForys/ts-query-model/issues/26)) ([6ebbbbc](https://github.com/DanForys/ts-query-model/commit/6ebbbbc0357016969adfc81202eba4137b58acb2))
+
 ## [0.5.1](https://github.com/DanForys/ts-query-model/compare/v0.5.0...v0.5.1) (2024-08-29)
 
 
