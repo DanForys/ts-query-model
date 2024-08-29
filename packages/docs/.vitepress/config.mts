@@ -32,6 +32,7 @@ export default defineConfig({
         text: 'Database columns',
         items: [
           { text: 'Defining columns', link: '/columns/concepts' },
+          { text: 'Column sets', link: '/columns/columnSets' },
           { text: 'Column types', collapsed: true, items: [
             { text: 'booleanIntColumn', link: '/columns/booleanIntColumn' },
             { text: 'dateColumn', link: '/columns/dateColumn' },

@@ -1,7 +1,19 @@
-import { columns, Database, MySQLConnection } from "ts-query-model";
+import {
+  buildColumnSet,
+  columns,
+  Database,
+  MySQLConnection,
+} from "ts-query-model";
 
 describe("ts-query-model", () => {
   let db: Database<MySQLConnection>;
+  const commonColumns = buildColumnSet({
+    id: columns.numberColumnAutoIncrement(),
+    name: columns.stringColumn(),
+    booleanLike: columns.booleanIntColumn(),
+    number: columns.numberColumn(),
+    rowCount: columns.numberColumn(),
+  });
 
   beforeAll(() => {
     db = new Database(
@@ -19,12 +31,7 @@ describe("ts-query-model", () => {
   it("can query a MySQL database for a single row", async () => {
     const getRow = db.getOne({
       name: "get-row-test",
-      columns: {
-        id: columns.numberColumnAutoIncrement(),
-        name: columns.stringColumn(),
-        booleanLike: columns.booleanIntColumn(),
-        number: columns.numberColumn(),
-      },
+      ...commonColumns("id", "name", "booleanLike", "number"),
       query: () => "SELECT * FROM test LIMIT 1",
     });
 
@@ -35,12 +42,7 @@ describe("ts-query-model", () => {
   it("can query a MySQL database for multiple rows", async () => {
     const getRows = db.getMany({
       name: "get-rows-test",
-      columns: {
-        id: columns.numberColumnAutoIncrement(),
-        name: columns.stringColumn(),
-        booleanLike: columns.booleanIntColumn(),
-        number: columns.numberColumn(),
-      },
+      ...commonColumns("id", "name", "booleanLike", "number"),
       query: () => "SELECT * FROM test",
     });
 
@@ -52,9 +54,7 @@ describe("ts-query-model", () => {
     const getColumn = db.getColumn({
       name: "get-column-test",
       columnName: "name",
-      columns: {
-        name: columns.stringColumn(),
-      },
+      ...commonColumns("name"),
       query: () => "SELECT name FROM test",
     });
 
@@ -66,9 +66,7 @@ describe("ts-query-model", () => {
     const getValue = db.getValue({
       name: "get-column-test",
       columnName: "rowCount",
-      columns: {
-        rowCount: columns.numberColumn(),
-      },
+      ...commonColumns("rowCount"),
       query: () => "SELECT COUNT(*) AS rowCount FROM test",
     });
 
