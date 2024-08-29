@@ -10,6 +10,8 @@
     "typescript",
     "mysql",
     "sqlite",
+    "postgres",
+    "sql",
     "database"
   ],
   "license": "MIT",
