@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/DanForys/ts-query-model/compare/v0.6.0...v0.7.0) (2024-08-29)
+
+
+### Features
+
+* columnSet builder ([#28](https://github.com/DanForys/ts-query-model/issues/28)) ([44421d1](https://github.com/DanForys/ts-query-model/commit/44421d1ed5a83fd18dca6f002f56b5c5247764b3))
+
 ## [0.6.0](https://github.com/DanForys/ts-query-model/compare/v0.5.1...v0.6.0) (2024-08-29)
 
 
