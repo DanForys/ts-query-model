@@ -6,7 +6,7 @@ Not an ORM. Currently supports MySQL, PostgreSQL and SQLite.
 It aims to provide a middle ground between the complexity of using an ORM
 and having to manually create types for raw SQL queries.
 
-➡️➡️ [Full documentation website](https://ts-query-model.forys.uk/) ⬅️⬅️
+➡️➡️ [Full API documentation](https://ts-query-model.forys.uk/) ⬅️⬅️
 
 ## Features
 
@@ -47,14 +47,14 @@ It is recommended to use in conjunction with
 npm install sql-template-strings
 ```
 
-## Quick start (MySQL)
+## Code example (MySQL)
 
 ```typescript
 import { columns, Database, MySQLConnection } from "ts-query-model";
 import SQL from "sql-template-strings";
 
 // Step 1: define your database connection
-// (You can use new SQLiteConnection() for SQLite)
+// (Also supports SQLite and PostgreSQL)
 const db = new Database(
   new MySQLConnection({
     uri: "mysql://your-database-connection-string",
@@ -83,46 +83,4 @@ const result = await getUsers({ limit: 10 });
 //      your columns
 ```
 
-See more at the [full documentation website](https://ts-query-model.forys.uk/)
-
-## Database methods
-
-### `getOne()`
-
-Create a query function to run `query` and return a single row of columns.
-
-### `getMany()`
-
-Create a query function to run `query` and return multiple rows of columns.
-
-### `getColumn()`
-
-Create a query function to run `query` and return an array of results
-only from column `columnName`.
-
-### `getValue()`
-
-Create a query function to run `query` and return a single value
-only from column `columnName`.
-
-### `write()`
-
-Create a query function to write to the database, returning a result set header.
-
-## Column types
-
-| Column function                   | TypeScript type                          | Database type                             |
-| --------------------------------- | ---------------------------------------- | ----------------------------------------- |
-| `booleanIntColumn`                | `boolean`                                | `0` &#124; `1`                            |
-| `booleanIntColumnNull`            | `boolean` &#124; `null`                  | `0` &#124; `1` &#124; `null`              |
-| `dateColumn`                      | `Date`                                   | `DateTime`                                |
-| `dateColumnNull`                  | `Date` &#124; `null`                     | `DateTime` &#124; `null`                  |
-| `enumColumn<EnumShape>`           | `EnumShape extends string`               | `ENUM`                                    |
-| `enumColumnNull<EnumShape>`       | `EnumShape extends string` #124; `null`  | `ENUM` &#124; `null`                      |
-| `jsonStringColumn<JsonShape>`     | `JsonShape extends object`               | `TEXT` &#124; `VARCHAR` etc               |
-| `jsonStringColumnNull<JsonShape>` | `JsonShape extends object` &#124; `null` | `TEXT` &#124; `VARCHAR` etc &#124; `null` |
-| `numberColumn`                    | `number`                                 | `INT`, `MEDIUMINT` etc                    |
-| `numberColumnAutoIncrement`       | `number` &#124; `null`                   | `INT`, `MEDIUMINT` etc                    |
-| `numberColumnNull`                | `number` &#124; `null`                   | `INT`, `MEDIUMINT` etc &#124; `null`      |
-| `stringColumn`                    | `string`                                 | `TEXT` &#124; `VARCHAR` etc               |
-| `stringColumnNull`                | `string` &#124; `null`                   | `TEXT` &#124; `VARCHAR` etc &#124; `null` |
+See more at the [full API documentation](https://ts-query-model.forys.uk/)
