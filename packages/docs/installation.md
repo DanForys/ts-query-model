@@ -25,6 +25,12 @@ npm install sql-template-strings
 npm install mysql2
 ```
 
+`pg` if you are working with a PostgreSQL database:
+
+```sh
+npm install pg
+```
+
 `sqlite3` if you are working with a SQLite database:
 
 ```sh

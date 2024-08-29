@@ -5,7 +5,7 @@ layout: home
 hero:
   name: "ts-query-model"
   text: "API documentation"
-  tagline: Types for database queries with minimum fuss. Supports MySQL and SQLite.
+  tagline: Types for database queries with minimum fuss. Supports MySQL, PostgreSQL and SQLite.
   actions:
     - theme: brand
       text: About

@@ -6,6 +6,7 @@ on:
 
 jobs:
   setup-and-test:
+    name: Lint & unit test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -53,6 +54,36 @@ jobs:
         run: |
           cd packages/integration-test
           npm run test:mysql
+  integration-test-postgres:
+    name: PostgreSQL integration tests
+    needs: setup-and-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: query-test
+          POSTGRES_USER: query-test
+          POSTGRES_PASSWORD: query-test
+        options: --health-cmd="pg_isready -U query-test" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure NPM cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - name: Install packages
+        run: |
+          npm ci
+      - name: Run integration tests
+        run: |
+          cd packages/integration-test
+          npm run test:postgres
   integration-test-sqlite:
     name: SQLite integration tests
     needs: setup-and-test

@@ -1,4 +1,7 @@
-import { GenericConnection } from "../generic/generic-connection";
+import {
+  GenericConnection,
+  QueryResultRow,
+} from "../generic/generic-connection";
 import { GenericQuery } from "../types/query-model";
 
 import mysql, { ResultSetHeader, RowDataPacket } from "mysql2/promise";
@@ -23,7 +26,7 @@ export class MySQLConnection extends GenericConnection {
     this.getConnection().end();
   }
 
-  async getMany<T>(query: GenericQuery): Promise<T[]> {
+  async getMany<T extends QueryResultRow>(query: GenericQuery): Promise<T[]> {
     const connection = this.getConnection();
 
     if (typeof query === "string") {
@@ -35,7 +38,9 @@ export class MySQLConnection extends GenericConnection {
     return result[0];
   }
 
-  async getOne<T>(query: GenericQuery): Promise<T | null> {
+  async getOne<T extends QueryResultRow>(
+    query: GenericQuery
+  ): Promise<T | null> {
     const connection = this.getConnection();
 
     if (typeof query === "string") {

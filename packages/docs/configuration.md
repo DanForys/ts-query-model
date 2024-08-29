@@ -25,6 +25,28 @@ const db = new Database(
 export { db };
 ```
 
+## PostgreSQL
+
+For the full list of connection options, see the [pg documentation](https://node-postgres.com/features/connecting#programmatic)
+
+```ts
+import { Database, PostgreSQLConnection } from "ts-query-model";
+
+const db = new Database(
+  new PostgreSQLConnection({
+    user: "dbuser",
+    password: "secretpassword",
+    host: "database.server.com",
+    port: 3211,
+    database: "mydb",
+    // Any other MySQL options go here. This is the options
+    // block used by the mysql2 package directly
+  })
+);
+
+export { db };
+```
+
 ## SQLite
 
 ```ts
