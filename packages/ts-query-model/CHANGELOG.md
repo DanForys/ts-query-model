@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/DanForys/ts-query-model/compare/v0.4.5...v0.5.0) (2024-08-29)
+
+
+### Features
+
+* postgres support ([#22](https://github.com/DanForys/ts-query-model/issues/22)) ([a8a4ca0](https://github.com/DanForys/ts-query-model/commit/a8a4ca0d9ea6b843b4cb235e12ef91c3eb265379))
+
 ## [0.4.5](https://github.com/DanForys/ts-query-model/compare/v0.4.4...v0.4.5) (2024-08-28)
 
 
