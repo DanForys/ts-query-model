@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.1](https://github.com/DanForys/ts-query-model/compare/v0.5.0...v0.5.1) (2024-08-29)
+
+
+### Bug Fixes
+
+* node &gt;16 support, bump mysql2 version ([632b2c7](https://github.com/DanForys/ts-query-model/commit/632b2c781357642c337e3542ca7ecb90bbb23554))
+* node version &gt; 14 supported ([fcb66ee](https://github.com/DanForys/ts-query-model/commit/fcb66eea88e24eadaad0ec4565b713abd38b84b6))
+
 ## [0.5.0](https://github.com/DanForys/ts-query-model/compare/v0.4.5...v0.5.0) (2024-08-29)
 
 
