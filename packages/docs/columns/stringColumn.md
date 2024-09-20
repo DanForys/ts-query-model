@@ -29,7 +29,8 @@ Given the following database table `stringExample`:
 And the following model:
 
 ```ts twoslash
-import { columns, Database, MySQLConnection } from "ts-query-model";
+import { columns, Database } from "ts-query-model";
+import MySQLConnection from "ts-query-model/lib/mysql";
 import SQL from "sql-template-strings";
 
 const db = new Database(
@@ -52,7 +53,8 @@ const getExampleRow = db.getOne({
 A query for row id `1` yields:
 
 ```ts twoslash
-import { columns, Database, MySQLConnection } from "ts-query-model";
+import { columns, Database } from "ts-query-model";
+import MySQLConnection from "ts-query-model/lib/mysql";
 import SQL from "sql-template-strings";
 
 const db = new Database(

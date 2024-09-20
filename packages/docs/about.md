@@ -32,7 +32,8 @@ When the query is executed, the returned result from the query function is passe
 to the database engine.
 
 ```ts twoslash
-import { columns, Database, MySQLConnection } from "ts-query-model";
+import { columns, Database } from "ts-query-model";
+import MySQLConnection from "ts-query-model/lib/mysql";
 import SQL from "sql-template-strings";
 
 const db = new Database(
@@ -61,7 +62,8 @@ Using the configuration above, this will execute the query and return
 a correctly typed result object from the `columns` configuration:
 
 ```ts twoslash
-import { columns, Database, MySQLConnection } from "ts-query-model";
+import { columns, Database } from "ts-query-model";
+import MySQLConnection from "ts-query-model/lib/mysql";
 import SQL from "sql-template-strings";
 
 const db = new Database(

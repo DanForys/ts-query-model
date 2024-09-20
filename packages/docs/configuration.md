@@ -12,7 +12,8 @@ You should export and re-use the database instance for each query you create.
 For the full list of connection options, see the [node-mysql documentation](https://sidorares.github.io/node-mysql2/docs/examples/connections/create-connection#connectionoptions)
 
 ```ts
-import { Database, MySQLConnection } from "ts-query-model";
+import { Database } from "ts-query-model";
+import MySQLConnection from "ts-query-model/lib/mysql";
 
 const db = new Database(
   new MySQLConnection({
@@ -31,6 +32,7 @@ For the full list of connection options, see the [pg documentation](https://node
 
 ```ts
 import { Database, PostgreSQLConnection } from "ts-query-model";
+import PostgreSQLConnection from "ts-query-model/lib/postgres";
 
 const db = new Database(
   new PostgreSQLConnection({
@@ -51,6 +53,7 @@ export { db };
 
 ```ts
 import { Database, SQLiteConnection } from "ts-query-model";
+import SQLiteConnection from "ts-query-model/lib/sqlite";
 
 const db = new Database(new SQLiteConnection("database-filename"));
 
@@ -82,7 +85,8 @@ Basic logging is built in using `console.info()`. It is enabled by default.
 To disable logging, set `loggingEnabled: false` in the `Database` constructor options:
 
 ```ts
-import { Database, SQLiteConnection } from "ts-query-model";
+import { Database } from "ts-query-model";
+import SQLiteConnection from "ts-query-model/lib/sqlite";
 
 const db = new Database(new SQLiteConnection("database-filename"), {
   loggingEnabled: false,

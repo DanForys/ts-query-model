@@ -8,7 +8,8 @@ All models are built from `Database` class instance factory methods. To get star
 get an instance configured for your database:
 
 ```ts twoslash
-import { Database, MySQLConnection } from "ts-query-model";
+import { Database } from "ts-query-model";
+import MySQLConnection from "ts-query-model/lib/mysql";
 
 const db = new Database(
   new MySQLConnection({
@@ -35,7 +36,8 @@ For example, to create a model with some simple queries and an update
 function for a `users` table:
 
 ```ts twoslash
-import { Database, MySQLConnection } from "ts-query-model";
+import { Database } from "ts-query-model";
+import MySQLConnection from "ts-query-model/lib/mysql";
 
 const db = new Database(
   new MySQLConnection({
@@ -76,7 +78,8 @@ export const userModel = {
 The model methods can then be used as follows:
 
 ```ts twoslash
-import { Database, MySQLConnection } from "ts-query-model";
+import { Database } from "ts-query-model";
+import MySQLConnection from "ts-query-model/lib/mysql";
 
 const db = new Database(
   new MySQLConnection({

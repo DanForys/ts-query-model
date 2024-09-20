@@ -20,7 +20,7 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
     "lint": "eslint ./src",

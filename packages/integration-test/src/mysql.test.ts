@@ -1,9 +1,5 @@
-import {
-  buildColumnSet,
-  columns,
-  Database,
-  MySQLConnection,
-} from "ts-query-model";
+import { buildColumnSet, columns, Database } from "ts-query-model";
+import MySQLConnection from "ts-query-model/lib/mysql";
 
 describe("ts-query-model", () => {
   let db: Database<MySQLConnection>;
