@@ -53,12 +53,8 @@ Spread the `getColumns` function in a query in place of the `columns`
 key:
 
 ```ts twoslash
-import {
-  columns,
-  Database,
-  MySQLConnection,
-  buildColumnSet,
-} from "ts-query-model";
+import { columns, Database, buildColumnSet } from "ts-query-model";
+import MySQLConnection from "ts-query-model/lib/mysql";
 import SQL from "sql-template-strings";
 
 const db = new Database(
