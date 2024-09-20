@@ -50,7 +50,8 @@ npm install sql-template-strings
 ## Code example (MySQL)
 
 ```typescript
-import { columns, Database, MySQLConnection } from "ts-query-model";
+import { columns, Database } from "ts-query-model";
+import MySQLConnection from "ts-query-model/lib/mysql";
 import SQL from "sql-template-strings";
 
 // Step 1: define your database connection
