@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.1](https://github.com/DanForys/ts-query-model/compare/v0.7.0...v0.7.1) (2024-09-20)
+
+
+### Bug Fixes
+
+* README ([#33](https://github.com/DanForys/ts-query-model/issues/33)) ([5e564f1](https://github.com/DanForys/ts-query-model/commit/5e564f196bf226fcf278c0c2ea60c448de796d27))
+* separetely export db connection classes ([#31](https://github.com/DanForys/ts-query-model/issues/31)) ([75e2e57](https://github.com/DanForys/ts-query-model/commit/75e2e57fb5e63a6a6fc0e265614d21479b7ee209))
+
 ## [0.7.0](https://github.com/DanForys/ts-query-model/compare/v0.6.0...v0.7.0) (2024-08-29)
 
 
