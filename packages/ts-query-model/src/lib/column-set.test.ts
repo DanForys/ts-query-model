@@ -20,9 +20,7 @@ describe("buildColumnSet", () => {
       });
 
       expect(colFunc.get("test2")).toEqual({
-        columns: {
-          test2: numberColumn(),
-        },
+        test2: numberColumn(),
       });
     });
 
@@ -33,10 +31,8 @@ describe("buildColumnSet", () => {
       });
 
       expect(colFunc.get("test2", "test1")).toEqual({
-        columns: {
-          test2: numberColumn(),
-          test1: stringColumn(),
-        },
+        test2: numberColumn(),
+        test1: stringColumn(),
       });
     });
 
@@ -47,10 +43,8 @@ describe("buildColumnSet", () => {
       });
 
       expect(colFunc.getAll()).toEqual({
-        columns: {
-          test2: numberColumn(),
-          test1: stringColumn(),
-        },
+        test2: numberColumn(),
+        test1: stringColumn(),
       });
     });
   });
