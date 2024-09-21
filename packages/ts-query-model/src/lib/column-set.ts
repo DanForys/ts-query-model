@@ -9,18 +9,21 @@ import { QueryColumns } from "../types/query-model";
 export const buildColumnSet = <Columns extends QueryColumns>(
   columns: Columns
 ) => {
-  return <SelectedCols extends Array<keyof Columns>>(
-    ...selectedColumns: SelectedCols
-  ) => {
-    const resultColumnsTuple = selectedColumns.map((columnName) => {
-      return [columnName, columns[columnName]];
-    });
-    const resultColumns = Object.fromEntries(resultColumnsTuple) as {
-      [Property in SelectedCols[number]]: Columns[Property];
-    };
+  return {
+    get: <SelectedCols extends Array<keyof Columns>>(
+      ...selectedColumns: SelectedCols
+    ) => {
+      const resultColumnsTuple = selectedColumns.map((columnName) => {
+        return [columnName, columns[columnName]];
+      });
+      const resultColumns = Object.fromEntries(resultColumnsTuple) as {
+        [Property in SelectedCols[number]]: Columns[Property];
+      };
 
-    return {
-      columns: resultColumns,
-    };
+      return resultColumns;
+    },
+    getAll: () => {
+      return columns;
+    },
   };
 };

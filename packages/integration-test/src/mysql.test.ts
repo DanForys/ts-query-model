@@ -27,7 +27,7 @@ describe("ts-query-model", () => {
   it("can query a MySQL database for a single row", async () => {
     const getRow = db.getOne({
       name: "get-row-test",
-      ...commonColumns("id", "name", "booleanLike", "number"),
+      columns: commonColumns.get("id", "name", "booleanLike", "number"),
       query: () => "SELECT * FROM test LIMIT 1",
     });
 
@@ -38,7 +38,7 @@ describe("ts-query-model", () => {
   it("can query a MySQL database for multiple rows", async () => {
     const getRows = db.getMany({
       name: "get-rows-test",
-      ...commonColumns("id", "name", "booleanLike", "number"),
+      columns: commonColumns.get("id", "name", "booleanLike", "number"),
       query: () => "SELECT * FROM test",
     });
 
@@ -50,7 +50,7 @@ describe("ts-query-model", () => {
     const getColumn = db.getColumn({
       name: "get-column-test",
       columnName: "name",
-      ...commonColumns("name"),
+      columns: commonColumns.get("name"),
       query: () => "SELECT name FROM test",
     });
 
@@ -62,7 +62,7 @@ describe("ts-query-model", () => {
     const getValue = db.getValue({
       name: "get-column-test",
       columnName: "rowCount",
-      ...commonColumns("rowCount"),
+      columns: commonColumns.get("rowCount"),
       query: () => "SELECT COUNT(*) AS rowCount FROM test",
     });
 
