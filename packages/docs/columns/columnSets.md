@@ -11,9 +11,11 @@ For convenience you can use the `buildColumnSet()` function to define
 your column types. This allows you to re-use the columns across
 queries without having to redefine them each time.
 
-`buildColumnSet()` returns a function you can use to
-add the columns to your query. The function will return each column
-name you supply as an argument.
+`buildColumnSet()` returns an object with functions you can use to
+add the columns to your query:
+
+- `get([col1], [col2])` - return specific columns
+- `getAll()` - return all columns
 
 ## Examples
 
@@ -23,34 +25,50 @@ name you supply as an argument.
 import { buildColumnSet, columns } from "ts-query-model";
 
 // define the columns we need. We'll use these across multiple queries
-const getColumns = buildColumnSet({
+const columnSet = buildColumnSet({
   id: columns.numberColumn(),
   name: columns.stringColumn(),
   email: columns.stringColumn(),
 });
 ```
 
-The returned `getColumns` function returns a set of columns
+The returned `columnSet.get()` function returns a set of columns
 for use in a query. It'll return the column for each name argument:
 
 ```ts twoslash
 import { buildColumnSet, columns } from "ts-query-model";
 
-const getColumns = buildColumnSet({
+const columnSet = buildColumnSet({
   id: columns.numberColumn(),
   name: columns.stringColumn(),
   email: columns.stringColumn(),
 });
 // ---cut---
-const exampleCols = getColumns("id", "email");
-console.log(exampleCols.columns);
+const exampleCols = columnSet.get("id", "email");
+console.log(exampleCols);
 // -> { id: NumberColumn, email: StringColumn }
+```
+
+Use `columnSet.getAll()` to use all the defined columns:
+
+```ts twoslash
+import { buildColumnSet, columns } from "ts-query-model";
+
+const columnSet = buildColumnSet({
+  id: columns.numberColumn(),
+  name: columns.stringColumn(),
+  email: columns.stringColumn(),
+});
+// ---cut---
+const exampleCols = columnSet.getAll();
+console.log(exampleCols);
+// -> { id: NumberColumn, name: StringColumn, email: StringColumn }
 ```
 
 ### Use a column set in a query
 
-Spread the `getColumns` function in a query in place of the `columns`
-key:
+Use the returned `get()` or `getAll()` function to provide the `columns`
+for a model definition:
 
 ```ts twoslash
 import { columns, Database, buildColumnSet } from "ts-query-model";
@@ -63,7 +81,7 @@ const db = new Database(
   })
 );
 
-const getColumns = buildColumnSet({
+const columnSet = buildColumnSet({
   id: columns.numberColumn(),
   name: columns.stringColumn(),
   email: columns.stringColumn(),
@@ -73,13 +91,13 @@ const myAwesomeModel = {
   getThings: db.getMany({
     name: "get-all-things",
     // spread your column set here to add these columns to the query
-    ...getColumns("id", "email"),
+    columns: columnSet.get("id", "email"),
     query: () => SQL`SELECT id, email FROM things`,
   }),
   getOnlyEmails: db.getMany({
     name: "get-only-email",
     // re-use the column set anywhere with different column names
-    ...getColumns("email"),
+    columns: columnSet.get("email"),
     query: () => SQL`SELECT id, email FROM things`,
   }),
 };

@@ -8,7 +8,8 @@ describe("buildColumnSet", () => {
       test2: numberColumn(),
     });
 
-    expect(typeof colFunc).toBe("function");
+    expect(typeof colFunc.get).toBe("function");
+    expect(typeof colFunc.getAll).toBe("function");
   });
 
   describe("column getter function", () => {
@@ -18,10 +19,8 @@ describe("buildColumnSet", () => {
         test2: numberColumn(),
       });
 
-      expect(colFunc("test2")).toEqual({
-        columns: {
-          test2: numberColumn(),
-        },
+      expect(colFunc.get("test2")).toEqual({
+        test2: numberColumn(),
       });
     });
 
@@ -31,11 +30,21 @@ describe("buildColumnSet", () => {
         test2: numberColumn(),
       });
 
-      expect(colFunc("test2", "test1")).toEqual({
-        columns: {
-          test2: numberColumn(),
-          test1: stringColumn(),
-        },
+      expect(colFunc.get("test2", "test1")).toEqual({
+        test2: numberColumn(),
+        test1: stringColumn(),
+      });
+    });
+
+    it("getAll() returns all columns", () => {
+      const colFunc = buildColumnSet({
+        test1: stringColumn(),
+        test2: numberColumn(),
+      });
+
+      expect(colFunc.getAll()).toEqual({
+        test2: numberColumn(),
+        test1: stringColumn(),
       });
     });
   });
