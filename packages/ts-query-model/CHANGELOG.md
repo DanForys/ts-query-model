@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.2](https://github.com/DanForys/ts-query-model/compare/v0.7.1...v0.7.2) (2024-09-21)
+
+
+### Bug Fixes
+
+* ExtractRowType improvements ([#34](https://github.com/DanForys/ts-query-model/issues/34)) ([3b5778b](https://github.com/DanForys/ts-query-model/commit/3b5778badfaeb9c4092196304470b6018d7c59a6))
+
 ## [0.7.1](https://github.com/DanForys/ts-query-model/compare/v0.7.0...v0.7.1) (2024-09-20)
 
 
