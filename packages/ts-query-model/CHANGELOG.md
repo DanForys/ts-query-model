@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/DanForys/ts-query-model/compare/v1.0.0...v1.0.1) (2024-09-21)
+
+
+### Bug Fixes
+
+* remove mysql execute ([#38](https://github.com/DanForys/ts-query-model/issues/38)) ([f43d4b7](https://github.com/DanForys/ts-query-model/commit/f43d4b7c0f3b706c7fc75699868c6faacd268d8e))
+
 ## [1.0.0](https://github.com/DanForys/ts-query-model/compare/v0.7.2...v1.0.0) (2024-09-21)
 
 
