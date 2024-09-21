@@ -30,11 +30,11 @@ export class MySQLConnection extends GenericConnection {
     const connection = this.getConnection();
 
     if (typeof query === "string") {
-      const result = await connection.execute<T[] & RowDataPacket[]>(query);
+      const result = await connection.query<T[] & RowDataPacket[]>(query);
       return result[0];
     }
 
-    const result = await connection.execute<T[] & RowDataPacket[]>(query);
+    const result = await connection.query<T[] & RowDataPacket[]>(query);
     return result[0];
   }
 
@@ -44,11 +44,11 @@ export class MySQLConnection extends GenericConnection {
     const connection = this.getConnection();
 
     if (typeof query === "string") {
-      const result = await connection.execute<T[] & RowDataPacket[]>(query);
+      const result = await connection.query<T[] & RowDataPacket[]>(query);
       return result[0][0] ?? null;
     }
 
-    const result = await connection.execute<T[] & RowDataPacket[]>(query);
+    const result = await connection.query<T[] & RowDataPacket[]>(query);
     return result[0][0] ?? null;
   }
 
@@ -56,11 +56,11 @@ export class MySQLConnection extends GenericConnection {
     const connection = this.getConnection();
 
     if (typeof query === "string") {
-      const result = await connection.execute<ResultSetHeader>(query);
+      const result = await connection.query<ResultSetHeader>(query);
       return result[0];
     }
 
-    const result = await connection.execute<ResultSetHeader>(query);
+    const result = await connection.query<ResultSetHeader>(query);
     return result[0];
   }
 }
