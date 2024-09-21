@@ -29,4 +29,6 @@ export interface ColumnDefinition {
 }
 
 export type ExtractRowType<T extends (...args: any[]) => Promise<any>> =
-  Awaited<ReturnType<T>>;
+  Awaited<ReturnType<T>> extends unknown[]
+    ? Awaited<ReturnType<T>>[number]
+    : Awaited<ReturnType<T>>;
