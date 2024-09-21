@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/DanForys/ts-query-model/compare/v0.7.2...v1.0.0) (2024-09-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* get/getAll fns in columnSet ([#36](https://github.com/DanForys/ts-query-model/issues/36))
+
+### Features
+
+* get/getAll fns in columnSet ([#36](https://github.com/DanForys/ts-query-model/issues/36)) ([aa5d728](https://github.com/DanForys/ts-query-model/commit/aa5d728ec28590deb45a12da03ae358996208595))
+
 ## [0.7.2](https://github.com/DanForys/ts-query-model/compare/v0.7.1...v0.7.2) (2024-09-21)
 
 
