@@ -2,7 +2,7 @@ import {
   GenericConnection,
   QueryResultRow,
 } from "../generic/generic-connection";
-import { GenericQuery } from "../types/query-model";
+import { GenericQuery, QueryColumns } from "../types/query-model";
 
 import mysql, { ResultSetHeader, RowDataPacket } from "mysql2/promise";
 
@@ -62,5 +62,39 @@ export class MySQLConnection extends GenericConnection {
 
     const result = await connection.query<ResultSetHeader>(query);
     return result[0];
+  }
+
+  async insert(
+    table: string,
+    columns: QueryColumns,
+    values: Record<string, unknown>
+  ): Promise<typeof values> {
+    const connection = this.getConnection();
+    const columnNames = Object.keys(columns);
+
+    const queryInsertPairs = columnNames.map((name) => {
+      return `${name} = ?`;
+    });
+
+    const query = `INSERT INTO \`${table}\` SET ${queryInsertPairs.join(",")}`;
+
+    const result = await connection.query<ResultSetHeader>(
+      query,
+      columnNames.map((name) => values[name])
+    );
+
+    const updatedRow = { ...values };
+
+    if (result[0].insertId) {
+      const autoIncrementColumnName = columnNames.find(
+        (col) => columns[col].autoIncrement
+      );
+
+      if (autoIncrementColumnName) {
+        updatedRow[autoIncrementColumnName] = result[0].insertId;
+      }
+    }
+
+    return updatedRow;
   }
 }

@@ -77,6 +77,7 @@ export class ReadQuery<
   }
 
   getOne = async (...args: Parameters<Query>) => {
+    if (!this.query) throw new Error("Query must be defined");
     const query = this.query(...args);
     const logData = this.startQueryLog();
 
@@ -96,6 +97,8 @@ export class ReadQuery<
   };
 
   getMany = async (...args: Parameters<Query>) => {
+    if (!this.query) throw new Error("Query must be defined");
+
     const query = this.query(...args);
     const logData = this.startQueryLog();
 
@@ -117,6 +120,8 @@ export class ReadQuery<
 
   getColumn = (columnName: keyof Columns) => {
     return async (...args: Parameters<Query>) => {
+      if (!this.query) throw new Error("Query must be defined");
+
       const query = this.query(...args);
       const logData = this.startQueryLog();
 
@@ -138,6 +143,8 @@ export class ReadQuery<
 
   getValue = (columnName: keyof Columns) => {
     return async (...args: Parameters<Query>) => {
+      if (!this.query) throw new Error("Query must be defined");
+
       const query = this.query(...args);
       const logData = this.startQueryLog();
 

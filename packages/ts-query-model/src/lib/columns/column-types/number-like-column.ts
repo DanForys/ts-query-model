@@ -33,6 +33,7 @@ const _autoIncrementNumberColumn: NumberColumnAutoIncrement = {
     valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
   fromSQL: (valueFromSQL) => valueFromSQL,
   nullable: true,
+  autoIncrement: true,
 };
 
 const numberColumn = () => _numberColumn;

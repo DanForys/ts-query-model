@@ -1,5 +1,5 @@
 import { GenericConnection } from "../generic/generic-connection";
-import { GenericQueryFn, QueryColumns } from "../types/query-model";
+import { QueryColumns } from "../types/query-model";
 
 import { QueryLogger } from "./database";
 import { Query } from "./query";
@@ -11,41 +11,50 @@ import { Query } from "./query";
  * @typeParam UpdateFunc - The write-query function
  * @param <H> - Headers
  */
-export class WriteQuery<
+export class InsertQuery<
   Columns extends QueryColumns,
-  Query extends GenericQueryFn,
   Connection extends GenericConnection
-> extends Query<Columns, Query, Connection> {
+> extends Query<Columns, never, Connection> {
+  table: string;
+
   constructor({
     name,
+    table,
     columns,
-    query,
     connection,
     logger,
   }: {
     name?: string;
+    table: string;
     columns: Columns;
-    query: Query;
     connection: Connection;
     logger: QueryLogger;
   }) {
-    super({ name, columns, query, connection, logger });
+    super({ name, columns, connection, logger });
+    this.table = table;
   }
 
-  write = async (
-    ...args: Parameters<Query>
-  ): Promise<ReturnType<Connection["write"]>> => {
-    if (!this.query) throw new Error("Query must be defined");
-
-    const query = this.query(...args);
+  insert = async (items: {
+    [Property in keyof Columns]: Parameters<Columns[Property]["toSQL"]>[0];
+  }) => {
     const logData = this.startQueryLog();
 
     try {
-      const result = await this.connection.write(query);
-      this.endQueryLog(logData, args);
-      return result as ReturnType<Connection["write"]>;
+      const result = await this.connection.insert(
+        this.table,
+        this.columns,
+        items
+      );
+      this.endQueryLog(logData, Object.entries(items));
+      return result as {
+        [Property in keyof Columns]: Parameters<
+          Columns[Property]["fromSQL"]
+        >[0];
+      };
     } catch (e) {
-      throw this.getQueryError(e, query);
+      // throw this.getQueryError(e, query);
+      console.log(e);
+      throw e;
     }
   };
 

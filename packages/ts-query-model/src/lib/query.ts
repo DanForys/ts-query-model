@@ -21,7 +21,7 @@ export class Query<
 > {
   readonly name: string;
   readonly columns: Columns;
-  readonly query: Query;
+  readonly query?: Query;
   readonly connection: Connection;
   readonly logger: QueryLogger;
 
@@ -38,7 +38,7 @@ export class Query<
   }: {
     name?: string;
     columns: Columns;
-    query: Query;
+    query?: Query;
     connection: Connection;
     logger: QueryLogger;
   }) {

@@ -1,6 +1,7 @@
 import { GenericConnection } from "../generic/generic-connection";
 import { GenericQueryFn, QueryColumns } from "../types/query-model";
 
+import { InsertQuery } from "./insert-query";
 import { ReadQuery } from "./read-query";
 import { WriteQuery } from "./write-query";
 
@@ -38,6 +39,12 @@ interface WriteQueryOptions<Q extends GenericQueryFn> {
    * Query function
    */
   query: Q;
+}
+
+interface InsertQueryOptions<T extends QueryColumns> {
+  name?: string;
+  table: string;
+  columns: T;
 }
 
 export interface QueryModelDatabaseOptions {
@@ -166,5 +173,19 @@ export class Database<Connection extends GenericConnection> {
       query,
       logger: this.logger,
     }).write;
+  }
+
+  insert<Columns extends QueryColumns>({
+    name,
+    table,
+    columns,
+  }: InsertQueryOptions<Columns>) {
+    return new InsertQuery({
+      connection: this.connection,
+      name,
+      table,
+      columns,
+      logger: this.logger,
+    }).insert;
   }
 }

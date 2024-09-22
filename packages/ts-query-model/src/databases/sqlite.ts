@@ -2,7 +2,7 @@ import {
   GenericConnection,
   QueryResultRow,
 } from "../generic/generic-connection";
-import { GenericQuery } from "../types/query-model";
+import { GenericQuery, QueryColumns } from "../types/query-model";
 
 import sqlite3 from "sqlite3";
 
@@ -117,5 +117,24 @@ export class SQLiteConnection extends GenericConnection {
         });
       });
     });
+  }
+
+  async insert(
+    table: string,
+    columns: QueryColumns,
+    values: Record<string, unknown>
+  ): Promise<unknown> {
+    // const connection = this.getConnection();
+
+    // const queryInsertPairs = Object.keys(columns).map((name) => {
+    //   return `${name} = ?`;
+    // });
+
+    // const query = `INSERT INTO \`${table}\` SET ${queryInsertPairs.join(",")}`;
+
+    // const result = await connection.query<ResultSetHeader>(query, values);
+    // return result[0];
+    console.log(table, columns, values);
+    return;
   }
 }

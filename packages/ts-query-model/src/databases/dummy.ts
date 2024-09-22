@@ -24,4 +24,8 @@ export class DummySQLConnection extends GenericConnection {
   async write(): Promise<null> {
     return null;
   }
+
+  async insert(): Promise<null> {
+    return null;
+  }
 }
