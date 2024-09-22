@@ -26,6 +26,7 @@ export type GenericConnectionInstance = InstanceType<
 export interface ColumnDefinition {
   toSQL: (valueFromJS: any) => any;
   fromSQL: (valueFromSQL: any) => any;
+  nullable: boolean;
 }
 
 export type ExtractRowType<T extends (...args: any[]) => Promise<any>> =

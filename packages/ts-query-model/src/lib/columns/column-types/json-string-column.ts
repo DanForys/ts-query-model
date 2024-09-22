@@ -17,6 +17,7 @@ const jsonStringColumn = <
   return {
     toSQL: (valueFromJS: JSONShape) => JSON.stringify(valueFromJS),
     fromSQL: (valueFromSQL: string) => JSON.parse(valueFromSQL),
+    nullable: false,
   };
 };
 
@@ -30,6 +31,7 @@ const jsonStringColumnNull = <
         : JSON.stringify(valueFromJS),
     fromSQL: (valueFromSQL: string | null) =>
       valueFromSQL === null ? null : JSON.parse(valueFromSQL),
+    nullable: true,
   };
 };
 

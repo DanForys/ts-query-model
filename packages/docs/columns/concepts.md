@@ -27,6 +27,7 @@ A single column definition has the following interface:
 interface ColumnDefinition {
   toSQL: (valueFromJS: any) => any;
   fromSQL: (valueFromSQL: any) => any;
+  nullable: boolean;
 }
 ```
 
@@ -34,6 +35,7 @@ where:
 
 - `toSQL` takes the JavaScript type and returns the SQL type
 - `fromSQL` takes the SQL type and returns the JavaScript type
+- `nullable` will validate whether or not the field can return `null`
 
 ### Example
 
@@ -43,11 +45,12 @@ To implementation of the `numberColumn` looks something like this:
 const numberColumn = () => ({
   toSQL: (valueFromJS: number) => valueFromJS,
   fromSQL: (valueFromSQL: number) => valueFromSQL,
+  nullable: false,
 });
 ```
 
 ## Create your own types
 
 You can use any types and transformations you wish as columns.
-Just create an object with both the `toSQL` and `fromSQL` functions
-following the `ColumnDefinition` above.
+Just create an object with the `toSQL`, `fromSQL` functions
+and `nullable` field following the `ColumnDefinition` above.

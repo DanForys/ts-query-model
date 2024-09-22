@@ -62,10 +62,13 @@ export class ReadQuery<
 
   resultToObject<K extends keyof Columns>(resultRow: Record<K, unknown>) {
     const mapped = Object.fromEntries(
-      Object.entries(resultRow).map(([key, value]) => [
-        key,
-        this.columns[key].fromSQL(value),
-      ])
+      Object.entries(resultRow).map(([key, value]) => {
+        if (value === null && !this.columns[key].nullable)
+          throw new Error(
+            `Column "${key} is non-nullable, but a null value has been retrieved"`
+          );
+        return [key, this.columns[key].fromSQL(value)];
+      })
     );
 
     return mapped as {
