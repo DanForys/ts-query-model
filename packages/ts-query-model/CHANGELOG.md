@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/DanForys/ts-query-model/compare/v1.0.1...v1.1.0) (2024-09-22)
+
+
+### Features
+
+* null validation checks ([#40](https://github.com/DanForys/ts-query-model/issues/40)) ([ec928ee](https://github.com/DanForys/ts-query-model/commit/ec928ee5ba886432289226b6ae714d3f89fbab6e))
+
 ## [1.0.1](https://github.com/DanForys/ts-query-model/compare/v1.0.0...v1.0.1) (2024-09-21)
 
 
