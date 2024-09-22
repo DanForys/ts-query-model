@@ -14,6 +14,7 @@ const enumColumn = <EnumShape extends string>(): EnumColumn<EnumShape> => {
   return {
     toSQL: (valueFromJS: EnumShape) => valueFromJS,
     fromSQL: (valueFromSQL: EnumShape) => valueFromSQL,
+    nullable: false,
   };
 };
 
@@ -24,6 +25,7 @@ const enumColumnNull = <
     toSQL: (valueFromJS: EnumShape | null | undefined) =>
       valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
     fromSQL: (valueFromSQL: EnumShape | null) => valueFromSQL,
+    nullable: true,
   };
 };
 

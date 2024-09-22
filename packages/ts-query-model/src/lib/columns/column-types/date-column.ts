@@ -13,12 +13,14 @@ interface DateColumnNull extends ColumnDefinition {
 const _dateColumn: DateColumn = {
   toSQL: (valueFromJS) => valueFromJS,
   fromSQL: (valueFromSQL) => valueFromSQL,
+  nullable: false,
 };
 
 const _nullableDateColumn: DateColumnNull = {
   toSQL: (valueFromJS) =>
     valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
   fromSQL: (valueFromSQL) => (valueFromSQL === null ? null : valueFromSQL),
+  nullable: true,
 };
 
 const dateColumn = () => _dateColumn;

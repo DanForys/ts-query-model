@@ -13,6 +13,7 @@ interface NullableBooleanLikeColumn extends ColumnDefinition {
 const _booleanColumn: BooleanLikeColumn = {
   toSQL: (valueFromJS) => (valueFromJS ? 1 : 0),
   fromSQL: (valueFromSQL) => Boolean(valueFromSQL),
+  nullable: false,
 };
 
 const _nullableBooleanColumn: NullableBooleanLikeColumn = {
@@ -24,6 +25,7 @@ const _nullableBooleanColumn: NullableBooleanLikeColumn = {
       : 0,
   fromSQL: (valueFromSQL) =>
     valueFromSQL === null ? null : Boolean(valueFromSQL),
+  nullable: true,
 };
 
 const booleanIntColumn = () => _booleanColumn;

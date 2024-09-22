@@ -18,18 +18,21 @@ interface NumberColumnAutoIncrement extends ColumnDefinition {
 const _numberColumn: NumberColumn = {
   toSQL: (valueFromJS) => valueFromJS,
   fromSQL: (valueFromSQL) => valueFromSQL,
+  nullable: false,
 };
 
 const _nullableNumberColumn: NumberColumnNull = {
   toSQL: (valueFromJS) =>
     valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
   fromSQL: (valueFromSQL) => valueFromSQL,
+  nullable: true,
 };
 
 const _autoIncrementNumberColumn: NumberColumnAutoIncrement = {
   toSQL: (valueFromJS) =>
     valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
   fromSQL: (valueFromSQL) => valueFromSQL,
+  nullable: true,
 };
 
 const numberColumn = () => _numberColumn;

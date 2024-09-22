@@ -13,6 +13,7 @@ interface StringColumnNull extends ColumnDefinition {
 const _stringColumn: StringColumn = {
   toSQL: (valueFromJS) => valueFromJS.toString(),
   fromSQL: (valueFromSQL) => `${valueFromSQL}`,
+  nullable: false,
 };
 
 const _nullableStringColumn: StringColumnNull = {
@@ -21,6 +22,7 @@ const _nullableStringColumn: StringColumnNull = {
       ? null
       : valueFromJS.toString(),
   fromSQL: (valueFromSQL) => (valueFromSQL === null ? null : `${valueFromSQL}`),
+  nullable: true,
 };
 
 const stringColumn = () => _stringColumn;
