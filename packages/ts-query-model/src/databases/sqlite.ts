@@ -123,18 +123,39 @@ export class SQLiteConnection extends GenericConnection {
     table: string,
     columns: QueryColumns,
     values: Record<string, unknown>
-  ): Promise<unknown> {
-    // const connection = this.getConnection();
+  ): Promise<typeof values> {
+    const connection = await this.getConnection();
 
-    // const queryInsertPairs = Object.keys(columns).map((name) => {
-    //   return `${name} = ?`;
-    // });
+    return new Promise((resolve, reject) => {
+      const columnNames = Object.keys(columns);
 
-    // const query = `INSERT INTO \`${table}\` SET ${queryInsertPairs.join(",")}`;
+      const query = `
+        INSERT INTO \`${table}\` 
+        (${columnNames.join(",")})
+        VALUES (${columnNames.map(() => "?").join(",")})
+      `;
 
-    // const result = await connection.query<ResultSetHeader>(query, values);
-    // return result[0];
-    console.log(table, columns, values);
-    return;
+      connection.run(
+        query,
+        columnNames.map((name) => values[name]),
+        function (error) {
+          if (error) return reject(error);
+
+          const updatedRow = { ...values };
+
+          if (this.lastID) {
+            const autoIncrementColumnName = columnNames.find(
+              (col) => columns[col].autoIncrement
+            );
+
+            if (autoIncrementColumnName) {
+              updatedRow[autoIncrementColumnName] = this.lastID;
+            }
+          }
+
+          resolve(updatedRow);
+        }
+      );
+    });
   }
 }

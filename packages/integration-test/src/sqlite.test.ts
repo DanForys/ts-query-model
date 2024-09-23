@@ -104,4 +104,26 @@ describe("ts-query-model SQLite support", () => {
     const result = await getValue();
     expect(result).toEqual(3);
   });
+
+  it("can insert a new row into a SQLite table", async () => {
+    const insert = db.insert({
+      name: "insert-test",
+      table: "test",
+      columns: {
+        id: columns.numberColumnAutoIncrement(),
+        name: columns.stringColumn(),
+        booleanLike: columns.booleanIntColumn(),
+        number: columns.numberColumn(),
+      },
+    });
+
+    const result = await insert({
+      id: null,
+      name: "Mr Smoogle",
+      booleanLike: true,
+      number: 314,
+    });
+
+    expect(result.id).toBeGreaterThan(0);
+  });
 });
