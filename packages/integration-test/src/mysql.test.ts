@@ -30,12 +30,12 @@ describe("ts-query-model", () => {
     const createTable = db.write({
       name: "createTable",
       query: () => `
-        CREATE TABLE \`test\` (
-          \`id\` int unsigned NOT NULL AUTO_INCREMENT,
-          \`name\` varchar(30) DEFAULT NULL,
-          \`booleanLike\` tinyint(1) DEFAULT NULL,
-          \`number\` int DEFAULT NULL,
-          PRIMARY KEY (\`id\`)
+        CREATE TABLE test (
+          id int unsigned NOT NULL AUTO_INCREMENT,
+          name varchar(30) DEFAULT NULL,
+          booleanLike tinyint(1) DEFAULT NULL,
+          number int DEFAULT NULL,
+          PRIMARY KEY (id)
         );
       `,
     });
@@ -94,7 +94,7 @@ describe("ts-query-model", () => {
     const getColumn = db.getColumn({
       name: "get-column-test",
       columnName: "name",
-      columns: commonColumns.get("name"),
+      columnType: columns.stringColumn(),
       query: () => "SELECT name FROM test",
     });
 
@@ -106,7 +106,7 @@ describe("ts-query-model", () => {
     const getValue = db.getValue({
       name: "get-column-test",
       columnName: "rowCount",
-      columns: commonColumns.get("rowCount"),
+      columnType: columns.numberColumn(),
       query: () => "SELECT COUNT(*) AS rowCount FROM test",
     });
 

@@ -100,9 +100,7 @@ describe("ts-query-model PostgreSQL support", () => {
     const getColumn = db.getColumn({
       name: "get-column-test",
       columnName: "name",
-      columns: {
-        name: columns.stringColumn(),
-      },
+      columnType: columns.stringColumn(),
       query: () => "SELECT name FROM test",
     });
 
@@ -114,9 +112,7 @@ describe("ts-query-model PostgreSQL support", () => {
     const getValue = db.getValue({
       name: "get-column-test",
       columnName: "rowcount",
-      columns: {
-        rowcount: columns.stringColumn(),
-      },
+      columnType: columns.numberColumn(),
       query: () => "SELECT COUNT(*) AS rowcount FROM test",
     });
 

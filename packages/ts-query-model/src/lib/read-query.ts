@@ -120,47 +120,6 @@ export class ReadQuery<
     }
   };
 
-  getColumn = (columnName: keyof Columns) => {
-    return async (...args: Parameters<Query>) => {
-      const query = this.query(...args);
-      const logData = this.startQueryLog();
-
-      try {
-        const result = await this.connection.getMany<
-          Record<keyof Columns, unknown>
-        >(query);
-
-        if (result.length > 0) {
-          this.validateFields(result[0]);
-        }
-        this.endQueryLog(logData, args);
-        return result.map((item: any) => this.resultToObject(item)[columnName]);
-      } catch (e) {
-        throw this.getQueryError(e, query);
-      }
-    };
-  };
-
-  getValue = (columnName: keyof Columns) => {
-    return async (...args: Parameters<Query>) => {
-      const query = this.query(...args);
-      const logData = this.startQueryLog();
-
-      try {
-        const result = await this.connection.getOne<
-          Record<keyof Columns, unknown>
-        >(query);
-
-        if (!result) return null;
-        this.validateFields(result);
-        this.endQueryLog(logData, args);
-        return this.resultToObject(result)[columnName];
-      } catch (e) {
-        throw this.getQueryError(e, query);
-      }
-    };
-  };
-
   // async update(row: {
   //   [Property in keyof T]: ReturnType<T[Property]["get"]>;
   // }) {

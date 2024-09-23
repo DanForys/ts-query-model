@@ -85,9 +85,7 @@ describe("ts-query-model SQLite support", () => {
     const getColumn = db.getColumn({
       name: "get-column-test",
       columnName: "name",
-      columns: {
-        name: columns.stringColumn(),
-      },
+      columnType: columns.stringColumn(),
       query: () => "SELECT name FROM test",
     });
 
@@ -99,9 +97,7 @@ describe("ts-query-model SQLite support", () => {
     const getValue = db.getValue({
       name: "get-column-test",
       columnName: "rowCount",
-      columns: {
-        rowCount: columns.numberColumn(),
-      },
+      columnType: columns.numberColumn(),
       query: () => "SELECT COUNT(*) AS rowCount FROM test",
     });
 
