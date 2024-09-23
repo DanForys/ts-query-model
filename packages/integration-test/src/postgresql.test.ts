@@ -20,7 +20,7 @@ describe("ts-query-model PostgreSQL support", () => {
       name: "createTable",
       query: () => SQL`
         CREATE TABLE test (
-          id INTEGER PRIMARY KEY,
+          id serial primary key,
           name TEXT NOT NULL,
           booleanlike INTEGER NOT NULL,
           number INTEGER NOT NULL
@@ -30,14 +30,8 @@ describe("ts-query-model PostgreSQL support", () => {
 
     const addRow = db.write({
       name: "addRow",
-      query: (
-        id: number,
-        name: string,
-        booleanlike: number,
-        number: number
-      ) => SQL`
-        INSERT INTO test VALUES (
-         ${id},
+      query: (name: string, booleanlike: number, number: number) => SQL`
+        INSERT INTO test ("name", "booleanlike", "number") VALUES (
          ${name},
          ${booleanlike},
          ${number}
@@ -46,9 +40,9 @@ describe("ts-query-model PostgreSQL support", () => {
     });
 
     await createTable();
-    await addRow(1, "Mr Flibble", 1, 12345);
-    await addRow(2, "Lister", 0, 6789);
-    await addRow(3, "Kryten", 1, 101112);
+    await addRow("Mr Flibble", 1, 12345);
+    await addRow("Lister", 0, 6789);
+    await addRow("Kryten", 1, 101112);
   });
 
   afterAll(async () => {
@@ -118,5 +112,27 @@ describe("ts-query-model PostgreSQL support", () => {
 
     const result = await getValue();
     expect(result).toEqual("3"); // PG sends this as a bigint, which is a string from pg.js
+  });
+
+  it("can insert a new row into a PostgreSQL table", async () => {
+    const insert = db.insert({
+      name: "insert-test",
+      table: "test",
+      columns: {
+        id: columns.numberColumnAutoIncrement(),
+        name: columns.stringColumn(),
+        booleanlike: columns.booleanIntColumn(),
+        number: columns.numberColumn(),
+      },
+    });
+
+    const result = await insert({
+      id: null,
+      name: "Mr Smoogle",
+      booleanlike: true,
+      number: 314,
+    });
+
+    expect(result.id).toBeGreaterThan(0);
   });
 });

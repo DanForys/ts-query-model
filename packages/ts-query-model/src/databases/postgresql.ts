@@ -54,18 +54,34 @@ export class PostgreSQLConnection extends GenericConnection {
     table: string,
     columns: QueryColumns,
     values: Record<string, unknown>
-  ): Promise<unknown> {
-    // const connection = this.getConnection();
+  ): Promise<typeof values> {
+    const connection = this.getConnection();
+    const columnNames = Object.keys(columns).filter(
+      (name) => columns[name].autoIncrement !== true
+    );
+    const autoIncrementColumnName = Object.keys(columns).find(
+      (name) => columns[name].autoIncrement
+    );
 
-    // const queryInsertPairs = Object.keys(columns).map((name) => {
-    //   return `${name} = ?`;
-    // });
+    const query = `
+      insert into ${table} 
+      (${columnNames.map((name) => `"${name}"`).join(",")})
+      values (${columnNames.map((_, index) => `$${index + 1}`).join(",")})
+      ${autoIncrementColumnName ? `returning "${autoIncrementColumnName}"` : ""}
+    `;
 
-    // const query = `INSERT INTO \`${table}\` SET ${queryInsertPairs.join(",")}`;
+    const result = await connection.query(
+      query,
+      columnNames.map((name) => columns[name].toSQL(values[name]))
+    );
 
-    // const result = await connection.query<ResultSetHeader>(query, values);
-    // return result[0];
-    console.log(table, columns, values);
-    return;
+    const updatedRow = { ...values };
+
+    if (autoIncrementColumnName) {
+      updatedRow[autoIncrementColumnName] =
+        result.rows[0][autoIncrementColumnName];
+    }
+
+    return updatedRow;
   }
 }
