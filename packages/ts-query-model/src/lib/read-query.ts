@@ -15,7 +15,10 @@ export class ReadQuery<
   Columns extends QueryColumns,
   Query extends GenericQueryFn,
   Connection extends GenericConnection
-> extends Query<Columns, Query, Connection> {
+> extends Query<Connection> {
+  query: GenericQueryFn;
+  columns: Columns;
+
   constructor({
     name,
     columns,
@@ -29,7 +32,9 @@ export class ReadQuery<
     connection: Connection;
     logger: QueryLogger;
   }) {
-    super({ name, columns, query, connection, logger });
+    super({ name, connection, logger });
+    this.columns = columns;
+    this.query = query;
   }
 
   validateFields<K extends keyof Columns>(resultRow: Record<K, unknown>) {
@@ -77,7 +82,6 @@ export class ReadQuery<
   }
 
   getOne = async (...args: Parameters<Query>) => {
-    if (!this.query) throw new Error("Query must be defined");
     const query = this.query(...args);
     const logData = this.startQueryLog();
 
@@ -97,8 +101,6 @@ export class ReadQuery<
   };
 
   getMany = async (...args: Parameters<Query>) => {
-    if (!this.query) throw new Error("Query must be defined");
-
     const query = this.query(...args);
     const logData = this.startQueryLog();
 
@@ -120,8 +122,6 @@ export class ReadQuery<
 
   getColumn = (columnName: keyof Columns) => {
     return async (...args: Parameters<Query>) => {
-      if (!this.query) throw new Error("Query must be defined");
-
       const query = this.query(...args);
       const logData = this.startQueryLog();
 
@@ -143,8 +143,6 @@ export class ReadQuery<
 
   getValue = (columnName: keyof Columns) => {
     return async (...args: Parameters<Query>) => {
-      if (!this.query) throw new Error("Query must be defined");
-
       const query = this.query(...args);
       const logData = this.startQueryLog();
 

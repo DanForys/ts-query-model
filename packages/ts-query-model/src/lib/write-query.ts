@@ -15,7 +15,10 @@ export class WriteQuery<
   Columns extends QueryColumns,
   Query extends GenericQueryFn,
   Connection extends GenericConnection
-> extends Query<Columns, Query, Connection> {
+> extends Query<Connection> {
+  query: GenericQueryFn;
+  columns: Columns;
+
   constructor({
     name,
     columns,
@@ -29,7 +32,9 @@ export class WriteQuery<
     connection: Connection;
     logger: QueryLogger;
   }) {
-    super({ name, columns, query, connection, logger });
+    super({ name, connection, logger });
+    this.columns = columns;
+    this.query = query;
   }
 
   write = async (

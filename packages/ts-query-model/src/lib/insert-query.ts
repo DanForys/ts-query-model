@@ -14,8 +14,9 @@ import { Query } from "./query";
 export class InsertQuery<
   Columns extends QueryColumns,
   Connection extends GenericConnection
-> extends Query<Columns, never, Connection> {
+> extends Query<Connection> {
   table: string;
+  columns: Columns;
 
   constructor({
     name,
@@ -30,8 +31,9 @@ export class InsertQuery<
     connection: Connection;
     logger: QueryLogger;
   }) {
-    super({ name, columns, connection, logger });
+    super({ name, connection, logger });
     this.table = table;
+    this.columns = columns;
   }
 
   insert = async (items: {
@@ -52,6 +54,7 @@ export class InsertQuery<
         >[0];
       };
     } catch (e) {
+      // FIXME
       // throw this.getQueryError(e, query);
       console.log(e);
       throw e;
