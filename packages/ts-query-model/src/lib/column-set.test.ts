@@ -14,37 +14,43 @@ describe("buildColumnSet", () => {
 
   describe("column getter function", () => {
     it("returns a columns object for the column name argument", () => {
-      const colFunc = buildColumnSet({
+      const cols = {
         test1: stringColumn(),
         test2: numberColumn(),
-      });
+      };
+
+      const colFunc = buildColumnSet(cols);
 
       expect(colFunc.get("test2")).toEqual({
-        test2: numberColumn(),
+        test2: cols["test2"],
       });
     });
 
     it("returns multiple column objects for multiple column name arguments", () => {
-      const colFunc = buildColumnSet({
+      const cols = {
         test1: stringColumn(),
         test2: numberColumn(),
-      });
+      };
+
+      const colFunc = buildColumnSet(cols);
 
       expect(colFunc.get("test2", "test1")).toEqual({
-        test2: numberColumn(),
-        test1: stringColumn(),
+        test2: cols["test2"],
+        test1: cols["test1"],
       });
     });
 
     it("getAll() returns all columns", () => {
-      const colFunc = buildColumnSet({
+      const cols = {
         test1: stringColumn(),
         test2: numberColumn(),
-      });
+      };
+
+      const colFunc = buildColumnSet(cols);
 
       expect(colFunc.getAll()).toEqual({
-        test2: numberColumn(),
-        test1: stringColumn(),
+        test2: cols["test2"],
+        test1: cols["test1"],
       });
     });
   });
