@@ -23,11 +23,16 @@ export type GenericConnectionInstance = InstanceType<
   new (...a: any[]) => GenericConnection
 >;
 
+export type ColumnOptions = {
+  default?: string | number | Date | boolean | null | (() => any);
+};
+
 export interface ColumnDefinition {
   toSQL: (valueFromJS: any) => any;
   fromSQL: (valueFromSQL: any) => any;
   nullable: boolean;
   autoIncrement?: boolean;
+  options?: ColumnOptions;
 }
 
 export type ExtractRowType<T extends (...args: any[]) => Promise<any>> =

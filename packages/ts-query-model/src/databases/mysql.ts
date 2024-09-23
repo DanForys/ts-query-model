@@ -71,19 +71,38 @@ export class MySQLConnection extends GenericConnection {
   ): Promise<typeof values> {
     const connection = this.getConnection();
     const columnNames = Object.keys(columns);
+    const valuesToInsert = { ...values };
 
+    // Apply default values
+    columnNames.map((name) => {
+      if (
+        columns[name].options &&
+        "default" in columns[name].options &&
+        values[name] === null
+      ) {
+        const defaultValue = columns[name].options.default;
+        if (typeof defaultValue === "function") {
+          valuesToInsert[name] = defaultValue();
+        } else {
+          valuesToInsert[name] = defaultValue;
+        }
+      }
+    });
+
+    // Perform query
     const queryInsertPairs = columnNames.map((name) => {
-      return `${name} = ?`;
+      return `\`${name}\` = ?`;
     });
 
     const query = `INSERT INTO \`${table}\` SET ${queryInsertPairs.join(",")}`;
 
     const result = await connection.query<ResultSetHeader>(
       query,
-      columnNames.map((name) => values[name])
+      columnNames.map((name) => valuesToInsert[name])
     );
 
-    const updatedRow = { ...values };
+    // Apply auto-increment key if applicable
+    const updatedRow = { ...valuesToInsert };
 
     if (result[0].insertId) {
       const autoIncrementColumnName = columnNames.find(

@@ -135,4 +135,27 @@ describe("ts-query-model PostgreSQL support", () => {
 
     expect(result.id).toBeGreaterThan(0);
   });
+
+  it("can insert a new row with default values into a PostgreSQL table", async () => {
+    const insert = db.insert({
+      name: "insert-test",
+      table: "test",
+      columns: {
+        id: columns.numberColumnAutoIncrement(),
+        name: columns.stringColumnNull({ default: "Mr Anonymous" }),
+        booleanlike: columns.booleanIntColumn(),
+        number: columns.numberColumn(),
+      },
+    });
+
+    const result = await insert({
+      id: null,
+      name: null,
+      booleanlike: true,
+      number: 314,
+    });
+
+    expect(result.id).toBeGreaterThan(0);
+    expect(result.name).toEqual("Mr Anonymous");
+  });
 });

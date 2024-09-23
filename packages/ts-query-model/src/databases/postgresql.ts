@@ -62,6 +62,23 @@ export class PostgreSQLConnection extends GenericConnection {
     const autoIncrementColumnName = Object.keys(columns).find(
       (name) => columns[name].autoIncrement
     );
+    const valuesToInsert = { ...values };
+
+    // Apply default values
+    columnNames.map((name) => {
+      if (
+        columns[name].options &&
+        "default" in columns[name].options &&
+        values[name] === null
+      ) {
+        const defaultValue = columns[name].options.default;
+        if (typeof defaultValue === "function") {
+          valuesToInsert[name] = defaultValue();
+        } else {
+          valuesToInsert[name] = defaultValue;
+        }
+      }
+    });
 
     const query = `
       insert into ${table} 
@@ -72,10 +89,11 @@ export class PostgreSQLConnection extends GenericConnection {
 
     const result = await connection.query(
       query,
-      columnNames.map((name) => columns[name].toSQL(values[name]))
+      columnNames.map((name) => columns[name].toSQL(valuesToInsert[name]))
     );
 
-    const updatedRow = { ...values };
+    // Apply auto-increment key if applicable
+    const updatedRow = { ...valuesToInsert };
 
     if (autoIncrementColumnName) {
       updatedRow[autoIncrementColumnName] =

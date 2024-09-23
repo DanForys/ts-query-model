@@ -6,7 +6,7 @@ describe("ts-query-model", () => {
   let db: Database<MySQLConnection>;
   const commonColumns = buildColumnSet({
     id: columns.numberColumnAutoIncrement(),
-    name: columns.stringColumn(),
+    name: columns.stringColumnNull({ default: "Mr Anonymous" }),
     booleanLike: columns.booleanIntColumn(),
     number: columns.numberColumn(),
     rowCount: columns.numberColumn(),
@@ -129,5 +129,23 @@ describe("ts-query-model", () => {
     });
 
     expect(result.id).toBeGreaterThan(0);
+  });
+
+  it("can insert a new row with default values into a MySQL table", async () => {
+    const insert = db.insert({
+      name: "insert-test",
+      table: "test",
+      columns: commonColumns.get("id", "name", "booleanLike", "number"),
+    });
+
+    const result = await insert({
+      id: null,
+      name: null,
+      booleanLike: true,
+      number: 314,
+    });
+
+    expect(result.id).toBeGreaterThan(0);
+    expect(result.name).toEqual("Mr Anonymous");
   });
 });

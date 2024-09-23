@@ -1,4 +1,4 @@
-import { ColumnDefinition } from "../../../types/query-model";
+import { ColumnDefinition, ColumnOptions } from "../../../types/query-model";
 
 interface NumberColumn extends ColumnDefinition {
   toSQL: (valueFromJS: number) => number;
@@ -15,29 +15,36 @@ interface NumberColumnAutoIncrement extends ColumnDefinition {
   fromSQL: (valueFromSQL: number) => number;
 }
 
-const _numberColumn: NumberColumn = {
-  toSQL: (valueFromJS) => valueFromJS,
-  fromSQL: (valueFromSQL) => valueFromSQL,
-  nullable: false,
+const numberColumn = (options?: ColumnOptions): NumberColumn => {
+  return {
+    toSQL: (valueFromJS) => valueFromJS,
+    fromSQL: (valueFromSQL) => valueFromSQL,
+    nullable: false,
+    options,
+  };
 };
 
-const _nullableNumberColumn: NumberColumnNull = {
-  toSQL: (valueFromJS) =>
-    valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
-  fromSQL: (valueFromSQL) => valueFromSQL,
-  nullable: true,
+const numberColumnNull = (options?: ColumnOptions): NumberColumnNull => {
+  return {
+    toSQL: (valueFromJS) =>
+      valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
+    fromSQL: (valueFromSQL) => valueFromSQL,
+    nullable: true,
+    options,
+  };
 };
 
-const _autoIncrementNumberColumn: NumberColumnAutoIncrement = {
-  toSQL: (valueFromJS) =>
-    valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
-  fromSQL: (valueFromSQL) => valueFromSQL,
-  nullable: true,
-  autoIncrement: true,
+const numberColumnAutoIncrement = (
+  options?: ColumnOptions
+): NumberColumnAutoIncrement => {
+  return {
+    toSQL: (valueFromJS) =>
+      valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
+    fromSQL: (valueFromSQL) => valueFromSQL,
+    nullable: true,
+    autoIncrement: true,
+    options,
+  };
 };
-
-const numberColumn = () => _numberColumn;
-const numberColumnNull = () => _nullableNumberColumn;
-const numberColumnAutoIncrement = () => _autoIncrementNumberColumn;
 
 export { numberColumn, numberColumnAutoIncrement, numberColumnNull };

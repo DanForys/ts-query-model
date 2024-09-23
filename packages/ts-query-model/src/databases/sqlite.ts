@@ -128,6 +128,23 @@ export class SQLiteConnection extends GenericConnection {
 
     return new Promise((resolve, reject) => {
       const columnNames = Object.keys(columns);
+      const valuesToInsert = { ...values };
+
+      // Apply default values
+      columnNames.map((name) => {
+        if (
+          columns[name].options &&
+          "default" in columns[name].options &&
+          values[name] === null
+        ) {
+          const defaultValue = columns[name].options.default;
+          if (typeof defaultValue === "function") {
+            valuesToInsert[name] = defaultValue();
+          } else {
+            valuesToInsert[name] = defaultValue;
+          }
+        }
+      });
 
       const query = `
         INSERT INTO \`${table}\` 
@@ -137,12 +154,13 @@ export class SQLiteConnection extends GenericConnection {
 
       connection.run(
         query,
-        columnNames.map((name) => values[name]),
+        columnNames.map((name) => valuesToInsert[name]),
         function (error) {
           if (error) return reject(error);
 
-          const updatedRow = { ...values };
+          const updatedRow = { ...valuesToInsert };
 
+          // Apply auto-increment key if applicable
           if (this.lastID) {
             const autoIncrementColumnName = columnNames.find(
               (col) => columns[col].autoIncrement
