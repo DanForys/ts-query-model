@@ -1,11 +1,12 @@
 import { ColumnDefinition, ColumnOptions } from "../../../types/query-model";
 
-interface EnumColumn<EnumShape extends string> extends ColumnDefinition {
+export interface EnumColumn<EnumShape extends string> extends ColumnDefinition {
   toSQL: (valueFromJS: EnumShape) => EnumShape;
   fromSQL: (valueFromSQL: EnumShape) => EnumShape;
 }
 
-interface EnumColumnNull<EnumShape extends string> extends ColumnDefinition {
+export interface EnumColumnNull<EnumShape extends string>
+  extends ColumnDefinition {
   toSQL: (valueFromJS: EnumShape | null | undefined) => EnumShape | null;
   fromSQL: (valueFromSQL: EnumShape | null) => EnumShape | null;
 }

@@ -1,11 +1,12 @@
 import { ColumnDefinition, ColumnOptions } from "../../../types/query-model";
 
-interface JsonStringColumn<JSONShape extends object> extends ColumnDefinition {
+export interface JsonStringColumn<JSONShape extends object>
+  extends ColumnDefinition {
   toSQL: (valueFromJS: JSONShape) => string;
   fromSQL: (valueFromSQL: string) => JSONShape;
 }
 
-interface JsonStringColumnNull<JSONShape extends object>
+export interface JsonStringColumnNull<JSONShape extends object>
   extends ColumnDefinition {
   toSQL: (valueFromJS: JSONShape | null | undefined) => string | null;
   fromSQL: (valueFromSQL: string | null) => JSONShape | null;

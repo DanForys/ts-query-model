@@ -1,11 +1,11 @@
 import { ColumnDefinition, ColumnOptions } from "../../../types/query-model";
 
-interface DateColumn extends ColumnDefinition {
+export interface DateColumn extends ColumnDefinition {
   toSQL: (valueFromJS: Date) => Date;
   fromSQL: (valueFromSQL: Date) => Date;
 }
 
-interface DateColumnNull extends ColumnDefinition {
+export interface DateColumnNull extends ColumnDefinition {
   toSQL: (valueFromJS: Date | null | undefined) => Date | null;
   fromSQL: (valueFromSQL: Date | null) => Date | null;
 }

@@ -1,16 +1,16 @@
 import { ColumnDefinition, ColumnOptions } from "../../../types/query-model";
 
-interface NumberColumn extends ColumnDefinition {
+export interface NumberColumn extends ColumnDefinition {
   toSQL: (valueFromJS: number) => number;
   fromSQL: (valueFromSQL: number) => number;
 }
 
-interface NumberColumnNull extends ColumnDefinition {
+export interface NumberColumnNull extends ColumnDefinition {
   toSQL: (valueFromJS: number | null | undefined) => null | number;
   fromSQL: (valueFromSQL: null) => null | number;
 }
 
-interface NumberColumnAutoIncrement extends ColumnDefinition {
+export interface NumberColumnAutoIncrement extends ColumnDefinition {
   toSQL: (valueFromJS: number | null | undefined) => null | number;
   fromSQL: (valueFromSQL: number) => number;
 }

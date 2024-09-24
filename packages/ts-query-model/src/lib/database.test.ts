@@ -1,6 +1,6 @@
 import { DummySQLConnection } from "../databases/dummy";
 
-import { stringColumn } from "./columns";
+import columns from "./columns";
 import { Database } from "./database";
 
 describe("The Database class", () => {
@@ -8,7 +8,7 @@ describe("The Database class", () => {
     const dbInstance = new Database(new DummySQLConnection());
     expect(() =>
       dbInstance.getMany({
-        columns: { test: stringColumn() },
+        columns: { test: columns.string() },
         query: (input: string) => ({
           sql: `DUMMY SQL`,
           text: `DUMMY SQL`,

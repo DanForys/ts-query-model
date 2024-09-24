@@ -1,8 +1,12 @@
 import { GenericConnection } from "../generic/generic-connection";
-import { QueryColumns } from "../types/query-model";
+import { DatabaseRow, QueryColumns } from "../types/query-model";
 
 import { QueryLogger } from "./database";
 import { Query } from "./query";
+
+type InsertDatabaseRow<Columns extends QueryColumns> = {
+  [Property in keyof Columns]: Parameters<Columns[Property]["toSQL"]>[0];
+};
 
 /**
  * QueryBuilder Class
@@ -36,9 +40,7 @@ export class InsertQuery<
     this.columns = columns;
   }
 
-  insert = async (items: {
-    [Property in keyof Columns]: Parameters<Columns[Property]["toSQL"]>[0];
-  }) => {
+  insert = async (items: InsertDatabaseRow<Columns>) => {
     const logData = this.startQueryLog();
 
     try {
@@ -48,11 +50,7 @@ export class InsertQuery<
         items
       );
       this.endQueryLog(logData, Object.entries(items));
-      return result as {
-        [Property in keyof Columns]: Parameters<
-          Columns[Property]["fromSQL"]
-        >[0];
-      };
+      return result as DatabaseRow<Columns>;
     } catch (e) {
       // FIXME
       // throw this.getQueryError(e, query);

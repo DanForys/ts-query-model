@@ -5,11 +5,11 @@ import MySQLConnection from "ts-query-model/lib/mysql";
 describe("ts-query-model", () => {
   let db: Database<MySQLConnection>;
   const commonColumns = buildColumnSet({
-    id: columns.numberColumnAutoIncrement(),
-    name: columns.stringColumnNull({ default: "Mr Anonymous" }),
-    booleanLike: columns.booleanIntColumn(),
-    number: columns.numberColumn(),
-    rowCount: columns.numberColumn(),
+    id: columns.numberAutoIncrement(),
+    name: columns.stringNull({ default: "Mr Anonymous" }),
+    booleanLike: columns.booleanInt(),
+    number: columns.number(),
+    rowCount: columns.number(),
   });
 
   beforeAll(async () => {
@@ -94,7 +94,7 @@ describe("ts-query-model", () => {
     const getColumn = db.getColumn({
       name: "get-column-test",
       columnName: "name",
-      columnType: columns.stringColumn(),
+      columnType: columns.string(),
       query: () => "SELECT name FROM test",
     });
 
@@ -106,7 +106,7 @@ describe("ts-query-model", () => {
     const getValue = db.getValue({
       name: "get-column-test",
       columnName: "rowCount",
-      columnType: columns.numberColumn(),
+      columnType: columns.number(),
       query: () => "SELECT COUNT(*) AS rowCount FROM test",
     });
 
@@ -154,10 +154,10 @@ describe("ts-query-model", () => {
       name: "insert-test",
       table: "test",
       columns: {
-        id: columns.numberColumnAutoIncrement(),
-        name: columns.stringColumnNull({ default: () => "Cat" }),
-        booleanLike: columns.booleanIntColumn(),
-        number: columns.numberColumn(),
+        id: columns.numberAutoIncrement(),
+        name: columns.stringNull({ default: () => "Cat" }),
+        booleanLike: columns.booleanInt(),
+        number: columns.number(),
       },
     });
 

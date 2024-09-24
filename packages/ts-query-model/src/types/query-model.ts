@@ -39,3 +39,7 @@ export type ExtractRowType<T extends (...args: any[]) => Promise<any>> =
   Awaited<ReturnType<T>> extends unknown[]
     ? Awaited<ReturnType<T>>[number]
     : Awaited<ReturnType<T>>;
+
+export type DatabaseRow<Columns extends QueryColumns> = {
+  [Property in keyof Columns]: ReturnType<Columns[Property]["fromSQL"]>;
+};

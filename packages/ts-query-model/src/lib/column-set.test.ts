@@ -1,11 +1,11 @@
 import { buildColumnSet } from "./column-set";
-import { numberColumn, stringColumn } from "./columns";
+import columns from "./columns";
 
 describe("buildColumnSet", () => {
   it("returns a column getter function", () => {
     const colFunc = buildColumnSet({
-      test1: stringColumn(),
-      test2: numberColumn(),
+      test1: columns.string(),
+      test2: columns.number(),
     });
 
     expect(typeof colFunc.get).toBe("function");
@@ -15,8 +15,8 @@ describe("buildColumnSet", () => {
   describe("column getter function", () => {
     it("returns a columns object for the column name argument", () => {
       const cols = {
-        test1: stringColumn(),
-        test2: numberColumn(),
+        test1: columns.string(),
+        test2: columns.number(),
       };
 
       const colFunc = buildColumnSet(cols);
@@ -28,8 +28,8 @@ describe("buildColumnSet", () => {
 
     it("returns multiple column objects for multiple column name arguments", () => {
       const cols = {
-        test1: stringColumn(),
-        test2: numberColumn(),
+        test1: columns.string(),
+        test2: columns.number(),
       };
 
       const colFunc = buildColumnSet(cols);
@@ -42,8 +42,8 @@ describe("buildColumnSet", () => {
 
     it("getAll() returns all columns", () => {
       const cols = {
-        test1: stringColumn(),
-        test2: numberColumn(),
+        test1: columns.string(),
+        test2: columns.number(),
       };
 
       const colFunc = buildColumnSet(cols);

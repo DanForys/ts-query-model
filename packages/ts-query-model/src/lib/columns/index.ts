@@ -18,18 +18,34 @@ import {
   stringColumnNull,
 } from "./column-types/string-like-column";
 
-export {
-  booleanIntColumn,
-  booleanIntColumnNull,
-  dateColumn,
-  dateColumnNull,
-  enumColumn,
-  enumColumnNull,
-  jsonStringColumn,
-  jsonStringColumnNull,
-  numberColumn,
-  numberColumnAutoIncrement,
-  numberColumnNull,
-  stringColumn,
-  stringColumnNull,
+// export default {
+//   booleanIntColumn as booleanInt,
+//   booleanIntColumnNull as booleanIntNull,
+//   dateColumn as date,
+//   dateColumnNull as dateNull,
+//   enumColumn as enum,
+//   enumColumnNull as enumNull,
+//   jsonStringColumn as jsonString,
+//   jsonStringColumnNull as jsonStringNull,
+//   numberColumn as number,
+//   numberColumnAutoIncrement as numberAutoIncrement,
+//   numberColumnNull as numberNull,
+//   stringColumn as string,
+//   stringColumnNull as stringNull,
+// };
+
+export default {
+  booleanInt: booleanIntColumn,
+  booleanIntNull: booleanIntColumnNull,
+  date: dateColumn,
+  dateNull: dateColumnNull,
+  enum: enumColumn,
+  enumNull: enumColumnNull,
+  jsonString: jsonStringColumn,
+  jsonStringNull: jsonStringColumnNull,
+  number: numberColumn,
+  numberAutoIncrement: numberColumnAutoIncrement,
+  numberNull: numberColumnNull,
+  string: stringColumn,
+  stringNull: stringColumnNull,
 };

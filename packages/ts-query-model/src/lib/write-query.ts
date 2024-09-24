@@ -4,6 +4,10 @@ import { GenericQueryFn, QueryColumns } from "../types/query-model";
 import { QueryLogger } from "./database";
 import { Query } from "./query";
 
+type WriteQueryResult<Connection extends GenericConnection> = Awaited<
+  ReturnType<Connection["write"]>
+>;
+
 /**
  * QueryBuilder Class
  * @typeParam T extends QueryModelColumnsDefinition - The column definitions passed to the constructor
@@ -39,7 +43,7 @@ export class WriteQuery<
 
   write = async (
     ...args: Parameters<Query>
-  ): Promise<ReturnType<Connection["write"]>> => {
+  ): Promise<WriteQueryResult<Connection>> => {
     if (!this.query) throw new Error("Query must be defined");
 
     const query = this.query(...args);
@@ -48,7 +52,7 @@ export class WriteQuery<
     try {
       const result = await this.connection.write(query);
       this.endQueryLog(logData, args);
-      return result as ReturnType<Connection["write"]>;
+      return result as WriteQueryResult<Connection>;
     } catch (e) {
       throw this.getQueryError(e, query);
     }

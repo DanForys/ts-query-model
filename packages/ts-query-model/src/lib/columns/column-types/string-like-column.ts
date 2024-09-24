@@ -1,11 +1,11 @@
 import { ColumnDefinition, ColumnOptions } from "../../../types/query-model";
 
-interface StringColumn extends ColumnDefinition {
+export interface StringColumn extends ColumnDefinition {
   toSQL: (valueFromJS: string) => string;
   fromSQL: (valueFromSQL: string) => string;
 }
 
-interface StringColumnNull extends ColumnDefinition {
+export interface StringColumnNull extends ColumnDefinition {
   toSQL: (valueFromJS: string | null | undefined) => string | null;
   fromSQL: (valueFromSQL: string | null) => string | null;
 }

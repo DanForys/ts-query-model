@@ -53,10 +53,10 @@ describe("ts-query-model SQLite support", () => {
     const getRow = db.getOne({
       name: "get-row-test",
       columns: {
-        id: columns.numberColumnAutoIncrement(),
-        name: columns.stringColumn(),
-        booleanLike: columns.booleanIntColumn(),
-        number: columns.numberColumn(),
+        id: columns.numberAutoIncrement(),
+        name: columns.string(),
+        booleanLike: columns.booleanInt(),
+        number: columns.number(),
       },
       query: () => "SELECT * FROM test LIMIT 1",
     });
@@ -69,10 +69,10 @@ describe("ts-query-model SQLite support", () => {
     const getRows = db.getMany({
       name: "get-rows-test",
       columns: {
-        id: columns.numberColumnAutoIncrement(),
-        name: columns.stringColumn(),
-        booleanLike: columns.booleanIntColumn(),
-        number: columns.numberColumn(),
+        id: columns.numberAutoIncrement(),
+        name: columns.string(),
+        booleanLike: columns.booleanInt(),
+        number: columns.number(),
       },
       query: () => "SELECT * FROM test",
     });
@@ -85,7 +85,7 @@ describe("ts-query-model SQLite support", () => {
     const getColumn = db.getColumn({
       name: "get-column-test",
       columnName: "name",
-      columnType: columns.stringColumn(),
+      columnType: columns.string(),
       query: () => "SELECT name FROM test",
     });
 
@@ -97,7 +97,7 @@ describe("ts-query-model SQLite support", () => {
     const getValue = db.getValue({
       name: "get-column-test",
       columnName: "rowCount",
-      columnType: columns.numberColumn(),
+      columnType: columns.number(),
       query: () => "SELECT COUNT(*) AS rowCount FROM test",
     });
 
@@ -110,10 +110,10 @@ describe("ts-query-model SQLite support", () => {
       name: "insert-test",
       table: "test",
       columns: {
-        id: columns.numberColumnAutoIncrement(),
-        name: columns.stringColumn(),
-        booleanLike: columns.booleanIntColumn(),
-        number: columns.numberColumn(),
+        id: columns.numberAutoIncrement(),
+        name: columns.string(),
+        booleanLike: columns.booleanInt(),
+        number: columns.number(),
       },
     });
 
@@ -132,10 +132,10 @@ describe("ts-query-model SQLite support", () => {
       name: "insert-test",
       table: "test",
       columns: {
-        id: columns.numberColumnAutoIncrement(),
-        name: columns.stringColumnNull({ default: "Mr Anonymous" }),
-        booleanLike: columns.booleanIntColumn(),
-        number: columns.numberColumn(),
+        id: columns.numberAutoIncrement(),
+        name: columns.stringNull({ default: "Mr Anonymous" }),
+        booleanLike: columns.booleanInt(),
+        number: columns.number(),
       },
     });
 
@@ -155,10 +155,10 @@ describe("ts-query-model SQLite support", () => {
       name: "insert-test",
       table: "test",
       columns: {
-        id: columns.numberColumnAutoIncrement(),
-        name: columns.stringColumnNull({ default: () => "Cat" }),
-        booleanLike: columns.booleanIntColumn(),
-        number: columns.numberColumn(),
+        id: columns.numberAutoIncrement(),
+        name: columns.stringNull({ default: () => "Cat" }),
+        booleanLike: columns.booleanInt(),
+        number: columns.number(),
       },
     });
 

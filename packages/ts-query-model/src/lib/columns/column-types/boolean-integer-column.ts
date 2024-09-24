@@ -1,18 +1,18 @@
 import { ColumnDefinition, ColumnOptions } from "../../../types/query-model";
 
-interface BooleanLikeColumn extends ColumnDefinition {
+export interface BooleanIntColumn extends ColumnDefinition {
   toSQL: (valueFromJS: boolean) => number;
   fromSQL: (valueFromSQL: number) => boolean;
 }
 
-interface NullableBooleanLikeColumn extends ColumnDefinition {
+export interface NullableBooleanIntColumn extends ColumnDefinition {
   toSQL: (valueFromJS: boolean | null | undefined) => null | number;
   fromSQL: (valueFromSQL: number | null) => boolean | null;
 }
 
 const booleanIntColumn = (
   options?: ColumnOptions<number>
-): BooleanLikeColumn => {
+): BooleanIntColumn => {
   return {
     toSQL: (valueFromJS) => (valueFromJS ? 1 : 0),
     fromSQL: (valueFromSQL) => Boolean(valueFromSQL),
@@ -23,7 +23,7 @@ const booleanIntColumn = (
 
 const booleanIntColumnNull = (
   options?: ColumnOptions<number>
-): NullableBooleanLikeColumn => {
+): NullableBooleanIntColumn => {
   return {
     toSQL: (valueFromJS) =>
       valueFromJS === null || valueFromJS === undefined

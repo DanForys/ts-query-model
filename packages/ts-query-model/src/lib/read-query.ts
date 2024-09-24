@@ -1,5 +1,9 @@
 import { GenericConnection } from "../generic/generic-connection";
-import { GenericQueryFn, QueryColumns } from "../types/query-model";
+import {
+  DatabaseRow,
+  GenericQueryFn,
+  QueryColumns,
+} from "../types/query-model";
 
 import { QueryLogger } from "./database";
 import { Query } from "./query";
@@ -65,7 +69,9 @@ export class ReadQuery<
     }
   }
 
-  resultToObject<K extends keyof Columns>(resultRow: Record<K, unknown>) {
+  resultToObject<K extends keyof Columns>(
+    resultRow: Record<K, unknown>
+  ): DatabaseRow<Columns> {
     const mapped = Object.fromEntries(
       Object.entries(resultRow).map(([key, value]) => {
         if (value === null && !this.columns[key].nullable)
@@ -76,9 +82,7 @@ export class ReadQuery<
       })
     );
 
-    return mapped as {
-      [Property in keyof Columns]: ReturnType<Columns[Property]["fromSQL"]>;
-    };
+    return mapped as DatabaseRow<Columns>;
   }
 
   getOne = async (...args: Parameters<Query>) => {
