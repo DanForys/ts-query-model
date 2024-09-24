@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/DanForys/ts-query-model/compare/v1.1.0...v2.0.0) (2024-09-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* add insert query ([#42](https://github.com/DanForys/ts-query-model/issues/42))
+
+### Features
+
+* add insert query ([#42](https://github.com/DanForys/ts-query-model/issues/42)) ([2bc1433](https://github.com/DanForys/ts-query-model/commit/2bc1433519d3c1de1d02c26ce4fc11cc67896ed0))
+
 ## [1.1.0](https://github.com/DanForys/ts-query-model/compare/v1.0.1...v1.1.0) (2024-09-22)
 
 
