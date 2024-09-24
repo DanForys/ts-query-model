@@ -1,12 +1,12 @@
 import { GenericConnection } from "../generic/generic-connection";
-import { GenericQueryFn, QueryColumns } from "../types/query-model";
+import { DatabaseRow, QueryColumns } from "../types/query-model";
 
 import { QueryLogger } from "./database";
 import { Query } from "./query";
 
-type WriteQueryResult<Connection extends GenericConnection> = Awaited<
-  ReturnType<Connection["write"]>
->;
+type InsertDatabaseRow<Columns extends QueryColumns> = {
+  [Property in keyof Columns]: Parameters<Columns[Property]["toSQL"]>[0];
+};
 
 /**
  * QueryBuilder Class
@@ -15,46 +15,47 @@ type WriteQueryResult<Connection extends GenericConnection> = Awaited<
  * @typeParam UpdateFunc - The write-query function
  * @param <H> - Headers
  */
-export class WriteQuery<
+export class InsertQuery<
   Columns extends QueryColumns,
-  Query extends GenericQueryFn,
   Connection extends GenericConnection
 > extends Query<Connection> {
-  query: GenericQueryFn;
+  table: string;
   columns: Columns;
 
   constructor({
     name,
+    table,
     columns,
-    query,
     connection,
     logger,
   }: {
     name?: string;
+    table: string;
     columns: Columns;
-    query: Query;
     connection: Connection;
     logger: QueryLogger;
   }) {
     super({ name, connection, logger });
+    this.table = table;
     this.columns = columns;
-    this.query = query;
   }
 
-  write = async (
-    ...args: Parameters<Query>
-  ): Promise<WriteQueryResult<Connection>> => {
-    if (!this.query) throw new Error("Query must be defined");
-
-    const query = this.query(...args);
+  insert = async (items: InsertDatabaseRow<Columns>) => {
     const logData = this.startQueryLog();
 
     try {
-      const result = await this.connection.write(query);
-      this.endQueryLog(logData, args);
-      return result as WriteQueryResult<Connection>;
+      const result = await this.connection.insert(
+        this.table,
+        this.columns,
+        items
+      );
+      this.endQueryLog(logData, Object.entries(items));
+      return result as DatabaseRow<Columns>;
     } catch (e) {
-      throw this.getQueryError(e, query);
+      // FIXME
+      // throw this.getQueryError(e, query);
+      console.log(e);
+      throw e;
     }
   };
 

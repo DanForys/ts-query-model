@@ -2,7 +2,7 @@ import {
   GenericConnection,
   QueryResultRow,
 } from "../generic/generic-connection";
-import { GenericQuery } from "../types/query-model";
+import { GenericQuery, QueryColumns } from "../types/query-model";
 
 import sqlite3 from "sqlite3";
 
@@ -116,6 +116,64 @@ export class SQLiteConnection extends GenericConnection {
           changes: this.changes,
         });
       });
+    });
+  }
+
+  async insert(
+    table: string,
+    columns: QueryColumns,
+    values: Record<string, unknown>
+  ): Promise<typeof values> {
+    const connection = await this.getConnection();
+
+    return new Promise((resolve, reject) => {
+      const columnNames = Object.keys(columns);
+      const valuesToInsert = { ...values };
+
+      // Apply default values
+      columnNames.map((name) => {
+        if (
+          columns[name].options &&
+          "default" in columns[name].options &&
+          values[name] === null
+        ) {
+          const defaultValue = columns[name].options.default;
+          if (typeof defaultValue === "function") {
+            valuesToInsert[name] = defaultValue();
+          } else {
+            valuesToInsert[name] = defaultValue;
+          }
+        }
+      });
+
+      const query = `
+        INSERT INTO \`${table}\` 
+        (${columnNames.join(",")})
+        VALUES (${columnNames.map(() => "?").join(",")})
+      `;
+
+      connection.run(
+        query,
+        columnNames.map((name) => valuesToInsert[name]),
+        function (error) {
+          if (error) return reject(error);
+
+          const updatedRow = { ...valuesToInsert };
+
+          // Apply auto-increment key if applicable
+          if (this.lastID) {
+            const autoIncrementColumnName = columnNames.find(
+              (col) => columns[col].autoIncrement
+            );
+
+            if (autoIncrementColumnName) {
+              updatedRow[autoIncrementColumnName] = this.lastID;
+            }
+          }
+
+          resolve(updatedRow);
+        }
+      );
     });
   }
 }

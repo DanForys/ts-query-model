@@ -19,6 +19,49 @@ The column types perform these functions:
 - transforming data from SQL types to JavaScript types
 - providing type information for the TypeScript compiler
 
+## Default values
+
+You may define default values for nullable columns. The default
+will be used when the column value is `null`. The default can
+be a value or a function returning a value.
+
+When used with an `insert` query, the default value will be
+correctly returned in the result row.
+
+For example:
+
+```ts twoslash
+import { Database, columns } from "ts-query-model";
+import MySQLConnection from "ts-query-model/lib/mysql";
+
+const db = new Database(
+  new MySQLConnection({
+    uri: "mysql://your-database-connection-string",
+  })
+);
+// ---cut---
+const userModel = {
+  createUser: db.insert({
+    name: "create-user",
+    table: "users",
+    columns: {
+      id: columns.numberAutoIncrement(),
+      name: columns.stringNull({ default: "Anonymous" }),
+      email: columns.stringNull(),
+    },
+  }),
+};
+
+const result = await userModel.createUser({
+  id: null,
+  name: null,
+  email: null,
+});
+
+console.log(result);
+// -> { id: 1, name: "Anonymous", email: null }
+```
+
 ## Implementation
 
 A single column definition has the following interface:

@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# `enumColumn()`
+# `columns.enumColumn()`
 
 ## When to use
 
@@ -18,12 +18,12 @@ the column could be defined as:
 ```ts twoslash
 import { columns } from "ts-query-model";
 // ---cut---
-columns.enumColumn<"CHEESE" | "WINE" | "JELLY">();
+columns.enum<"CHEESE" | "WINE" | "JELLY">();
 ```
 
 ## Nullability
 
-If the column allows `null` values, use `enumColumnNull()`.
+If the column allows `null` values, use `columns.enumNull()`.
 
 ## Example
 
@@ -51,7 +51,7 @@ const db = new Database(
 const getExampleRow = db.getOne({
   name: "get-one-example-row",
   columns: {
-    pet: columns.enumColumn<"CAT" | "DOG" | "FISH">(),
+    pet: columns.enum<"CAT" | "DOG" | "FISH">(),
   },
   query: ({ id }: { id: number }) =>
     SQL`SELECT pet FROM petExample WHERE id = ${id}`,
@@ -74,7 +74,7 @@ const db = new Database(
 const getExampleRow = db.getOne({
   name: "get-one-example-row",
   columns: {
-    pet: columns.enumColumn<"CAT" | "DOG" | "FISH">(),
+    pet: columns.enum<"CAT" | "DOG" | "FISH">(),
   },
   query: ({ id }: { id: number }) =>
     SQL`SELECT pet FROM petExample WHERE id = ${id}`,

@@ -2,7 +2,7 @@ import {
   GenericConnection,
   QueryResultRow,
 } from "../generic/generic-connection";
-import { GenericQuery } from "../types/query-model";
+import { GenericQuery, QueryColumns } from "../types/query-model";
 
 import mysql, { ResultSetHeader, RowDataPacket } from "mysql2/promise";
 
@@ -62,5 +62,58 @@ export class MySQLConnection extends GenericConnection {
 
     const result = await connection.query<ResultSetHeader>(query);
     return result[0];
+  }
+
+  async insert(
+    table: string,
+    columns: QueryColumns,
+    values: Record<string, unknown>
+  ): Promise<typeof values> {
+    const connection = this.getConnection();
+    const columnNames = Object.keys(columns);
+    const valuesToInsert = { ...values };
+
+    // Apply default values
+    columnNames.map((name) => {
+      if (
+        columns[name].options &&
+        "default" in columns[name].options &&
+        values[name] === null
+      ) {
+        const defaultValue = columns[name].options.default;
+        if (typeof defaultValue === "function") {
+          valuesToInsert[name] = defaultValue();
+        } else {
+          valuesToInsert[name] = defaultValue;
+        }
+      }
+    });
+
+    // Perform query
+    const queryInsertPairs = columnNames.map((name) => {
+      return `\`${name}\` = ?`;
+    });
+
+    const query = `INSERT INTO \`${table}\` SET ${queryInsertPairs.join(",")}`;
+
+    const result = await connection.query<ResultSetHeader>(
+      query,
+      columnNames.map((name) => valuesToInsert[name])
+    );
+
+    // Apply auto-increment key if applicable
+    const updatedRow = { ...valuesToInsert };
+
+    if (result[0].insertId) {
+      const autoIncrementColumnName = columnNames.find(
+        (col) => columns[col].autoIncrement
+      );
+
+      if (autoIncrementColumnName) {
+        updatedRow[autoIncrementColumnName] = result[0].insertId;
+      }
+    }
+
+    return updatedRow;
   }
 }

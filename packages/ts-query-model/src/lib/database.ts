@@ -1,7 +1,13 @@
 import { GenericConnection } from "../generic/generic-connection";
-import { GenericQueryFn, QueryColumns } from "../types/query-model";
+import {
+  ColumnDefinition,
+  GenericQueryFn,
+  QueryColumns,
+} from "../types/query-model";
 
+import { InsertQuery } from "./insert-query";
 import { ReadQuery } from "./read-query";
+import { SingleColumnQuery } from "./single-column-query";
 import { WriteQuery } from "./write-query";
 
 interface GetQueryOptions<T extends QueryColumns, Q extends GenericQueryFn> {
@@ -20,13 +26,17 @@ interface GetQueryOptions<T extends QueryColumns, Q extends GenericQueryFn> {
 }
 
 interface GetColumnQueryOptions<
-  T extends QueryColumns,
+  T extends ColumnDefinition,
+  N extends string,
   Q extends GenericQueryFn
-> extends GetQueryOptions<T, Q> {
+> {
   /**
    * Name of the column to return
    */
-  columnName: string;
+  name?: string;
+  columnName: N;
+  columnType: T;
+  query: Q;
 }
 
 interface WriteQueryOptions<Q extends GenericQueryFn> {
@@ -38,6 +48,12 @@ interface WriteQueryOptions<Q extends GenericQueryFn> {
    * Query function
    */
   query: Q;
+}
+
+interface InsertQueryOptions<T extends QueryColumns> {
+  name?: string;
+  table: string;
+  columns: T;
 }
 
 export interface QueryModelDatabaseOptions {
@@ -111,41 +127,51 @@ export class Database<Connection extends GenericConnection> {
   /**
    * Get an array of values from a single column
    */
-  getColumn<Query extends GenericQueryFn, Columns extends QueryColumns>({
+  getColumn<
+    Column extends ColumnDefinition,
+    Query extends GenericQueryFn,
+    ColumnName extends string
+  >({
     name,
     columnName,
-    columns,
+    columnType,
     query,
-  }: GetColumnQueryOptions<Columns, Query>): ReturnType<
-    ReadQuery<Columns, Query, Connection>["getColumn"]
+  }: GetColumnQueryOptions<Column, ColumnName, Query>): ReturnType<
+    SingleColumnQuery<Column, ColumnName, Query, Connection>["getColumn"]
   > {
-    return new ReadQuery({
+    return new SingleColumnQuery({
       connection: this.connection,
       name,
-      columns,
+      columnName,
+      columnType,
       query,
       logger: this.logger,
-    }).getColumn(columnName);
+    }).getColumn();
   }
 
   /**
    * Get a single value from a single column
    */
-  getValue<Query extends GenericQueryFn, Columns extends QueryColumns>({
+  getValue<
+    Column extends ColumnDefinition,
+    Query extends GenericQueryFn,
+    ColumnName extends string
+  >({
     name,
     columnName,
-    columns,
+    columnType,
     query,
-  }: GetColumnQueryOptions<Columns, Query>): ReturnType<
-    ReadQuery<Columns, Query, Connection>["getValue"]
+  }: GetColumnQueryOptions<Column, ColumnName, Query>): ReturnType<
+    SingleColumnQuery<Column, ColumnName, Query, Connection>["getValue"]
   > {
-    return new ReadQuery({
+    return new SingleColumnQuery({
       connection: this.connection,
       name,
-      columns,
+      columnName,
+      columnType,
       query,
       logger: this.logger,
-    }).getValue(columnName);
+    }).getValue();
   }
 
   /**
@@ -166,5 +192,19 @@ export class Database<Connection extends GenericConnection> {
       query,
       logger: this.logger,
     }).write;
+  }
+
+  insert<Columns extends QueryColumns>({
+    name,
+    table,
+    columns,
+  }: InsertQueryOptions<Columns>) {
+    return new InsertQuery({
+      connection: this.connection,
+      name,
+      table,
+      columns,
+      logger: this.logger,
+    }).insert;
   }
 }

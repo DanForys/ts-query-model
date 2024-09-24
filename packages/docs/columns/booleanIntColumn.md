@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# `booleanIntColumn()`
+# `columns.booleanInt()`
 
 ## When to use
 
@@ -18,7 +18,7 @@ The database column should be of type `TINYINT(1)`
 
 ## Nullability
 
-If the column allows `null` values, use `booleanIntColumnNull()`.
+If the column allows `null` values, use `columns.booleanIntNull()`.
 
 ## Example
 
@@ -46,7 +46,7 @@ const db = new Database(
 const getExampleRow = db.getOne({
   name: "get-one-example-row",
   columns: {
-    status: columns.booleanIntColumn(),
+    status: columns.booleanInt(),
   },
   query: ({ id }: { id: number }) =>
     SQL`SELECT status FROM boolIntExample WHERE id = ${id}`,
@@ -69,7 +69,7 @@ const db = new Database(
 const getExampleRow = db.getOne({
   name: "get-one-example-row",
   columns: {
-    status: columns.booleanIntColumn(),
+    status: columns.booleanInt(),
   },
   query: ({ id }: { id: number }) =>
     SQL`SELECT status FROM boolIntExample WHERE id = ${id}`,
@@ -100,7 +100,7 @@ const db = new Database(
 const getExampleRow = db.getOne({
   name: "get-one-example-row",
   columns: {
-    status: columns.booleanIntColumn(),
+    status: columns.booleanInt(),
   },
   query: ({ id }: { id: number }) =>
     SQL`SELECT status FROM boolIntExample WHERE id = ${id}`,

@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# `dateColumn()`
+# `columns.dateColumn()`
 
 ## When to use
 
@@ -18,7 +18,7 @@ Do not use this if string values are returned.
 
 ## Nullability
 
-If the column allows `null` values, use `dateColumnNull()`.
+If the column allows `null` values, use `columns.dateNull()`.
 
 ## Example
 
@@ -46,7 +46,7 @@ const db = new Database(
 const getExampleRow = db.getOne({
   name: "get-one-example-row",
   columns: {
-    date: columns.dateColumn(),
+    date: columns.date(),
   },
   query: ({ id }: { id: number }) =>
     SQL`SELECT date FROM dateExample WHERE id = ${id}`,
@@ -69,7 +69,7 @@ const db = new Database(
 const getExampleRow = db.getOne({
   name: "get-one-example-row",
   columns: {
-    date: columns.dateColumn(),
+    date: columns.date(),
   },
   query: ({ id }: { id: number }) =>
     SQL`SELECT status FROM boolIntExample WHERE id = ${id}`,

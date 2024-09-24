@@ -1,34 +1,41 @@
-import { ColumnDefinition } from "../../../types/query-model";
+import { ColumnDefinition, ColumnOptions } from "../../../types/query-model";
 
-interface BooleanLikeColumn extends ColumnDefinition {
+export interface BooleanIntColumn extends ColumnDefinition {
   toSQL: (valueFromJS: boolean) => number;
   fromSQL: (valueFromSQL: number) => boolean;
 }
 
-interface NullableBooleanLikeColumn extends ColumnDefinition {
+export interface NullableBooleanIntColumn extends ColumnDefinition {
   toSQL: (valueFromJS: boolean | null | undefined) => null | number;
   fromSQL: (valueFromSQL: number | null) => boolean | null;
 }
 
-const _booleanColumn: BooleanLikeColumn = {
-  toSQL: (valueFromJS) => (valueFromJS ? 1 : 0),
-  fromSQL: (valueFromSQL) => Boolean(valueFromSQL),
-  nullable: false,
+const booleanIntColumn = (
+  options?: ColumnOptions<number>
+): BooleanIntColumn => {
+  return {
+    toSQL: (valueFromJS) => (valueFromJS ? 1 : 0),
+    fromSQL: (valueFromSQL) => Boolean(valueFromSQL),
+    nullable: false,
+    options,
+  };
 };
 
-const _nullableBooleanColumn: NullableBooleanLikeColumn = {
-  toSQL: (valueFromJS) =>
-    valueFromJS === null || valueFromJS === undefined
-      ? null
-      : valueFromJS
-      ? 1
-      : 0,
-  fromSQL: (valueFromSQL) =>
-    valueFromSQL === null ? null : Boolean(valueFromSQL),
-  nullable: true,
+const booleanIntColumnNull = (
+  options?: ColumnOptions<number>
+): NullableBooleanIntColumn => {
+  return {
+    toSQL: (valueFromJS) =>
+      valueFromJS === null || valueFromJS === undefined
+        ? null
+        : valueFromJS
+        ? 1
+        : 0,
+    fromSQL: (valueFromSQL) =>
+      valueFromSQL === null ? null : Boolean(valueFromSQL),
+    nullable: true,
+    options,
+  };
 };
-
-const booleanIntColumn = () => _booleanColumn;
-const booleanIntColumnNull = () => _nullableBooleanColumn;
 
 export { booleanIntColumn, booleanIntColumnNull };

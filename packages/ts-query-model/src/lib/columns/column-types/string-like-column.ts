@@ -1,31 +1,37 @@
-import { ColumnDefinition } from "../../../types/query-model";
+import { ColumnDefinition, ColumnOptions } from "../../../types/query-model";
 
-interface StringColumn extends ColumnDefinition {
+export interface StringColumn extends ColumnDefinition {
   toSQL: (valueFromJS: string) => string;
   fromSQL: (valueFromSQL: string) => string;
 }
 
-interface StringColumnNull extends ColumnDefinition {
+export interface StringColumnNull extends ColumnDefinition {
   toSQL: (valueFromJS: string | null | undefined) => string | null;
   fromSQL: (valueFromSQL: string | null) => string | null;
 }
 
-const _stringColumn: StringColumn = {
-  toSQL: (valueFromJS) => valueFromJS.toString(),
-  fromSQL: (valueFromSQL) => `${valueFromSQL}`,
-  nullable: false,
+const stringColumn = (options?: ColumnOptions<string>): StringColumn => {
+  return {
+    toSQL: (valueFromJS) => valueFromJS.toString(),
+    fromSQL: (valueFromSQL) => `${valueFromSQL}`,
+    nullable: false,
+    options,
+  };
 };
 
-const _nullableStringColumn: StringColumnNull = {
-  toSQL: (valueFromJS) =>
-    valueFromJS === null || valueFromJS === undefined
-      ? null
-      : valueFromJS.toString(),
-  fromSQL: (valueFromSQL) => (valueFromSQL === null ? null : `${valueFromSQL}`),
-  nullable: true,
+const stringColumnNull = (
+  options?: ColumnOptions<string>
+): StringColumnNull => {
+  return {
+    toSQL: (valueFromJS) =>
+      valueFromJS === null || valueFromJS === undefined
+        ? null
+        : valueFromJS.toString(),
+    fromSQL: (valueFromSQL) =>
+      valueFromSQL === null ? null : `${valueFromSQL}`,
+    nullable: true,
+    options,
+  };
 };
-
-const stringColumn = () => _stringColumn;
-const stringColumnNull = () => _nullableStringColumn;
 
 export { stringColumn, stringColumnNull };

@@ -8,11 +8,11 @@ Factory method to create a query function to return an array of values from a si
 
 ## Method signature
 
-`getColumn({ name?: string, columns: QueryColumns, columnName: string, query: GenericQueryFunction})`
+`getColumn({ name?: string, columnName: string, columnType: ColumnDefinition, query: GenericQueryFunction})`
 
 - `name` - optional name for logging
-- `columns` - columns returned from the query. See [column concepts](/columns/concepts.html)
 - `columnName` - the column to return values from
+- `columnType` - column returned from the query. See [column concepts](/columns/concepts.html)
 - `query` - function which returns the query to be executed. See [querying](/querying.html#query)
 
 ## Return value

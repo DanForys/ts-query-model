@@ -1,42 +1,52 @@
-import { ColumnDefinition } from "../../../types/query-model";
+import { ColumnDefinition, ColumnOptions } from "../../../types/query-model";
 
-interface NumberColumn extends ColumnDefinition {
+export interface NumberColumn extends ColumnDefinition {
   toSQL: (valueFromJS: number) => number;
   fromSQL: (valueFromSQL: number) => number;
 }
 
-interface NumberColumnNull extends ColumnDefinition {
+export interface NumberColumnNull extends ColumnDefinition {
   toSQL: (valueFromJS: number | null | undefined) => null | number;
   fromSQL: (valueFromSQL: null) => null | number;
 }
 
-interface NumberColumnAutoIncrement extends ColumnDefinition {
+export interface NumberColumnAutoIncrement extends ColumnDefinition {
   toSQL: (valueFromJS: number | null | undefined) => null | number;
   fromSQL: (valueFromSQL: number) => number;
 }
 
-const _numberColumn: NumberColumn = {
-  toSQL: (valueFromJS) => valueFromJS,
-  fromSQL: (valueFromSQL) => valueFromSQL,
-  nullable: false,
+const numberColumn = (options?: ColumnOptions<number>): NumberColumn => {
+  return {
+    toSQL: (valueFromJS) => valueFromJS,
+    fromSQL: (valueFromSQL) => valueFromSQL,
+    nullable: false,
+    options,
+  };
 };
 
-const _nullableNumberColumn: NumberColumnNull = {
-  toSQL: (valueFromJS) =>
-    valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
-  fromSQL: (valueFromSQL) => valueFromSQL,
-  nullable: true,
+const numberColumnNull = (
+  options?: ColumnOptions<number>
+): NumberColumnNull => {
+  return {
+    toSQL: (valueFromJS) =>
+      valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
+    fromSQL: (valueFromSQL) => valueFromSQL,
+    nullable: true,
+    options,
+  };
 };
 
-const _autoIncrementNumberColumn: NumberColumnAutoIncrement = {
-  toSQL: (valueFromJS) =>
-    valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
-  fromSQL: (valueFromSQL) => valueFromSQL,
-  nullable: true,
+const numberColumnAutoIncrement = (
+  options?: ColumnOptions<number>
+): NumberColumnAutoIncrement => {
+  return {
+    toSQL: (valueFromJS) =>
+      valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
+    fromSQL: (valueFromSQL) => valueFromSQL,
+    nullable: true,
+    autoIncrement: true,
+    options,
+  };
 };
-
-const numberColumn = () => _numberColumn;
-const numberColumnNull = () => _nullableNumberColumn;
-const numberColumnAutoIncrement = () => _autoIncrementNumberColumn;
 
 export { numberColumn, numberColumnAutoIncrement, numberColumnNull };

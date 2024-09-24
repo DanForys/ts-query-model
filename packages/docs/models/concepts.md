@@ -52,18 +52,18 @@ export const userModel = {
   getUserByName: db.getOne({
     name: "get-user-by-name",
     columns: {
-      id: columns.numberColumn(),
-      name: columns.stringColumn(),
-      email: columns.stringColumnNull(),
+      id: columns.number(),
+      name: columns.string(),
+      email: columns.stringNull(),
     },
     query: (name: string) => SQL`SELECT * FROM users WHERE name = ${name}`,
   }),
   getAllUsers: db.getMany({
     name: "get-all-users",
     columns: {
-      id: columns.numberColumn(),
-      name: columns.stringColumn(),
-      email: columns.stringColumnNull(),
+      id: columns.number(),
+      name: columns.string(),
+      email: columns.stringNull(),
     },
     query: (name: string) => SQL`SELECT * FROM users`,
   }),
@@ -93,18 +93,18 @@ export const userModel = {
   getUserByName: db.getOne({
     name: "get-user-by-name",
     columns: {
-      id: columns.numberColumn(),
-      name: columns.stringColumn(),
-      email: columns.stringColumnNull(),
+      id: columns.number(),
+      name: columns.string(),
+      email: columns.stringNull(),
     },
     query: (name: string) => SQL`SELECT * FROM users WHERE name = ${name}`,
   }),
   getAllUsers: db.getMany({
     name: "get-all-users",
     columns: {
-      id: columns.numberColumn(),
-      name: columns.stringColumn(),
-      email: columns.stringColumnNull(),
+      id: columns.number(),
+      name: columns.string(),
+      email: columns.stringNull(),
     },
     query: () => SQL`SELECT * FROM users`,
   }),

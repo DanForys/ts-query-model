@@ -1,8 +1,14 @@
 import { GenericConnection } from "../generic/generic-connection";
-import { GenericQueryFn, QueryColumns } from "../types/query-model";
+import {
+  DatabaseRow,
+  GenericQueryFn,
+  QueryColumns,
+} from "../types/query-model";
 
 import { QueryLogger } from "./database";
 import { Query } from "./query";
+
+type QueryFunctionArgs<Query extends GenericQueryFn> = Parameters<Query>;
 
 /**
  * QueryBuilder Class
@@ -15,7 +21,10 @@ export class ReadQuery<
   Columns extends QueryColumns,
   Query extends GenericQueryFn,
   Connection extends GenericConnection
-> extends Query<Columns, Query, Connection> {
+> extends Query<Connection> {
+  query: GenericQueryFn;
+  columns: Columns;
+
   constructor({
     name,
     columns,
@@ -29,7 +38,9 @@ export class ReadQuery<
     connection: Connection;
     logger: QueryLogger;
   }) {
-    super({ name, columns, query, connection, logger });
+    super({ name, connection, logger });
+    this.columns = columns;
+    this.query = query;
   }
 
   validateFields<K extends keyof Columns>(resultRow: Record<K, unknown>) {
@@ -60,7 +71,9 @@ export class ReadQuery<
     }
   }
 
-  resultToObject<K extends keyof Columns>(resultRow: Record<K, unknown>) {
+  resultToObject<K extends keyof Columns>(
+    resultRow: Record<K, unknown>
+  ): DatabaseRow<Columns> {
     const mapped = Object.fromEntries(
       Object.entries(resultRow).map(([key, value]) => {
         if (value === null && !this.columns[key].nullable)
@@ -71,9 +84,7 @@ export class ReadQuery<
       })
     );
 
-    return mapped as {
-      [Property in keyof Columns]: ReturnType<Columns[Property]["fromSQL"]>;
-    };
+    return mapped as DatabaseRow<Columns>;
   }
 
   getOne = async (...args: Parameters<Query>) => {
@@ -95,7 +106,7 @@ export class ReadQuery<
     }
   };
 
-  getMany = async (...args: Parameters<Query>) => {
+  getMany = async (...args: QueryFunctionArgs<Query>) => {
     const query = this.query(...args);
     const logData = this.startQueryLog();
 
@@ -113,47 +124,6 @@ export class ReadQuery<
     } catch (e) {
       throw this.getQueryError(e, query);
     }
-  };
-
-  getColumn = (columnName: keyof Columns) => {
-    return async (...args: Parameters<Query>) => {
-      const query = this.query(...args);
-      const logData = this.startQueryLog();
-
-      try {
-        const result = await this.connection.getMany<
-          Record<keyof Columns, unknown>
-        >(query);
-
-        if (result.length > 0) {
-          this.validateFields(result[0]);
-        }
-        this.endQueryLog(logData, args);
-        return result.map((item: any) => this.resultToObject(item)[columnName]);
-      } catch (e) {
-        throw this.getQueryError(e, query);
-      }
-    };
-  };
-
-  getValue = (columnName: keyof Columns) => {
-    return async (...args: Parameters<Query>) => {
-      const query = this.query(...args);
-      const logData = this.startQueryLog();
-
-      try {
-        const result = await this.connection.getOne<
-          Record<keyof Columns, unknown>
-        >(query);
-
-        if (!result) return null;
-        this.validateFields(result);
-        this.endQueryLog(logData, args);
-        return this.resultToObject(result)[columnName];
-      } catch (e) {
-        throw this.getQueryError(e, query);
-      }
-    };
   };
 
   // async update(row: {

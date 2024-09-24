@@ -1,9 +1,5 @@
 import { GenericConnection } from "../generic/generic-connection";
-import {
-  GenericQuery,
-  GenericQueryFn,
-  QueryOptions,
-} from "../types/query-model";
+import { GenericQuery } from "../types/query-model";
 
 import { QueryLogger } from "./database";
 
@@ -14,14 +10,8 @@ import { QueryLogger } from "./database";
  * @typeParam UpdateFunc - The write-query function
  * @param <H> - Headers
  */
-export class Query<
-  Columns extends QueryOptions["columns"],
-  Query extends GenericQueryFn,
-  Connection extends GenericConnection
-> {
+export class Query<Connection extends GenericConnection> {
   readonly name: string;
-  readonly columns: Columns;
-  readonly query: Query;
   readonly connection: Connection;
   readonly logger: QueryLogger;
 
@@ -31,20 +21,14 @@ export class Query<
    */
   constructor({
     name,
-    columns,
-    query,
     connection,
     logger,
   }: {
     name?: string;
-    columns: Columns;
-    query: Query;
     connection: Connection;
     logger: QueryLogger;
   }) {
     this.name = name ?? "anonymous";
-    this.columns = columns;
-    this.query = query;
     this.connection = connection;
     this.logger = logger;
   }

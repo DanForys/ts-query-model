@@ -33,7 +33,7 @@ export default defineConfig({
         items: [
           { text: 'Defining columns', link: '/columns/concepts' },
           { text: 'Column sets', link: '/columns/columnSets' },
-          { text: 'Column types', collapsed: true, items: [
+          { text: 'Column types', items: [
             { text: 'booleanIntColumn', link: '/columns/booleanIntColumn' },
             { text: 'dateColumn', link: '/columns/dateColumn' },
             { text: 'enumColumn', link: '/columns/enumColumn' },
@@ -47,7 +47,8 @@ export default defineConfig({
         text: 'Creating models',
         items: [
           { text: 'Model API', link: '/models/concepts' },
-          { text: 'Model factory methods', collapsed: true, items: [
+          { text: 'Model factory methods', items: [
+            { text: 'insert()', link: '/models/insert' },
             { text: 'getOne()', link: '/models/getOne' },
             { text: 'getMany()', link: '/models/getMany' },
             { text: 'getColumn()', link: '/models/getColumn' },

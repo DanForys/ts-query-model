@@ -53,10 +53,10 @@ describe("ts-query-model SQLite support", () => {
     const getRow = db.getOne({
       name: "get-row-test",
       columns: {
-        id: columns.numberColumnAutoIncrement(),
-        name: columns.stringColumn(),
-        booleanLike: columns.booleanIntColumn(),
-        number: columns.numberColumn(),
+        id: columns.numberAutoIncrement(),
+        name: columns.string(),
+        booleanLike: columns.booleanInt(),
+        number: columns.number(),
       },
       query: () => "SELECT * FROM test LIMIT 1",
     });
@@ -69,10 +69,10 @@ describe("ts-query-model SQLite support", () => {
     const getRows = db.getMany({
       name: "get-rows-test",
       columns: {
-        id: columns.numberColumnAutoIncrement(),
-        name: columns.stringColumn(),
-        booleanLike: columns.booleanIntColumn(),
-        number: columns.numberColumn(),
+        id: columns.numberAutoIncrement(),
+        name: columns.string(),
+        booleanLike: columns.booleanInt(),
+        number: columns.number(),
       },
       query: () => "SELECT * FROM test",
     });
@@ -85,9 +85,7 @@ describe("ts-query-model SQLite support", () => {
     const getColumn = db.getColumn({
       name: "get-column-test",
       columnName: "name",
-      columns: {
-        name: columns.stringColumn(),
-      },
+      columnType: columns.string(),
       query: () => "SELECT name FROM test",
     });
 
@@ -99,13 +97,79 @@ describe("ts-query-model SQLite support", () => {
     const getValue = db.getValue({
       name: "get-column-test",
       columnName: "rowCount",
-      columns: {
-        rowCount: columns.numberColumn(),
-      },
+      columnType: columns.number(),
       query: () => "SELECT COUNT(*) AS rowCount FROM test",
     });
 
     const result = await getValue();
     expect(result).toEqual(3);
+  });
+
+  it("can insert a new row into a SQLite table", async () => {
+    const insert = db.insert({
+      name: "insert-test",
+      table: "test",
+      columns: {
+        id: columns.numberAutoIncrement(),
+        name: columns.string(),
+        booleanLike: columns.booleanInt(),
+        number: columns.number(),
+      },
+    });
+
+    const result = await insert({
+      id: null,
+      name: "Mr Smoogle",
+      booleanLike: true,
+      number: 314,
+    });
+
+    expect(result.id).toBeGreaterThan(0);
+  });
+
+  it("can insert a new row with default values into a SQLite table", async () => {
+    const insert = db.insert({
+      name: "insert-test",
+      table: "test",
+      columns: {
+        id: columns.numberAutoIncrement(),
+        name: columns.stringNull({ default: "Mr Anonymous" }),
+        booleanLike: columns.booleanInt(),
+        number: columns.number(),
+      },
+    });
+
+    const result = await insert({
+      id: null,
+      name: null,
+      booleanLike: true,
+      number: 314,
+    });
+
+    expect(result.id).toBeGreaterThan(0);
+    expect(result.name).toEqual("Mr Anonymous");
+  });
+
+  it("can insert a new row with default values from a function into a SQLite table", async () => {
+    const insert = db.insert({
+      name: "insert-test",
+      table: "test",
+      columns: {
+        id: columns.numberAutoIncrement(),
+        name: columns.stringNull({ default: () => "Cat" }),
+        booleanLike: columns.booleanInt(),
+        number: columns.number(),
+      },
+    });
+
+    const result = await insert({
+      id: null,
+      name: null,
+      booleanLike: true,
+      number: 314,
+    });
+
+    expect(result.id).toBeGreaterThan(0);
+    expect(result.name).toEqual("Cat");
   });
 });

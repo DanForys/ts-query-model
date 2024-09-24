@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# `stringColumn()`
+# `columns.stringColumn()`
 
 ## When to use
 
@@ -15,7 +15,7 @@ It takes and returns `string` values only.
 
 ## Nullability
 
-If the column allows `null` values, use `stringColumnNull()`.
+If the column allows `null` values, use `stringNull()`.
 
 ## Example
 
@@ -43,7 +43,7 @@ const db = new Database(
 const getExampleRow = db.getOne({
   name: "get-one-example-row",
   columns: {
-    info: columns.stringColumn(),
+    info: columns.string(),
   },
   query: ({ id }: { id: number }) =>
     SQL`SELECT info FROM stringExample WHERE id = ${id}`,
@@ -66,7 +66,7 @@ const db = new Database(
 const getExampleRow = db.getOne({
   name: "get-one-example-row",
   columns: {
-    info: columns.stringColumn(),
+    info: columns.string(),
   },
   query: ({ id }: { id: number }) =>
     SQL`SELECT info FROM stringExample WHERE id = ${id}`,
