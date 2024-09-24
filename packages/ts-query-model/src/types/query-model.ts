@@ -43,3 +43,8 @@ export type ExtractRowType<T extends (...args: any[]) => Promise<any>> =
 export type DatabaseRow<Columns extends QueryColumns> = {
   [Property in keyof Columns]: ReturnType<Columns[Property]["fromSQL"]>;
 };
+
+export type DatabaseColumn<
+  ColumnName extends string,
+  ColumnType extends ColumnDefinition
+> = Record<ColumnName, ReturnType<ColumnType["fromSQL"]>>;

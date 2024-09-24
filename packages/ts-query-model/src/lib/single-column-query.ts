@@ -1,5 +1,9 @@
 import { GenericConnection } from "../generic/generic-connection";
-import { ColumnDefinition, GenericQueryFn } from "../types/query-model";
+import {
+  ColumnDefinition,
+  DatabaseColumn,
+  GenericQueryFn,
+} from "../types/query-model";
 
 import { QueryLogger } from "./database";
 import { Query } from "./query";
@@ -42,9 +46,7 @@ export class SingleColumnQuery<
     this.query = query;
   }
 
-  validateFields(
-    resultRow: Record<ColumnName, Parameters<ColumnType["fromSQL"]>[0]>
-  ) {
+  validateFields<K extends ColumnName>(resultRow: Record<K, unknown>) {
     const resultKeys = Object.keys(resultRow);
 
     const missingColumnDefinitions = resultKeys.filter(
@@ -66,9 +68,9 @@ export class SingleColumnQuery<
     }
   }
 
-  resultToObject(
-    resultRow: Record<ColumnName, Parameters<ColumnType["fromSQL"]>[0]>
-  ) {
+  resultToObject<K extends ColumnName>(
+    resultRow: Record<K, unknown>
+  ): DatabaseColumn<ColumnName, ColumnType> {
     const mapped = Object.fromEntries(
       Object.entries(resultRow).map(([key, value]) => {
         if (value === null && !this.columnType.nullable)
@@ -79,19 +81,17 @@ export class SingleColumnQuery<
       })
     );
 
-    return mapped;
+    return mapped as DatabaseColumn<ColumnName, ColumnType>;
   }
 
   getColumn = () => {
-    return async (
-      ...args: Parameters<Query>
-    ): Promise<ReturnType<ColumnType["fromSQL"]>[]> => {
+    return async (...args: Parameters<Query>) => {
       const query = this.query(...args);
       const logData = this.startQueryLog();
 
       try {
         const result = await this.connection.getMany<
-          Record<ColumnName, ReturnType<ColumnDefinition["fromSQL"]>>
+          Record<ColumnName, unknown>
         >(query);
 
         if (result.length > 0) {
@@ -108,15 +108,13 @@ export class SingleColumnQuery<
   };
 
   getValue = () => {
-    return async (
-      ...args: Parameters<Query>
-    ): Promise<ReturnType<ColumnType["fromSQL"]>> => {
+    return async (...args: Parameters<Query>) => {
       const query = this.query(...args);
       const logData = this.startQueryLog();
 
       try {
         const result = await this.connection.getMany<
-          Record<ColumnName, ReturnType<ColumnDefinition["fromSQL"]>>
+          Record<ColumnName, unknown>
         >(query);
 
         if (result.length > 0) {
