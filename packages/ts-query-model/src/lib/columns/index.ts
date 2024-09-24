@@ -1,40 +1,45 @@
+import { ColumnOptions } from "../../types/query-model";
+
 import {
+  BooleanIntColumn,
   booleanIntColumn,
   booleanIntColumnNull,
+  NullableBooleanIntColumn,
 } from "./column-types/boolean-integer-column";
-import { dateColumn, dateColumnNull } from "./column-types/date-column";
-import { enumColumn, enumColumnNull } from "./column-types/enum-column";
 import {
+  DateColumn,
+  dateColumn,
+  DateColumnNull,
+  dateColumnNull,
+} from "./column-types/date-column";
+import {
+  EnumColumn,
+  enumColumn,
+  EnumColumnNull,
+  enumColumnNull,
+} from "./column-types/enum-column";
+import {
+  JsonStringColumn,
   jsonStringColumn,
+  JsonStringColumnNull,
   jsonStringColumnNull,
 } from "./column-types/json-string-column";
 import {
+  NumberColumn,
   numberColumn,
+  NumberColumnAutoIncrement,
   numberColumnAutoIncrement,
+  NumberColumnNull,
   numberColumnNull,
 } from "./column-types/number-like-column";
 import {
+  StringColumn,
   stringColumn,
+  StringColumnNull,
   stringColumnNull,
 } from "./column-types/string-like-column";
 
-// export default {
-//   booleanIntColumn as booleanInt,
-//   booleanIntColumnNull as booleanIntNull,
-//   dateColumn as date,
-//   dateColumnNull as dateNull,
-//   enumColumn as enum,
-//   enumColumnNull as enumNull,
-//   jsonStringColumn as jsonString,
-//   jsonStringColumnNull as jsonStringNull,
-//   numberColumn as number,
-//   numberColumnAutoIncrement as numberAutoIncrement,
-//   numberColumnNull as numberNull,
-//   stringColumn as string,
-//   stringColumnNull as stringNull,
-// };
-
-export default {
+const columns = {
   booleanInt: booleanIntColumn,
   booleanIntNull: booleanIntColumnNull,
   date: dateColumn,
@@ -48,4 +53,22 @@ export default {
   numberNull: numberColumnNull,
   string: stringColumn,
   stringNull: stringColumnNull,
+};
+
+export {
+  BooleanIntColumn,
+  ColumnOptions,
+  columns,
+  DateColumn,
+  DateColumnNull,
+  EnumColumn,
+  EnumColumnNull,
+  JsonStringColumn,
+  JsonStringColumnNull,
+  NullableBooleanIntColumn,
+  NumberColumn,
+  NumberColumnAutoIncrement,
+  NumberColumnNull,
+  StringColumn,
+  StringColumnNull,
 };
