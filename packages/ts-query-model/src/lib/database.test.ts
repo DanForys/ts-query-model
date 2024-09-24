@@ -1,6 +1,6 @@
 import { DummySQLConnection } from "../databases/dummy";
 
-import columns from "./columns";
+import { columns } from "./columns";
 import { Database } from "./database";
 
 describe("The Database class", () => {
