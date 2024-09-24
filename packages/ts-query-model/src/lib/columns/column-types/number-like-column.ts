@@ -15,7 +15,7 @@ interface NumberColumnAutoIncrement extends ColumnDefinition {
   fromSQL: (valueFromSQL: number) => number;
 }
 
-const numberColumn = (options?: ColumnOptions): NumberColumn => {
+const numberColumn = (options?: ColumnOptions<number>): NumberColumn => {
   return {
     toSQL: (valueFromJS) => valueFromJS,
     fromSQL: (valueFromSQL) => valueFromSQL,
@@ -24,7 +24,9 @@ const numberColumn = (options?: ColumnOptions): NumberColumn => {
   };
 };
 
-const numberColumnNull = (options?: ColumnOptions): NumberColumnNull => {
+const numberColumnNull = (
+  options?: ColumnOptions<number>
+): NumberColumnNull => {
   return {
     toSQL: (valueFromJS) =>
       valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,
@@ -35,7 +37,7 @@ const numberColumnNull = (options?: ColumnOptions): NumberColumnNull => {
 };
 
 const numberColumnAutoIncrement = (
-  options?: ColumnOptions
+  options?: ColumnOptions<number>
 ): NumberColumnAutoIncrement => {
   return {
     toSQL: (valueFromJS) =>

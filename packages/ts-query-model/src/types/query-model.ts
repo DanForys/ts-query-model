@@ -23,8 +23,8 @@ export type GenericConnectionInstance = InstanceType<
   new (...a: any[]) => GenericConnection
 >;
 
-export type ColumnOptions = {
-  default?: string | number | Date | boolean | null | (() => any);
+export type ColumnOptions<DefaultType> = {
+  default?: DefaultType | (() => DefaultType);
 };
 
 export interface ColumnDefinition {
@@ -32,7 +32,7 @@ export interface ColumnDefinition {
   fromSQL: (valueFromSQL: any) => any;
   nullable: boolean;
   autoIncrement?: boolean;
-  options?: ColumnOptions;
+  options?: ColumnOptions<unknown>;
 }
 
 export type ExtractRowType<T extends (...args: any[]) => Promise<any>> =

@@ -11,7 +11,7 @@ interface EnumColumnNull<EnumShape extends string> extends ColumnDefinition {
 }
 
 const enumColumn = <EnumShape extends string>(
-  options?: ColumnOptions
+  options?: ColumnOptions<EnumShape>
 ): EnumColumn<EnumShape> => {
   return {
     toSQL: (valueFromJS: EnumShape) => valueFromJS,
@@ -22,7 +22,7 @@ const enumColumn = <EnumShape extends string>(
 };
 
 const enumColumnNull = <EnumShape extends string>(
-  options?: ColumnOptions
+  options?: ColumnOptions<EnumShape>
 ): EnumColumnNull<EnumShape> => {
   return {
     toSQL: (valueFromJS: EnumShape | null | undefined) =>

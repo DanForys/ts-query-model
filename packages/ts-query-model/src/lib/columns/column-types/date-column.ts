@@ -10,7 +10,7 @@ interface DateColumnNull extends ColumnDefinition {
   fromSQL: (valueFromSQL: Date | null) => Date | null;
 }
 
-const dateColumn = (options?: ColumnOptions): DateColumn => {
+const dateColumn = (options?: ColumnOptions<Date>): DateColumn => {
   return {
     toSQL: (valueFromJS) => valueFromJS,
     fromSQL: (valueFromSQL) => valueFromSQL,
@@ -19,7 +19,7 @@ const dateColumn = (options?: ColumnOptions): DateColumn => {
   };
 };
 
-const dateColumnNull = (options?: ColumnOptions): DateColumnNull => {
+const dateColumnNull = (options?: ColumnOptions<Date>): DateColumnNull => {
   return {
     toSQL: (valueFromJS) =>
       valueFromJS === null || valueFromJS === undefined ? null : valueFromJS,

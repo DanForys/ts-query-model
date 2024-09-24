@@ -12,7 +12,7 @@ interface JsonStringColumnNull<JSONShape extends object>
 }
 
 const jsonStringColumn = <JSONShape extends object>(
-  options?: ColumnOptions
+  options?: ColumnOptions<JSONShape>
 ): JsonStringColumn<JSONShape> => {
   return {
     toSQL: (valueFromJS: JSONShape) => JSON.stringify(valueFromJS),
@@ -23,7 +23,7 @@ const jsonStringColumn = <JSONShape extends object>(
 };
 
 const jsonStringColumnNull = <JSONShape extends object>(
-  options?: ColumnOptions
+  options?: ColumnOptions<JSONShape>
 ): JsonStringColumnNull<JSONShape> => {
   return {
     toSQL: (valueFromJS: JSONShape | null | undefined) =>

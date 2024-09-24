@@ -148,4 +148,27 @@ describe("ts-query-model", () => {
     expect(result.id).toBeGreaterThan(0);
     expect(result.name).toEqual("Mr Anonymous");
   });
+
+  it("can insert a new row with default values from a function into a MySQL table", async () => {
+    const insert = db.insert({
+      name: "insert-test",
+      table: "test",
+      columns: {
+        id: columns.numberColumnAutoIncrement(),
+        name: columns.stringColumnNull({ default: () => "Cat" }),
+        booleanLike: columns.booleanIntColumn(),
+        number: columns.numberColumn(),
+      },
+    });
+
+    const result = await insert({
+      id: null,
+      name: null,
+      booleanLike: true,
+      number: 314,
+    });
+
+    expect(result.id).toBeGreaterThan(0);
+    expect(result.name).toEqual("Cat");
+  });
 });

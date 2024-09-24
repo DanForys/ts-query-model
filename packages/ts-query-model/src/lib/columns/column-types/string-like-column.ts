@@ -10,7 +10,7 @@ interface StringColumnNull extends ColumnDefinition {
   fromSQL: (valueFromSQL: string | null) => string | null;
 }
 
-const stringColumn = (options?: ColumnOptions): StringColumn => {
+const stringColumn = (options?: ColumnOptions<string>): StringColumn => {
   return {
     toSQL: (valueFromJS) => valueFromJS.toString(),
     fromSQL: (valueFromSQL) => `${valueFromSQL}`,
@@ -19,7 +19,9 @@ const stringColumn = (options?: ColumnOptions): StringColumn => {
   };
 };
 
-const stringColumnNull = (options?: ColumnOptions): StringColumnNull => {
+const stringColumnNull = (
+  options?: ColumnOptions<string>
+): StringColumnNull => {
   return {
     toSQL: (valueFromJS) =>
       valueFromJS === null || valueFromJS === undefined
