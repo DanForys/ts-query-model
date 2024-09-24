@@ -26,9 +26,9 @@ import { buildColumnSet, columns } from "ts-query-model";
 
 // define the columns we need. We'll use these across multiple queries
 const columnSet = buildColumnSet({
-  id: columns.numberColumn(),
-  name: columns.stringColumn(),
-  email: columns.stringColumn(),
+  id: columns.number(),
+  name: columns.string(),
+  email: columns.string(),
 });
 ```
 
@@ -39,9 +39,9 @@ for use in a query. It'll return the column for each name argument:
 import { buildColumnSet, columns } from "ts-query-model";
 
 const columnSet = buildColumnSet({
-  id: columns.numberColumn(),
-  name: columns.stringColumn(),
-  email: columns.stringColumn(),
+  id: columns.number(),
+  name: columns.string(),
+  email: columns.string(),
 });
 // ---cut---
 const exampleCols = columnSet.get("id", "email");
@@ -55,9 +55,9 @@ Use `columnSet.getAll()` to use all the defined columns:
 import { buildColumnSet, columns } from "ts-query-model";
 
 const columnSet = buildColumnSet({
-  id: columns.numberColumn(),
-  name: columns.stringColumn(),
-  email: columns.stringColumn(),
+  id: columns.number(),
+  name: columns.string(),
+  email: columns.string(),
 });
 // ---cut---
 const exampleCols = columnSet.getAll();
@@ -82,9 +82,9 @@ const db = new Database(
 );
 
 const columnSet = buildColumnSet({
-  id: columns.numberColumn(),
-  name: columns.stringColumn(),
-  email: columns.stringColumn(),
+  id: columns.number(),
+  name: columns.string(),
+  email: columns.string(),
 });
 // ---cut---
 const myAwesomeModel = {

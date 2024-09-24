@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# `numberColumn()`
+# `columns.numberColumn()`
 
 ## When to use
 
@@ -15,9 +15,9 @@ It expects the underlying database driver to return a `number` for the column da
 
 ## Nullability
 
-If the column allows `null` values, use `numberColumnNull()`.
+If the column allows `null` values, use `numberNull()`.
 
-If the column is an auto-increment primary key, use `numberColumnAutoIncrement()`. This allows
+If the column is an auto-increment primary key, use `numberAutoIncrement()`. This allows
 `null` as an input, but will not be `null` on output.
 
 ## Example
@@ -46,7 +46,7 @@ const db = new Database(
 const getExampleRow = db.getOne({
   name: "get-one-example-row",
   columns: {
-    number: columns.numberColumn(),
+    number: columns.number(),
   },
   query: ({ id }: { id: number }) =>
     SQL`SELECT number FROM numberExample WHERE id = ${id}`,
@@ -69,7 +69,7 @@ const db = new Database(
 const getExampleRow = db.getOne({
   name: "get-one-example-row",
   columns: {
-    number: columns.numberColumn(),
+    number: columns.number(),
   },
   query: ({ id }: { id: number }) =>
     SQL`SELECT number FROM numberExample WHERE id = ${id}`,

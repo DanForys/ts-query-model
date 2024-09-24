@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# `jsonStringColumn()`
+# `columns.jsonStringColumn()`
 
 ## When to use
 
@@ -25,12 +25,12 @@ type MyStoredObject = {
   canFly: boolean;
 };
 
-columns.jsonStringColumn<MyStoredObject>();
+columns.jsonString<MyStoredObject>();
 ```
 
 ## Nullability
 
-If the column allows `null` values, use `jsonStringColumnNull()`.
+If the column allows `null` values, use `columns.jsonStringNull()`.
 
 ## Example
 
@@ -63,7 +63,7 @@ type MyStoredObject = {
 const getExampleRow = db.getOne({
   name: "get-one-example-row",
   columns: {
-    attributes: columns.jsonStringColumn<MyStoredObject>(),
+    attributes: columns.jsonString<MyStoredObject>(),
   },
   query: ({ id }: { id: number }) =>
     SQL`SELECT pet FROM animalExample WHERE id = ${id}`,
@@ -91,7 +91,7 @@ type MyStoredObject = {
 const getExampleRow = db.getOne({
   name: "get-one-example-row",
   columns: {
-    attributes: columns.jsonStringColumn<MyStoredObject>(),
+    attributes: columns.jsonString<MyStoredObject>(),
   },
   query: ({ id }: { id: number }) =>
     SQL`SELECT attributes FROM animalExample WHERE id = ${id}`,

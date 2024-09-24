@@ -46,10 +46,10 @@ const db = new Database(
 const getUsers = db.getMany({
   name: "get-all-users",
   columns: {
-    id: columns.numberColumnAutoIncrement(),
-    name: columns.stringColumn(),
-    dateCreated: columns.dateColumn(),
-    isBanned: columns.booleanIntColumn(),
+    id: columns.numberAutoIncrement(),
+    name: columns.string(),
+    dateCreated: columns.date(),
+    isBanned: columns.booleanInt(),
   },
   query: ({ limit }: { limit: number }) =>
     SQL`SELECT id, name, dateCreated, isBanned FROM users LIMIT ${limit}`,
@@ -75,10 +75,10 @@ const db = new Database(
 const getUsers = db.getMany({
   name: "get-all-users",
   columns: {
-    id: columns.numberColumnAutoIncrement(),
-    name: columns.stringColumn(),
-    dateCreated: columns.dateColumn(),
-    isBanned: columns.booleanIntColumn(),
+    id: columns.numberAutoIncrement(),
+    name: columns.string(),
+    dateCreated: columns.date(),
+    isBanned: columns.booleanInt(),
   },
   query: ({ limit }: { limit: number }) =>
     SQL`SELECT id, name, dateCreated, isBanned FROM users LIMIT ${limit}`,

@@ -62,12 +62,12 @@ const myAwesomeModel = {
   getUsers: db.getMany({
     name: "get-all-users",
     columns: {
-      id: columns.numberColumnAutoIncrement(),
-      name: columns.stringColumn(),
-      dateCreated: columns.dateColumn(),
-      isAwesome: columns.booleanIntColumn(),
+      id: columns.numberAutoIncrement(),
+      name: columns.string(),
+      dateCreated: columns.date(),
+      isAwesome: columns.booleanInt(),
     },
-    query: ({ limit }: { limit: number }) =>
+    query: (limit: number) =>
       SQL`SELECT id, name, dateCreated, isAwesome FROM users LIMIT ${limit}`,
   }),
 };
@@ -90,15 +90,15 @@ const myAwesomeModel = {
   getUsers: db.getMany({
     name: "get-all-users",
     columns: {
-      id: columns.numberColumnAutoIncrement(),
-      name: columns.stringColumn(),
-      dateCreated: columns.dateColumn(),
-      isAwesome: columns.booleanIntColumn(),
+      id: columns.numberAutoIncrement(),
+      name: columns.string(),
+      dateCreated: columns.date(),
+      isAwesome: columns.booleanInt(),
     },
-    query: ({ limit }: { limit: number }) =>
+    query: (limit: number) =>
       SQL`SELECT id, name, dateCreated, isAwesome FROM users LIMIT ${limit}`,
   }),
 };
 // ---cut---
-const awesomeUsers = await myAwesomeModel.getUsers({ limit: 10 });
+const awesomeUsers = await myAwesomeModel.getUsers(10);
 ```

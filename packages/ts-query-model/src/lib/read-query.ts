@@ -8,6 +8,8 @@ import {
 import { QueryLogger } from "./database";
 import { Query } from "./query";
 
+type QueryFunctionArgs<Query extends GenericQueryFn> = Parameters<Query>;
+
 /**
  * QueryBuilder Class
  * @typeParam T extends QueryModelColumnsDefinition - The column definitions passed to the constructor
@@ -104,7 +106,7 @@ export class ReadQuery<
     }
   };
 
-  getMany = async (...args: Parameters<Query>) => {
+  getMany = async (...args: QueryFunctionArgs<Query>) => {
     const query = this.query(...args);
     const logData = this.startQueryLog();
 

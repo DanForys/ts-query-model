@@ -35,10 +35,10 @@ For example:
 
 ```ts
 columns: {
-  id: columns.numberColumnAutoIncrement(),
-  name: columns.stringColumn(),
-  dateCreated: columns.dateColumn(),
-  isBanned: columns.booleanIntColumn(),
+  id: columns.numberAutoIncrement(),
+  name: columns.string(),
+  dateCreated: columns.date(),
+  isBanned: columns.booleanInt(),
 }
 ```
 
