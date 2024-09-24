@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/DanForys/ts-query-model/compare/v2.0.0...v2.0.1) (2024-09-24)
+
+
+### Bug Fixes
+
+* column type aliases not exported correctly ([#44](https://github.com/DanForys/ts-query-model/issues/44)) ([80e87af](https://github.com/DanForys/ts-query-model/commit/80e87af66bdbf2e604aff20b3a65b05251486f15))
+
 ## [2.0.0](https://github.com/DanForys/ts-query-model/compare/v1.1.0...v2.0.0) (2024-09-24)
 
 
