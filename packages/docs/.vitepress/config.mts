@@ -34,12 +34,12 @@ export default defineConfig({
           { text: 'Defining columns', link: '/columns/concepts' },
           { text: 'Column sets', link: '/columns/columnSets' },
           { text: 'Column types', items: [
-            { text: 'booleanIntColumn', link: '/columns/booleanIntColumn' },
-            { text: 'dateColumn', link: '/columns/dateColumn' },
-            { text: 'enumColumn', link: '/columns/enumColumn' },
-            { text: 'jsonStringColumn', link: '/columns/jsonStringColumn' },
-            { text: 'numberColumn', link: '/columns/numberColumn' },
-            { text: 'stringColumn', link: '/columns/stringColumn' },
+            { text: 'booleanInt', link: '/columns/booleanIntColumn' },
+            { text: 'date', link: '/columns/dateColumn' },
+            { text: 'enum', link: '/columns/enumColumn' },
+            { text: 'jsonString', link: '/columns/jsonStringColumn' },
+            { text: 'number', link: '/columns/numberColumn' },
+            { text: 'string', link: '/columns/stringColumn' },
           ]}
         ]
       },

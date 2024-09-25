@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# `columns.jsonStringColumn()`
+# `columns.jsonString()`
 
 ## When to use
 

@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# `columns.dateColumn()`
+# `columns.date()`
 
 ## When to use
 

@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# `columns.enumColumn()`
+# `columns.enum()`
 
 ## When to use
 
