@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# `columns.stringColumn()`
+# `columns.string()`
 
 ## When to use
 

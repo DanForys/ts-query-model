@@ -1,6 +1,6 @@
 {
   "name": "ts-query-model",
-  "description": "Simple TS wrapper for database queries with some convenience features. Works with MySQL and SQLite.",
+  "description": "Simple TS wrapper for database queries with some convenience features. Works with MySQL, PostgreSQL and SQLite.",
   "homepage": "https://ts-query-model.forys.uk/",
   "repository": {
     "type": "git",
@@ -11,6 +11,7 @@
     "mysql",
     "sqlite",
     "postgres",
+    "pg",
     "sql",
     "database"
   ],
