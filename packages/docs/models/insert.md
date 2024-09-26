@@ -34,8 +34,9 @@ To insert a new user into an existing `users` table:
 | `1`                    | `"Kryten"`  | `"2024-01-10 13:00:00"` |
 
 ```ts twoslash
+// @noErrors
 import { columns, Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
+import MySQLConnection from "ts-query-model/mysql";
 import SQL from "sql-template-strings";
 
 const db = new Database(

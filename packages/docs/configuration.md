@@ -13,7 +13,7 @@ For the full list of connection options, see the [node-mysql documentation](http
 
 ```ts
 import { Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
+import MySQLConnection from "ts-query-model/mysql";
 
 const db = new Database(
   new MySQLConnection({
@@ -32,7 +32,7 @@ For the full list of connection options, see the [pg documentation](https://node
 
 ```ts
 import { Database, PostgreSQLConnection } from "ts-query-model";
-import PostgreSQLConnection from "ts-query-model/lib/postgres";
+import PostgreSQLConnection from "ts-query-model/postgres";
 
 const db = new Database(
   new PostgreSQLConnection({
@@ -53,7 +53,7 @@ export { db };
 
 ```ts
 import { Database, SQLiteConnection } from "ts-query-model";
-import SQLiteConnection from "ts-query-model/lib/sqlite";
+import SQLiteConnection from "ts-query-model/sqlite";
 
 const db = new Database(new SQLiteConnection("database-filename"));
 
@@ -86,7 +86,7 @@ To disable logging, set `loggingEnabled: false` in the `Database` constructor op
 
 ```ts
 import { Database } from "ts-query-model";
-import SQLiteConnection from "ts-query-model/lib/sqlite";
+import SQLiteConnection from "ts-query-model/sqlite";
 
 const db = new Database(new SQLiteConnection("database-filename"), {
   loggingEnabled: false,

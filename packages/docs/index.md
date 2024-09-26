@@ -34,8 +34,9 @@ features:
 ### 1. Connect to your database
 
 ```ts twoslash
+// @noErrors
 import { Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
+import MySQLConnection from "ts-query-model/mysql";
 
 const db = new Database(
   new MySQLConnection({
@@ -47,16 +48,8 @@ const db = new Database(
 ### 2. Build your model
 
 ```ts twoslash
-import { columns, Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
-import SQL from "sql-template-strings";
-
-const db = new Database(
-  new MySQLConnection({
-    uri: "mysql://your-database-connection-string",
-  })
-);
-
+// @noErrors
+import { db, SQL, columns } from "./snippets/mysql-db";
 // ---cut---
 const myAwesomeModel = {
   getUsers: db.getMany({
@@ -76,15 +69,8 @@ const myAwesomeModel = {
 ### 3. Easy, correctly typed queries
 
 ```ts twoslash
-import { columns, Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
-import SQL from "sql-template-strings";
-
-const db = new Database(
-  new MySQLConnection({
-    uri: "mysql://your-database-connection-string",
-  })
-);
+// @noErrors
+import { db, SQL, columns } from "./snippets/mysql-db";
 
 const myAwesomeModel = {
   getUsers: db.getMany({

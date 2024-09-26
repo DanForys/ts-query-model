@@ -32,16 +32,7 @@ When the query is executed, the returned result from the query function is passe
 to the database engine.
 
 ```ts twoslash
-import { columns, Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
-import SQL from "sql-template-strings";
-
-const db = new Database(
-  new MySQLConnection({
-    uri: "mysql://your-database-connection-string",
-  })
-);
-
+import { db, SQL, columns } from "./snippets/mysql-db";
 // ---cut---
 const getUsers = db.getMany({
   name: "get-all-users",
@@ -62,15 +53,9 @@ Using the configuration above, this will execute the query and return
 a correctly typed result object from the `columns` configuration:
 
 ```ts twoslash
-import { columns, Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
-import SQL from "sql-template-strings";
-
-const db = new Database(
-  new MySQLConnection({
-    uri: "mysql://your-database-connection-string",
-  })
-);
+// @noErrors
+// ^ allow top-level await
+import { db, SQL, columns } from "./snippets/mysql-db";
 
 const getUsers = db.getMany({
   name: "get-all-users",

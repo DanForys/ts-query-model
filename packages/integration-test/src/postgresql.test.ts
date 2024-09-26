@@ -1,6 +1,6 @@
 import SQL from "sql-template-strings";
 import { columns, Database } from "ts-query-model";
-import PostgreSQLConnection from "ts-query-model/lib/postgres";
+import PostgreSQLConnection from "ts-query-model/postgres";
 
 describe("ts-query-model PostgreSQL support", () => {
   let db: Database<PostgreSQLConnection>;

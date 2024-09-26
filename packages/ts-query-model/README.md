@@ -51,7 +51,7 @@ npm install sql-template-strings
 
 ```typescript
 import { columns, Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
+import MySQLConnection from "ts-query-model/mysql";
 import SQL from "sql-template-strings";
 
 // Step 1: define your database connection
@@ -67,10 +67,10 @@ const getUsers = db.getMany({
   name: "get-all-users", // optional query name for logging
   columns: {
     // define the columns to be returned
-    id: columns.numberColumnAutoIncrement(),
-    name: columns.stringColumn(),
-    dateCreated: columns.dateColumn(),
-    isBanned: columns.booleanIntColumn(),
+    id: columns.numberAutoIncrement(),
+    name: columns.string(),
+    dateCreated: columns.date(),
+    isBanned: columns.booleanInt(),
   },
   query: ({ limit }: { limit: number }) =>
     // function to return the SQL to be executed

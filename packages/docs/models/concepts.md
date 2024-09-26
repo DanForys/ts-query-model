@@ -9,7 +9,7 @@ get an instance configured for your database:
 
 ```ts twoslash
 import { Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
+import MySQLConnection from "ts-query-model/mysql";
 
 const db = new Database(
   new MySQLConnection({
@@ -36,14 +36,8 @@ For example, to create a model with some simple queries and an update
 function for a `users` table:
 
 ```ts twoslash
-import { Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
-
-const db = new Database(
-  new MySQLConnection({
-    uri: "mysql://your-database-connection-string",
-  })
-);
+// @noErrors
+import { db, SQL, columns } from "./snippets/mysql-db";
 // ---cut---
 import { columns } from "ts-query-model";
 import SQL from "sql-template-strings";
@@ -78,8 +72,9 @@ export const userModel = {
 The model methods can then be used as follows:
 
 ```ts twoslash
+// @noErrors
 import { Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
+import MySQLConnection from "ts-query-model/mysql";
 
 const db = new Database(
   new MySQLConnection({

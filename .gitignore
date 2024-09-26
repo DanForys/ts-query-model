@@ -2,3 +2,4 @@ node_modules
 packages/ts-query-model/lib
 packages/docs/.vitepress/cache
 packages/docs/.vitepress/dist
+packages/ts-query-model/dist

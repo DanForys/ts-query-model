@@ -37,15 +37,8 @@ Given the following database table `petExample`:
 And the following model:
 
 ```ts twoslash
-import { columns, Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
-import SQL from "sql-template-strings";
-
-const db = new Database(
-  new MySQLConnection({
-    uri: "mysql://your-database-connection-string",
-  })
-);
+// @noErrors
+import { db, SQL, columns } from "./snippets/mysql-db";
 
 // ---cut---
 const getExampleRow = db.getOne({
@@ -61,15 +54,8 @@ const getExampleRow = db.getOne({
 A query for row id `1` yields:
 
 ```ts twoslash
-import { columns, Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
-import SQL from "sql-template-strings";
-
-const db = new Database(
-  new MySQLConnection({
-    uri: "mysql://your-database-connection-string",
-  })
-);
+// @noErrors
+import { db, SQL, columns } from "./snippets/mysql-db";
 
 const getExampleRow = db.getOne({
   name: "get-one-example-row",

@@ -1,6 +1,6 @@
 import SQL from "sql-template-strings";
 import { columns, Database } from "ts-query-model";
-import SQLiteConnection from "ts-query-model/lib/sqlite";
+import SQLiteConnection from "ts-query-model/sqlite";
 
 describe("ts-query-model SQLite support", () => {
   let db: Database<SQLiteConnection>;
