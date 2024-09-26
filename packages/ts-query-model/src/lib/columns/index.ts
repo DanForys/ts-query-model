@@ -1,29 +1,29 @@
-import { ColumnOptions } from "../../types/query-model.js";
+import { ColumnOptions } from "../../types/query-model";
 
 import {
   BooleanIntColumn,
   booleanIntColumn,
   booleanIntColumnNull,
   NullableBooleanIntColumn,
-} from "./column-types/boolean-integer-column.js";
+} from "./column-types/boolean-integer-column";
 import {
   DateColumn,
   dateColumn,
   DateColumnNull,
   dateColumnNull,
-} from "./column-types/date-column.js";
+} from "./column-types/date-column";
 import {
   EnumColumn,
   enumColumn,
   EnumColumnNull,
   enumColumnNull,
-} from "./column-types/enum-column.js";
+} from "./column-types/enum-column";
 import {
   JsonStringColumn,
   jsonStringColumn,
   JsonStringColumnNull,
   jsonStringColumnNull,
-} from "./column-types/json-string-column.js";
+} from "./column-types/json-string-column";
 import {
   NumberColumn,
   numberColumn,
@@ -31,13 +31,13 @@ import {
   numberColumnAutoIncrement,
   NumberColumnNull,
   numberColumnNull,
-} from "./column-types/number-like-column.js";
+} from "./column-types/number-like-column";
 import {
   StringColumn,
   stringColumn,
   StringColumnNull,
   stringColumnNull,
-} from "./column-types/string-like-column.js";
+} from "./column-types/string-like-column";
 
 const columns = {
   booleanInt: booleanIntColumn,

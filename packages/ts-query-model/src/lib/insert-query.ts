@@ -1,8 +1,8 @@
-import { GenericConnection } from "../generic/generic-connection.js";
-import { DatabaseRow, QueryColumns } from "../types/query-model.js";
+import { GenericConnection } from "../generic/generic-connection";
+import { DatabaseRow, QueryColumns } from "../types/query-model";
 
-import { QueryLogger } from "./database.js";
-import { Query } from "./query.js";
+import { QueryLogger } from "./database";
+import { Query } from "./query";
 
 type InsertDatabaseRow<Columns extends QueryColumns> = {
   [Property in keyof Columns]: Parameters<Columns[Property]["toSQL"]>[0];

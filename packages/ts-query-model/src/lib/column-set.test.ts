@@ -1,5 +1,5 @@
-import { columns } from "./columns/index.js";
-import { buildColumnSet } from "./column-set.js";
+import { columns } from "./columns/index";
+import { buildColumnSet } from "./column-set";
 
 describe("buildColumnSet", () => {
   it("returns a column getter function", () => {
