@@ -1,4 +1,4 @@
-import { ColumnDefinition, ColumnOptions } from "../../../types/query-model";
+import { ColumnDefinition, ColumnOptions } from "../../../types/query-model.js";
 
 export interface JsonStringColumn<JSONShape extends object>
   extends ColumnDefinition {

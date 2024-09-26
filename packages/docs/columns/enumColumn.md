@@ -37,7 +37,6 @@ Given the following database table `petExample`:
 And the following model:
 
 ```ts twoslash
-// @noErrors
 import { db, SQL, columns } from "./snippets/mysql-db";
 
 // ---cut---
@@ -54,7 +53,6 @@ const getExampleRow = db.getOne({
 A query for row id `1` yields:
 
 ```ts twoslash
-// @noErrors
 import { db, SQL, columns } from "./snippets/mysql-db";
 
 const getExampleRow = db.getOne({

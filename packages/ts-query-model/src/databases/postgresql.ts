@@ -1,8 +1,8 @@
 import {
   GenericConnection,
   QueryResultRow,
-} from "../generic/generic-connection";
-import { GenericQuery, QueryColumns } from "../types/query-model";
+} from "../generic/generic-connection.js";
+import { GenericQuery, QueryColumns } from "../types/query-model.js";
 
 import pg from "pg";
 const { Pool } = pg;

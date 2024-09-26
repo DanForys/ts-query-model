@@ -1,7 +1,7 @@
-import { GenericConnection } from "../generic/generic-connection";
-import { GenericQuery } from "../types/query-model";
+import { GenericConnection } from "../generic/generic-connection.js";
+import { GenericQuery } from "../types/query-model.js";
 
-import { QueryLogger } from "./database";
+import { QueryLogger } from "./database.js";
 
 /**
  * QueryBuilder Class

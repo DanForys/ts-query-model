@@ -53,8 +53,6 @@ Using the configuration above, this will execute the query and return
 a correctly typed result object from the `columns` configuration:
 
 ```ts twoslash
-// @noErrors
-// ^ allow top-level await
 import { db, SQL, columns } from "./snippets/mysql-db";
 
 const getUsers = db.getMany({

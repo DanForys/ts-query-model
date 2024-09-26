@@ -1,4 +1,4 @@
-import { QueryColumns } from "../types/query-model";
+import { QueryColumns } from "../types/query-model.js";
 
 export interface QueryResultRow {
   [column: string]: any;

@@ -1,4 +1,4 @@
-import { GenericConnection } from "../generic/generic-connection";
+import { GenericConnection } from "../generic/generic-connection.js";
 
 export class DummySQLConnection extends GenericConnection {
   constructor() {

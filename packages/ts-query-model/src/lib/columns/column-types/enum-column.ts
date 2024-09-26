@@ -1,4 +1,4 @@
-import { ColumnDefinition, ColumnOptions } from "../../../types/query-model";
+import { ColumnDefinition, ColumnOptions } from "../../../types/query-model.js";
 
 export interface EnumColumn<EnumShape extends string> extends ColumnDefinition {
   toSQL: (valueFromJS: EnumShape) => EnumShape;

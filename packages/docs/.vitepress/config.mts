@@ -11,9 +11,7 @@ export default defineConfig({
       transformerTwoslash({
         twoslashOptions: {
           compilerOptions: {
-            module: 199, // nodenext
-            moduleResolution: 99, // nodenext
-            esModuleInterop: true,
+            moduleResolution: 100, // bundler
           }
         }
       }) 

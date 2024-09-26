@@ -31,7 +31,6 @@ correctly returned in the result row.
 For example:
 
 ```ts twoslash
-// @noErrors
 import { db, SQL, columns } from "./snippets/mysql-db";
 // ---cut---
 const userModel = {

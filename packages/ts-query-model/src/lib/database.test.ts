@@ -1,7 +1,7 @@
-import { DummySQLConnection } from "../databases/dummy";
+import { DummySQLConnection } from "../databases/dummy.js";
 
-import { columns } from "./columns";
-import { Database } from "./database";
+import { columns } from "./columns/index.js";
+import { Database } from "./database.js";
 
 describe("The Database class", () => {
   it("can be instantiated", () => {
