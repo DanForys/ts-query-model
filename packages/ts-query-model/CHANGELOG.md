@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.3](https://github.com/DanForys/ts-query-model/compare/v2.0.2...v2.0.3) (2024-09-26)
+
+
+### Bug Fixes
+
+* db drivers to top-level exports. Update docs. ([#48](https://github.com/DanForys/ts-query-model/issues/48)) ([3055d75](https://github.com/DanForys/ts-query-model/commit/3055d7596bcea108ae3609f8fe1d6d9fb261cde4))
+* simplify package.json exports ([#50](https://github.com/DanForys/ts-query-model/issues/50)) ([89d64db](https://github.com/DanForys/ts-query-model/commit/89d64db2f967435ba139726e3de98a6fb4fcf00d))
+
 ## [2.0.2](https://github.com/DanForys/ts-query-model/compare/v2.0.1...v2.0.2) (2024-09-25)
 
 
