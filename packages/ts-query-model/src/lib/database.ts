@@ -1,14 +1,14 @@
-import { GenericConnection } from "../generic/generic-connection.js";
+import { GenericConnection } from "../generic/generic-connection";
 import {
   ColumnDefinition,
   GenericQueryFn,
   QueryColumns,
-} from "../types/query-model.js";
+} from "../types/query-model";
 
-import { InsertQuery } from "./insert-query.js";
-import { ReadQuery } from "./read-query.js";
-import { SingleColumnQuery } from "./single-column-query.js";
-import { WriteQuery } from "./write-query.js";
+import { InsertQuery } from "./insert-query";
+import { ReadQuery } from "./read-query";
+import { SingleColumnQuery } from "./single-column-query";
+import { WriteQuery } from "./write-query";
 
 interface GetQueryOptions<T extends QueryColumns, Q extends GenericQueryFn> {
   /**
