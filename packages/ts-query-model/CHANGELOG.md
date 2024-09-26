@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/DanForys/ts-query-model/compare/v2.0.3...v2.0.4) (2024-09-26)
+
+
+### Bug Fixes
+
+* revert to commonjs for compatibility ([#51](https://github.com/DanForys/ts-query-model/issues/51)) ([3c17764](https://github.com/DanForys/ts-query-model/commit/3c177640160a4a759d5b3929fe7e668c15e2e279))
+
 ## [2.0.3](https://github.com/DanForys/ts-query-model/compare/v2.0.2...v2.0.3) (2024-09-26)
 
 
