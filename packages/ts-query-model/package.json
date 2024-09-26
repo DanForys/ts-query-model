@@ -24,22 +24,10 @@
   },
   "main": "dist/index.js",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
-    "./mysql": {
-      "types": "./dist/mysql.d.ts",
-      "default":"./dist/mysql.js"
-    },
-    "./postgres": {
-      "types": "./dist/postgres.d.ts",
-      "default": "./dist/postgres.js"
-    },
-    "./sqlite": {
-      "types": "./dist/sqlite.d.ts",
-      "default":"./dist/sqlite.js"
-    }
+    ".": "./dist/index.js",
+    "./mysql": "./dist/mysql.js",
+    "./postgres": "./dist/postgres.js",
+    "./sqlite": "./dist/sqlite.js"
   },
   "scripts": {
     "build": "tsc",
