@@ -1,4 +1,4 @@
-import { QueryColumns } from "../types/query-model";
+import { QueryColumns } from "../types/query-model.js";
 
 /**
  * buildColumnSet

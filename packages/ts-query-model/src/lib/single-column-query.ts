@@ -1,12 +1,12 @@
-import { GenericConnection } from "../generic/generic-connection";
+import { GenericConnection } from "../generic/generic-connection.js";
 import {
   ColumnDefinition,
   DatabaseColumn,
   GenericQueryFn,
-} from "../types/query-model";
+} from "../types/query-model.js";
 
-import { QueryLogger } from "./database";
-import { Query } from "./query";
+import { QueryLogger } from "./database.js";
+import { Query } from "./query.js";
 
 /**
  * QueryBuilder Class

@@ -1,1 +1,1 @@
-export { PostgreSQLConnection as default } from "./databases/postgresql";
+export { PostgreSQLConnection as default } from "./databases/postgresql.js";

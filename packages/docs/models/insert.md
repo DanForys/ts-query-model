@@ -35,7 +35,7 @@ To insert a new user into an existing `users` table:
 
 ```ts twoslash
 import { columns, Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
+import MySQLConnection from "ts-query-model/mysql";
 import SQL from "sql-template-strings";
 
 const db = new Database(

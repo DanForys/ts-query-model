@@ -4,7 +4,7 @@
     "noUnusedLocals": true,
     "removeComments": false,
     "declaration": true,
-    "outDir": "lib",
+    "outDir": "dist",
     "lib": ["ES2020", "DOM"]
   },
   "include": [

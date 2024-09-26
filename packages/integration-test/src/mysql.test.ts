@@ -1,6 +1,6 @@
 import SQL from "sql-template-strings";
 import { buildColumnSet, columns, Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
+import MySQLConnection from "ts-query-model/mysql";
 
 describe("ts-query-model", () => {
   let db: Database<MySQLConnection>;

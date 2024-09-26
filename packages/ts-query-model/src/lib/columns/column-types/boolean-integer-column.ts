@@ -1,4 +1,4 @@
-import { ColumnDefinition, ColumnOptions } from "../../../types/query-model";
+import { ColumnDefinition, ColumnOptions } from "../../../types/query-model.js";
 
 export interface BooleanIntColumn extends ColumnDefinition {
   toSQL: (valueFromJS: boolean) => number;

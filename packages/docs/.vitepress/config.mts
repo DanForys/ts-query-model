@@ -7,7 +7,14 @@ export default defineConfig({
   description: "API documentation for the ts-query-model NPM module",
   markdown: {
     codeTransformers: [
-      transformerTwoslash() 
+      // Required to get twoslash to correctly resolve the exports from ts-query-model :/
+      transformerTwoslash({
+        twoslashOptions: {
+          compilerOptions: {
+            moduleResolution: 100, // bundler
+          }
+        }
+      }) 
     ]
   },
   themeConfig: {

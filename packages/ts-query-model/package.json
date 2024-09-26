@@ -6,6 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/DanForys/ts-query-model.git"
   },
+  "type": "module",
   "keywords": [
     "typescript",
     "mysql",
@@ -16,12 +17,30 @@
     "database"
   ],
   "license": "MIT",
-  "version": "2.0.2",
+  "version": "2.0.3-0",
   "private": false,
   "engines": {
     "node": ">=14.0.0"
   },
-  "main": "lib/index.js",
+  "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./mysql": {
+      "types": "./dist/mysql.d.ts",
+      "default":"./dist/mysql.js"
+    },
+    "./postgres": {
+      "types": "./dist/postgres.d.ts",
+      "default": "./dist/postgres.js"
+    },
+    "./sqlite": {
+      "types": "./dist/sqlite.d.ts",
+      "default":"./dist/sqlite.js"
+    }
+  },
   "scripts": {
     "build": "tsc",
     "lint": "eslint ./src",

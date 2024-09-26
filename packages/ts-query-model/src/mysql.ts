@@ -1,1 +1,1 @@
-export { MySQLConnection as default } from "./databases/mysql";
+export { MySQLConnection as default } from "./databases/mysql.js";

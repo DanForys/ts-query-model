@@ -44,15 +44,7 @@ Given the following database table `animalExample`:
 And the following model:
 
 ```ts twoslash
-import { columns, Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
-import SQL from "sql-template-strings";
-
-const db = new Database(
-  new MySQLConnection({
-    uri: "mysql://your-database-connection-string",
-  })
-);
+import { db, SQL, columns } from "./snippets/mysql-db";
 
 // ---cut---
 type MyStoredObject = {
@@ -73,15 +65,7 @@ const getExampleRow = db.getOne({
 A query for row id `1` yields:
 
 ```ts twoslash
-import { columns, Database } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
-import SQL from "sql-template-strings";
-
-const db = new Database(
-  new MySQLConnection({
-    uri: "mysql://your-database-connection-string",
-  })
-);
+import { db, SQL, columns } from "./snippets/mysql-db";
 
 type MyStoredObject = {
   animal: string;

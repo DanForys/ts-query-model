@@ -31,14 +31,7 @@ correctly returned in the result row.
 For example:
 
 ```ts twoslash
-import { Database, columns } from "ts-query-model";
-import MySQLConnection from "ts-query-model/lib/mysql";
-
-const db = new Database(
-  new MySQLConnection({
-    uri: "mysql://your-database-connection-string",
-  })
-);
+import { db, SQL, columns } from "./snippets/mysql-db";
 // ---cut---
 const userModel = {
   createUser: db.insert({
