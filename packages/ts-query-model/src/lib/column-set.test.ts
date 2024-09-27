@@ -54,4 +54,16 @@ describe("buildColumnSet", () => {
       });
     });
   });
+
+  describe("create() function", () => {
+    it("can create a row object with correct defaults", () => {
+      const colFunc = buildColumnSet({
+        test1: columns.string({ default: "Foo" }),
+        test2: columns.number({ default: () => 42 }),
+      });
+
+      const row = colFunc.create();
+      expect(row).toEqual({ test1: "Foo", test2: 42 });
+    });
+  });
 });

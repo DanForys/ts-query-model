@@ -23,13 +23,16 @@ export type GenericConnectionInstance = InstanceType<
   new (...a: any[]) => GenericConnection
 >;
 
+export type ColumnDefault<DefaultType> = DefaultType | (() => DefaultType);
+
 export type ColumnOptions<DefaultType> = {
-  default?: DefaultType | (() => DefaultType);
+  default?: ColumnDefault<DefaultType>;
 };
 
 export interface ColumnDefinition {
   toSQL: (valueFromJS: any) => any;
   fromSQL: (valueFromSQL: any) => any;
+  create: () => any;
   nullable: boolean;
   autoIncrement?: boolean;
   options?: ColumnOptions<unknown>;
