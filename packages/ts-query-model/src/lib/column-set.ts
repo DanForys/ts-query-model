@@ -1,4 +1,4 @@
-import { QueryColumns } from "../types/query-model.js";
+import { DatabaseRow, QueryColumns } from "../types/query-model.js";
 
 /**
  * buildColumnSet
@@ -24,6 +24,14 @@ export const buildColumnSet = <Columns extends QueryColumns>(
     },
     getAll: () => {
       return columns;
+    },
+    create: () => {
+      return Object.fromEntries(
+        Object.entries(columns).map(([name, definition]) => [
+          name,
+          definition.create(),
+        ])
+      ) as DatabaseRow<Columns>;
     },
   };
 };
